@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CONTROL_HERRAMIENTA_SUNCORP.Models.Sucursal>
+
+@{
+    ViewBag.Title = "sucursal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>Lista de sucursal</h4>
+            </div>
+
+            <form asp-controller="Sucursal" asp-action="sucursal">
+                <p>
+                    <input type="text" name="buscar" class="form-text" />
+                    <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+                </p>
+  </form>
+            <div class="panel-body">
+                <a class="btn btn-success" href="@Url.Action("Registrar", "Empresa")">Crear Nuevo</a>
+                <hr />
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>NOMBRE SUCURSAL</th>
+                                <th>CORREO ELECTRONICO</th>
+                                <th>DIRECCION</th>
+                                <th>EMPRESA</th>
+                                <th>COMENTARIO</th>
+                                <th>FECHA REGISTRO</th>
+                                <th style="width:150px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Sucursal item in Model)
+                            {
+                                <tr>
+                                    <td>@item.NOMBRE_SUCURSAL</td>
+                                    <td>@item.CORREO_ELECTRONICO</td>
+                                    <td>@item.DIRECCION</td>
+                                    <td>@item.EMPRESA.NOMBRE_EMPRESA</td>
+                                    <td>@item.COMENTARIO</td>
+                                    <td>@item.FECHA_REGISTRO</td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Empresa", new { idcontacto = item.ID_EMPRESA })">Editar</a>
+                                        <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Empresa", new { IDEMPRESA = item.ID_EMPRESA })">Eliminar</a>
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

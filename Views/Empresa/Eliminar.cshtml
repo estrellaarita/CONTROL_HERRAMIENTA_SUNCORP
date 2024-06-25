@@ -1,0 +1,35 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Empresa
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>Eliminar empresa</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    ¿Desea eliminar la empresa?: @Html.DisplayTextFor(m => m.RTN), @Html.DisplayTextFor(m => m.NOMBRE_EMPRESA), @Html.DisplayTextFor(m => m.CORREO_ELECTRONICO), @Html.DisplayTextFor(m => m.ID_CORPORACION) ?
+                </div>
+
+                <form action="@Url.Action("Eliminar","Empresa")" method="post">
+                    <input type="hidden" class="form-control" name="ID_EMPRESA" value="@Html.DisplayTextFor(m => m.ID_EMPRESA)" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="@Url.Action("empresa","Empresa")">Volver</a>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

@@ -1,0 +1,47 @@
+﻿﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Empresa
+
+@{
+    ViewBag.Title = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>NUEVA EMPRESA</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Registrar","Empresa")" method="post">
+                   
+                    <div class="form-group">
+                        <label>RTN</label>
+                        <input type="text" class="form-control" name="RTN" />
+                    </div>
+                    <div class="form-group">
+                        <label>NOMBRE_EMPRESA</label>
+                        <input type="text" class="form-control" name="NOMBRE_EMPRESA" />
+                    </div>
+                    <div class="form-group">
+                        <label>CORREO_ELECTRONICO</label>
+                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>CORPORACION</label>
+                        @Html.DropDownListFor(model => model.ID_CORPORACION, (SelectList)ViewBag.Corporaciones, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <a class="btn btn-warning" href="@Url.Action("empresa","Empresa")">Volver</a>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

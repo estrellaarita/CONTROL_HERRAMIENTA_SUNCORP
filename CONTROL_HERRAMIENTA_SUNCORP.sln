@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CONTROL_HERRAMIENTA_SUNCORP", "CONTROL_HERRAMIENTA_SUNCORP.csproj", "{ACF64B3D-DDC4-41B4-8E93-59A7C8CEFC14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACF64B3D-DDC4-41B4-8E93-59A7C8CEFC14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF64B3D-DDC4-41B4-8E93-59A7C8CEFC14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF64B3D-DDC4-41B4-8E93-59A7C8CEFC14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF64B3D-DDC4-41B4-8E93-59A7C8CEFC14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECAAFCC6-D2C9-40A4-8719-2B4FC3603D96}
+	EndGlobalSection
+EndGlobal
