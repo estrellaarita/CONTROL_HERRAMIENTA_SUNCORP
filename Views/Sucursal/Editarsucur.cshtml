@@ -1,0 +1,58 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Sucursal
+
+@{
+    ViewBag.Title = "Editarsucur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>NUEVA SUCURSAL</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Editarsucur","Sucursal")" method="post">
+
+                    <input type="hidden" class="form-control" name="ID_SUCURSAL" value="@Html.DisplayTextFor(m=>m.ID_SUCURSAL)" />
+
+                    <div class="form-group">
+                        <label>Nombre empresa</label>
+                        <input type="text" class="form-control" name="NOMBRE_SUCURSAL" value="@Html.DisplayTextFor(m=>m.NOMBRE_SUCURSAL)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Correo electronico</label>
+                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Direccion</label>
+                        <input type="text" class="form-control" name="DIRECCION" value="@Html.DisplayTextFor(m=>m.DIRECCION)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_EMPRESA">Empresa</label>
+                        @Html.DropDownListFor(model => model.ID_EMPRESA, (SelectList)ViewBag.Empresas, new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comentario</label>
+                        <input type="text" class="form-control" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-warning" href="@Url.Action("sucursal","Sucursal")">Volver</a>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -57,14 +57,13 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             return View(oempresa);
         }
 
-
-        //CERATE EMPRESA
+        //CREATE EMPRESA
 
         [HttpGet]
         public ActionResult Registrar()
         {
 
-            List<Corporacion> corporaciones = new List<Corporacion>();
+          List<Corporacion> ocorporacion = new List<Corporacion>();
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM CORPORACION", oconexion);
@@ -75,10 +74,12 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     Corporacion corporacion = new Corporacion();
                     corporacion.ID_CORPORACION = Convert.ToInt32(reader["ID_CORPORACION"]);
                     corporacion.NOMBRE_CORPORACION = reader["NOMBRE_CORPORACION"].ToString();
-                    corporaciones.Add(corporacion);
+                    ocorporacion.Add(corporacion);
                 }
             }
-            ViewBag.Corporaciones = new SelectList(corporaciones, "ID_CORPORACION", "NOMBRE_CORPORACION");
+            ViewBag.Corporaciones = new SelectList(ocorporacion, "ID_CORPORACION", "NOMBRE_CORPORACION");
+          
+             
             return View();
         }
 
@@ -93,7 +94,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.Parameters.AddWithValue("RTN", oempresa.RTN);
                 cmd.Parameters.AddWithValue("NOMBRE_EMPRESA", oempresa.NOMBRE_EMPRESA);
                 cmd.Parameters.AddWithValue("CORREO_ELECTRONICO", oempresa.CORREO_ELECTRONICO);
-                cmd.Parameters.AddWithValue("CORPORACION", oempresa.ID_CORPORACION);
+                cmd.Parameters.AddWithValue("ID_CORPORACION", oempresa.ID_CORPORACION);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
@@ -102,8 +103,15 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             return RedirectToAction("empresa", "Empresa");
         }
 
-        
-        //ELIMINAR
+
+        // ELIMINAR EMPRESA
+
+        [HttpGet]
+        public ActionResult Eliminar(int? Idempresa)
+        {
+            Empresa aempresa = oempresa.Where(c => c.ID_EMPRESA == Idempresa).FirstOrDefault();
+            return View(aempresa);
+        }
 
         [HttpPost]
         public ActionResult Eliminar(string Idempresa)
@@ -116,9 +124,55 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
             }
-            return RedirectToAction("Eliminar", "Empresa");
+            return RedirectToAction("empresa", "Empresa");
         }
 
+        //EDITAR EMPRESA
+
+        [HttpGet]
+        public ActionResult Editar(int? Idempresa)
+        {
+            List<Corporacion> ocorporacion = new List<Corporacion>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM CORPORACION", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Corporacion corporacion = new Corporacion();
+                    corporacion.ID_CORPORACION = Convert.ToInt32(reader["ID_CORPORACION"]);
+                    corporacion.NOMBRE_CORPORACION = reader["NOMBRE_CORPORACION"].ToString();
+                    ocorporacion.Add(corporacion);
+                }
+            }
+            ViewBag.Corporaciones = new SelectList(ocorporacion, "ID_CORPORACION", "NOMBRE_CORPORACION");
+
+            Empresa aempresa = oempresa.Where(c => c.ID_EMPRESA == Idempresa).FirstOrDefault();
+            
+            return View(aempresa);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(Empresa oempresa)
+        {
+
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SP_ACTUALIZAR_EMPRESA", oconexion);
+
+                cmd.Parameters.AddWithValue("ID_EMPRESA", oempresa.ID_EMPRESA);
+                cmd.Parameters.AddWithValue("RTN", oempresa.RTN);
+                cmd.Parameters.AddWithValue("NOMBRE_EMPRESA", oempresa.NOMBRE_EMPRESA);
+                cmd.Parameters.AddWithValue("CORREO_ELECTRONICO", oempresa.CORREO_ELECTRONICO);
+                cmd.Parameters.AddWithValue("ID_CORPORACION", oempresa.ID_CORPORACION);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                oconexion.Open();
+                cmd.ExecuteNonQuery();
+            }
+            return RedirectToAction("empresa", "Empresa");
+        }
 
     }
 }

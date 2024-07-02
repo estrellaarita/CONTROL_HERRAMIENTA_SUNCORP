@@ -20,28 +20,28 @@
                         <input type="text" class="form-control" name="RTN" />
                     </div>
                     <div class="form-group">
-                        <label>NOMBRE_EMPRESA</label>
+                        <label>NOMBRE EMPRESA</label>
                         <input type="text" class="form-control" name="NOMBRE_EMPRESA" />
                     </div>
                     <div class="form-group">
-                        <label>CORREO_ELECTRONICO</label>
+                        <label>CORREO ELECTRONICO</label>
                         <input type="text" class="form-control" name="CORREO_ELECTRONICO" />
                     </div>
 
                     <div class="form-group">
-                        <label>CORPORACION</label>
+                        <label for="ID_CORPORACION">CORPORACION</label>
                         @Html.DropDownListFor(model => model.ID_CORPORACION, (SelectList)ViewBag.Corporaciones, new { @class = "form-control" })
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <a class="btn btn-warning" href="@Url.Action("empresa","Empresa")">Volver</a>
 
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a class="btn btn-warning" href="@Url.Action("empresa","Empresa")">Volver</a>
-
-                </form>
+                    </form>
 
 
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 

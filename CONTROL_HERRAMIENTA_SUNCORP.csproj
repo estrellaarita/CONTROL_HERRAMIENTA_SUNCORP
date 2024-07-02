@@ -121,13 +121,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
+    <Compile Include="Controllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\SucursalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Departamento.cs" />
+    <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Sucursal.cs" />
     <Compile Include="Models\usuario.cs" />
     <Compile Include="Permisos\ValidarSesionAttribute.cs" />
@@ -191,6 +197,17 @@
     <Content Include="Views\Empresa\Registrar.cshtml" />
     <Content Include="Views\Empresa\Eliminar.cshtml" />
     <Content Include="Views\Sucursal\sucursal.cshtml" />
+    <Content Include="Views\Empresa\Editar.cshtml" />
+    <Content Include="Views\Sucursal\Crear.cshtml" />
+    <Content Include="Views\Sucursal\Editarsucur.cshtml" />
+    <Content Include="Views\Sucursal\Eliminarsucur.cshtml" />
+    <Content Include="Views\Empleado\empleado.cshtml" />
+    <Content Include="Views\Departamento\Departamento.cshtml" />
+    <Content Include="Views\Departamento\registrardept.cshtml" />
+    <Content Include="Views\Departamento\Editardept.cshtml" />
+    <Content Include="Views\Departamento\Eliminardept.cshtml" />
+    <Content Include="Views\Rol\Rol.cshtml" />
+    <Content Include="Views\Rol\registrarrol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,36 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Departamento
+
+@{
+    ViewBag.Title = "Eliminardept";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>Eliminar departamento</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    ¿Desea eliminar el departamento?: @Html.DisplayTextFor(m => m.DECRIPCION_DEPARTAMENTO) ?
+                </div>
+
+                <form action="@Url.Action("Eliminardept","Departamento")" method="post">
+                    <input type="hidden" class="form-control" name="Iddpt" value="@Html.DisplayTextFor(m => m.ID_DEPARTAMENTO)" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Departamento","Departamento")">Volver</a>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+

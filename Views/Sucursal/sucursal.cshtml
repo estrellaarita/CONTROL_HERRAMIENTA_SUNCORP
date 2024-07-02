@@ -18,20 +18,22 @@
                     <input type="text" name="buscar" class="form-text" />
                     <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
                 </p>
-  </form>
+            </form>
+
+            </div>
             <div class="panel-body">
-                <a class="btn btn-success" href="@Url.Action("Registrar", "Empresa")">Crear Nuevo</a>
+                <a class="btn btn-success" href="@Url.Action("Crear", "Sucursal")">Crear Nuevo</a>
                 <hr />
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>NOMBRE SUCURSAL</th>
-                                <th>CORREO ELECTRONICO</th>
-                                <th>DIRECCION</th>
-                                <th>EMPRESA</th>
-                                <th>COMENTARIO</th>
-                                <th>FECHA REGISTRO</th>
+                                <th>Nombre sucursalL</th>
+                                <th>Correo electronico</th>
+                                <th>Direccion</th>
+                                <th>Empresa</th>
+                                <th>Comentario</th>
+                                <th>Fecha registro</th>
                                 <th style="width:150px"></th>
                             </tr>
                         </thead>
@@ -46,8 +48,8 @@
                                     <td>@item.COMENTARIO</td>
                                     <td>@item.FECHA_REGISTRO</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Empresa", new { idcontacto = item.ID_EMPRESA })">Editar</a>
-                                        <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Empresa", new { IDEMPRESA = item.ID_EMPRESA })">Eliminar</a>
+                                        <a class="btn btn-primary btn-sm" href="@Url.Action("Editarsucur","Sucursal", new { Idsucursal = item.ID_SUCURSAL })">Editar</a>
+                                        <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarsucur","Sucursal", new { Idsucursal= item.ID_SUCURSAL })">Eliminar</a>
                                     </td>
 
                                 </tr>

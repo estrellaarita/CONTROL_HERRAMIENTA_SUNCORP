@@ -9,7 +9,7 @@
 
         <div class="panel panel-warning">
             <div class="panel-heading">
-                <h4>Lista de contacto</h4>
+                <h4>Lista de empresa</h4>
             </div>
 
             <form asp-controller="Empresa" asp-action="empresa">
@@ -31,9 +31,7 @@
                         <input type="button" value="Categoría" class="btn btn-sm btn-dark" />
 
                     </div>
-                </p>  
-                
-            </form>
+               
             <div class="panel-body">
                 <a class="btn btn-success" href="@Url.Action("Registrar", "Empresa")">Crear Nuevo</a>
                 <hr />
@@ -42,10 +40,10 @@
                             <thead>
                                 <tr>
                                     <th>RTN</th>
-                                    <th>NOMBRE EMPRESA</th>
-                                    <th>CORREO ELECTRONICO</th>
-                                    <th>CORPORACION</th>
-                                    <th>FECHA REGISTRO</th>
+                                    <th>Nombre empresa</th>
+                                    <th>Correo electronico</th>
+                                    <th>Corporacion</th>
+                                    <th>Fecha registro</th>
                                     <th style="width:150px"></th>
                                 </tr>
                             </thead>
@@ -59,8 +57,8 @@
                                         <td>@item.CORPORACION.NOMBRE_CORPORACION</td>
                                         <td>@item.FECHA_REGISTRO</td>
                                         <td>
-                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Empresa", new { idcontacto = item.ID_EMPRESA })">Editar</a>
-                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Empresa", new { IDEMPRESA = item.ID_EMPRESA })">Eliminar</a>
+                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Empresa", new { Idempresa = item.ID_EMPRESA })">Editar</a>
+                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Empresa", new { Idempresa = item.ID_EMPRESA })">Eliminar</a>
                                         </td>
 
                                 </tr>

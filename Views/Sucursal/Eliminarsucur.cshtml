@@ -1,0 +1,36 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Sucursal
+
+@{
+    ViewBag.Title = "Eliminarsucur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>Eliminar sucursal</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    ¿Desea eliminar la sucursal?: @Html.DisplayTextFor(m => m.NOMBRE_SUCURSAL) ?
+                </div>
+
+                <form action="@Url.Action("Eliminarsucur","Sucursal")" method="post">
+                    <input type="hidden" class="form-control" name="Idsucursal" value="@Html.DisplayTextFor(m => m.ID_SUCURSAL)" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="@Url.Action("sucursal","Sucursal")">Volver</a>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+

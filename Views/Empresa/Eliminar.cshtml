@@ -16,11 +16,11 @@
             </div>
             <div class="panel-body">
                 <div class="alert alert-danger">
-                    ¿Desea eliminar la empresa?: @Html.DisplayTextFor(m => m.RTN), @Html.DisplayTextFor(m => m.NOMBRE_EMPRESA), @Html.DisplayTextFor(m => m.CORREO_ELECTRONICO), @Html.DisplayTextFor(m => m.ID_CORPORACION) ?
+                    ¿Desea eliminar la empresa?: @Html.DisplayTextFor(m => m.NOMBRE_EMPRESA) ?
                 </div>
 
                 <form action="@Url.Action("Eliminar","Empresa")" method="post">
-                    <input type="hidden" class="form-control" name="ID_EMPRESA" value="@Html.DisplayTextFor(m => m.ID_EMPRESA)" />
+                    <input type="hidden" class="form-control" name="Idempresa" value="@Html.DisplayTextFor(m => m.ID_EMPRESA)" />
 
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                     <a class="btn btn-warning" href="@Url.Action("empresa","Empresa")">Volver</a>

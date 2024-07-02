@@ -13,19 +13,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         public string DIRECCION { get; set; }
         public int ID_EMPRESA { get; set; }
         public string COMENTARIO { get; set; }
-        public empresa EMPRESA { get; set; }
+        public Empresa EMPRESA { get; set; }
         public DateTime FECHA_REGISTRO { get; set; }
     }
 
-
-    public class empresa
-    {
-        public int ID_EMPRESA { get; set; }
-        public string RTN { get; set; }
-        public string NOMBRE_EMPRESA { get; set; }
-        public string CORREO_ELECTRONICO { get; set; }
-        public int ID_CORPORACION { get; set; }
-        public Corporacion CORPORACION { get; set; }
-        public DateTime FECHA_REGISTRO { get; set; }
-    }
 }

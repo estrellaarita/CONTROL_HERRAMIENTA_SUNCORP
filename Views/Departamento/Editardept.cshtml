@@ -1,0 +1,39 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Departamento
+
+@{
+    ViewBag.Title = "Editardept";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
+            <div class="panel-heading">
+                <h4>Actualizar departamento</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Editardept","Departamento")" method="post">
+                    <div class="form-group">
+                        <label>Departamento</label>
+
+                        <input type="hidden" class="form-control" name="ID_DEPARTAMENTO" value="@Html.DisplayTextFor(m=>m.ID_DEPARTAMENTO)" />
+
+                        <input type="text" class="form-control" name="DECRIPCION_DEPARTAMENTO" value="@Html.DisplayTextFor(m=>m.DECRIPCION_DEPARTAMENTO)" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Departamento","Departamento")">Volver</a>
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

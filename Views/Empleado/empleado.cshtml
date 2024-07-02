@@ -1,0 +1,111 @@
+﻿@model IEnumerable<CONTROL_HERRAMIENTA_SUNCORP.Models.Empleado>
+
+@{
+    ViewBag.Title = "empleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de empleados</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="row" style="margin-top:30px">
+        <div class="col-sm-12">
+
+            <div class="panel panel-warning" style="font-size: 17px;">
+                <div class="panel-heading">
+                    <h4>Lista de departamento</h4>
+                </div>
+
+                <form asp-controller="Empresa" asp-action="empresa">
+                    <p>
+                        <input type="text" name="buscar" class="form-text" />
+                        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+                    </p>
+                </form>
+
+                <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" value="Departamento" class="btn btn-sm btn-dark" onclick="location.href='@Url.Action("Departamento", "Departamento")'" />
+
+                    <input type="button" value="Rol" class="btn btn-sm btn-dark" onclick="location.href='@Url.Action("Rol", "Rol")'" />
+
+                </div>
+
+                <div class="panel-body">
+                    <a class="btn btn-success" href="@Url.Action("Emplregistrar", "Empleado")">Crear Nuevo</a>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>DNI</th>
+                                    <th>Primer nombre</th>
+                                    <th>Segundo nombre</th>
+                                    <th>Primer apellido</th>
+                                    <th>Segundo apellido</th>
+                                    <th>Genero</th>
+                                    <th>Sucursal</th>
+                                    <th>Departamento</th>
+                                    <th>Rol</th>
+                                    <th>Estado empleado</th>
+                                    <th>Fecha registro</th>
+                                    <th style="width:150px"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Empleado item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.DNI</td>
+                                        <td>@item.PRIMER_NOMBRE</td>
+                                        <td>@item.SEGUNDO_NOMBRE</td>
+                                        <td>@item.PRIMER_APELLIDO</td>
+                                        <td>@item.SEGUNDO_APELLIDO</td>
+                                        <td>@item.GENERO.DESCRIPCION_GENERO</td>
+                                        <td>@item.SUCURSAL.NOMBRE_SUCURSAL</td>
+                                        <td>@item.DEPARTAMENTO.DECRIPCION_DEPARTAMENTO</td>
+                                        <td>@item.ROL.DECRIPCION_ROL</td>
+                                        <td>@item.ESTADO_EMPELADO.DESCRIPCION_ESTADO_EMPLEADO</td>
+                                        <td>@item.FECHA_REGISTRO</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Empresa", new { Idempresa = item.ID_EMPLEADO })">
+                                                <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Empresa", new { Idempresa = item.ID_EMPLEADO })">
+                                                <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
