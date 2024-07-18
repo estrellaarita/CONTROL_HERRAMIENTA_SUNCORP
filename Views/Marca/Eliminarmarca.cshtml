@@ -1,0 +1,36 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Marca
+
+@{
+    ViewBag.Title = "Eliminarmarca";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>ELIMINAR MARCA</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    ¿Desea eliminar el marca @Html.DisplayTextFor(m => m.DECRIPCION_MARCA) ?
+                </div>
+
+                <form action="@Url.Action("Eliminarmarca","Marca")" method="post">
+                    <input type="hidden" class="form-control" name="Idmarca" value="@Html.DisplayTextFor(m => m.ID_MARCA)" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Marca","Marca")">Volver</a>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+

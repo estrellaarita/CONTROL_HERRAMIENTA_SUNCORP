@@ -1,0 +1,44 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Rol
+
+@{
+    ViewBag.Title = "Editarrol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
+            <div class="panel-heading">
+                <h4>ACTUALIZAR ROL</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Editarrol","Rol")" method="post">
+                    <div class="form-group">
+                        <label>Rol</label>
+
+                        <input type="hidden" class="form-control" name="ID_ROL" value="@Html.DisplayTextFor(m=>m.ID_ROL)" />
+
+                        <input type="text" class="form-control" name="DECRIPCION_ROL" value="@Html.DisplayTextFor(m=>m.DECRIPCION_ROL)" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    @if (ViewData["MENSAJEROL"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJEROL"]
+                        </div>
+                    }
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Rol","Rol")">Volver</a>
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

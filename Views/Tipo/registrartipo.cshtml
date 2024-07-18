@@ -1,0 +1,44 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Tipoherramienta
+
+@{
+    ViewBag.Title = "registrartipo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>NUEVO TIPO HERRAMIENTA</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("registrartipo","Tipo")" method="post">
+                    <div class="form-group">
+                        <label>Tipo herramienta</label>
+                        <input type="text" class="form-control" name="DECRIPCION_TIPO_HERRAMIENTA" required />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    @if (ViewData["MENSAJETIPO"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJETIPO"]
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Tipo","Tipo")">Volver</a>
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+

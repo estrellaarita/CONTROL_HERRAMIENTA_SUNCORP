@@ -56,20 +56,39 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         public ActionResult registrardept(Departamento odepartamento)
         {
 
+            bool registrado;
+            string mensaje;
+
+
+
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_CREATE_DEPARTAMENTO", oconexion);
 
-                cmd.Parameters.AddWithValue("DEPARTAMENTO", odepartamento.DECRIPCION_DEPARTAMENTO);
-
+                cmd.Parameters.AddWithValue("DESCRIPCION_DEPARTAMENTO", odepartamento.DECRIPCION_DEPARTAMENTO);
+                cmd.Parameters.Add("REGISTRADODEPT", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("MENSAJEDEPT", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
+
+                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADODEPT"].Value);
+                mensaje = cmd.Parameters["MENSAJEDEPT"].Value.ToString();
             }
-            return RedirectToAction("Departamento", "Departamento");
+            ViewData["MENSAJEDEPT"] = mensaje;
+
+            if (registrado)
+            {
+                return RedirectToAction("Departamento", "Departamento");
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
-        //EDITAR
+        //ACTUALIZAR
         [HttpGet]
         public ActionResult Editardept(int? Iddpt)
         {
@@ -80,6 +99,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Editardept(Departamento odepartamento)
         {
+            bool registrado;
+            string mensaje;
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
@@ -87,12 +108,27 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 
                 cmd.Parameters.AddWithValue("ID_DEPARTAMENTO", odepartamento.ID_DEPARTAMENTO);
                 cmd.Parameters.AddWithValue("DESCRIPCION_DEPARTAMENTO", odepartamento.DECRIPCION_DEPARTAMENTO);
+                cmd.Parameters.Add("REGISTRADODEPT", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("MENSAJEDEPT", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
+
+                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADODEPT"].Value);
+                mensaje = cmd.Parameters["MENSAJEDEPT"].Value.ToString();
             }
-            return RedirectToAction("Departamento", "Departamento");
+            ViewData["MENSAJEDEPT"] = mensaje;
+
+            if (registrado)
+            {
+                return RedirectToAction("Departamento", "Departamento");
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         //ELIMINAR
@@ -116,5 +152,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             }
             return RedirectToAction("Departamento", "Departamento");
         }
+
+     
     }
 }

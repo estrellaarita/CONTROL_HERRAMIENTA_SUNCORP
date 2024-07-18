@@ -5,18 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Eliminar</h2>
 
 <div class="row" style="margin-top:30px">
     <div class="col-sm-12">
 
         <div class="panel panel-warning">
             <div class="panel-heading">
-                <h4>Eliminar empresa</h4>
+                <h4>ELIMINAR EMPRESA</h4>
             </div>
             <div class="panel-body">
                 <div class="alert alert-danger">
-                    ¿Desea eliminar la empresa?: @Html.DisplayTextFor(m => m.NOMBRE_EMPRESA) ?
+                    ¿Desea eliminar la empresa @Html.DisplayTextFor(m => m.NOMBRE_EMPRESA) ?
                 </div>
 
                 <form action="@Url.Action("Eliminar","Empresa")" method="post">

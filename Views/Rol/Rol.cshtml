@@ -21,9 +21,9 @@
     <div class="row" style="margin-top:30px">
         <div class="col-sm-12">
 
-            <div class="panel panel-warning" style="font-size: 17px;">
+            <div class="panel panel-warning" style="font-size: 16px;">
                 <div class="panel-heading">
-                    <h4>Lista de rol</h4>
+                    <h4>Lista de roles</h4>
                 </div>
                 <div class="panel-body">
                     <a class="btn btn-success" href="@Url.Action("registrarrol","Rol")">Crear Nuevo</a>
@@ -33,7 +33,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>ROL</th>
+                                    <th>Rol</th>
                                     <th>Fecha registro</th>
                                     <th style="width:150px"></th>
                                 </tr>
@@ -47,10 +47,10 @@
                                         <td>@item.FECHA_REGISTRO</td>
 
                                         <td>
-                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editardept","Departamento", new { iddpt = item.ID_ROL })">
+                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editarrol","Rol", new { idrol = item.ID_ROL })">
                                                 <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminardept","Departamento", new { iddpt = item.ID_ROL})">
+                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarrol","Rol", new { idrol = item.ID_ROL})">
                                                 <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
                                             </a>
 

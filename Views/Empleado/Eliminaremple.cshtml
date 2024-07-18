@@ -1,0 +1,33 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Empleado
+
+@{
+    ViewBag.Title = "Eliminaremple";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>ELIMINAR EMPELADO</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    ¿Desea eliminar el empleado @Html.DisplayTextFor(m => m.PRIMER_NOMBRE) @Html.DisplayTextFor(m => m.SEGUNDO_NOMBRE) @Html.DisplayTextFor(m => m.PRIMER_APELLIDO) @Html.DisplayTextFor(m => m.SEGUNDO_APELLIDO)?
+                </div>
+
+                <form action="@Url.Action("Eliminaremple","Empleado")" method="post">
+                    <input type="hidden" class="form-control" name="Idempleado" value="@Html.DisplayTextFor(m => m.ID_EMPLEADO)" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="@Url.Action("empleado","Empleado")">Volver</a>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

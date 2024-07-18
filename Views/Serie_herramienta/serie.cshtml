@@ -1,0 +1,106 @@
+﻿@model IEnumerable<CONTROL_HERRAMIENTA_SUNCORP.Models.Serie>
+
+@{
+    ViewBag.Title = "serie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de series de las herramientas</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="row" style="margin-top:30px">
+        <div class="col-sm-12">
+
+            <div class="panel panel-warning" style="font-size: 16px;">
+                <div class="panel-heading">
+                    <h4>Lista de serie de las herramientas</h4>
+
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <form asp-controller="Serie" asp-action="serie">
+                    <p>
+                        <input type="text" name="buscar" class="form-text" />
+                        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+                    </p>
+                </form>
+
+                <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" value="HERRAMIENTA" class="btn btn-sm btn-dark" onclick="location.href='@Url.Action("Herramienta", "Herramienta")'" />
+                </div>
+
+                <div class="panel-body">
+                    <a class="btn btn-success" href="@Url.Action("Registrarserie", "Serie_herramienta")">Crear Nuevo</a>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Sucursal</th>
+                                    <th>Herramienta</th>
+                                    <th>Ubicacon fisica</th>
+                                    <th>Numero serie</th>
+                                    <th>Precio</th>
+                                    <th>Estado herramienta</th>
+                                    <th>Numero factura</th>
+                                    <th>Comentario</th>
+                                    <th>Fecha registro</th>
+                                    <th style="width:150px"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Serie item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.SUCURSAL.NOMBRE_SUCURSAL</td>
+                                        <td>@item.HERRAMIENTA.MODELO</td>
+                                        <td>@item.UBICACION_FISICA</td>
+                                        <td>@item.NUMERO_SERIE</td>
+                                        <td>@item.PRECIO</td>
+                                        <td>@item.ESTADO_HERRAMIENTA.DECRIPCION_ESTADO_HERRAMIENTA</td>
+                                        <td>@item.SUCURSAL.NOMBRE_SUCURSAL</td>
+                                        <td>@item.NUMERO_FACTURA</td>
+                                        <td>@item.COMENTARIO</td>
+                                        <td>@item.FECHA_REGISTRO</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editarserie","Empleado", new { Idempleado = item.ID_REGISTRO_SERIE_HERRAMIENTA })">
+                                                <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarserie","Empleado", new { Idempleado= item.ID_REGISTRO_SERIE_HERRAMIENTA })">
+                                                <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

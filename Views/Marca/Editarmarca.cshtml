@@ -1,0 +1,48 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Marca
+
+@{
+    ViewBag.Title = "Editarmarca";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
+            <div class="panel-heading">
+                <h4>ACTUALIZAR MARCA</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Editarmarca","Marca")" method="post">
+                    <div class="form-group">
+                        <label>Marca</label>
+
+                        <input type="hidden" class="form-control" name="ID_MARCA" value="@Html.DisplayTextFor(m=>m.ID_MARCA)" />
+
+                        <input type="text" class="form-control" name="DECRIPCION_MARCA" value="@Html.DisplayTextFor(m=>m.DECRIPCION_MARCA)" required />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    @if (ViewData["MENSAJEMARCA"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJEMARCA"]
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Marca","Marca")">Volver</a>
+
+
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

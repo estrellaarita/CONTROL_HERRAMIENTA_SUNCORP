@@ -10,15 +10,23 @@
 
         <div class="panel panel-warning">
             <div class="panel-heading">
-                <h4>Nuevo departamento</h4>
+                <h4>NUEVO DEPARTAMENTO</h4>
             </div>
             <div class="panel-body">
                 <form action="@Url.Action("registrardept","Departamento")" method="post">
                     <div class="form-group">
                         <label>Departamento</label>
-                        <input type="text" class="form-control" name="DECRIPCION_DEPARTAMENTO" />
+                        <input type="text" class="form-control" name="DECRIPCION_DEPARTAMENTO" required />
+                        @Html.ValidationMessageFor(model => model.DECRIPCION_DEPARTAMENTO, "", new { @class = "text-danger" })
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
+
+                    @if (ViewData["MENSAJEDEPT"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJEDEPT"]
+                        </div>
+                    }
 
                     <button type="submit" class="btn btn-primary">Registrar</button>
                     <a class="btn btn-warning" href="@Url.Action("Departamento","Departamento")">Volver</a>

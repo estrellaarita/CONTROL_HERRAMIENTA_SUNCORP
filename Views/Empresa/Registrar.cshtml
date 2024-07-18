@@ -17,19 +17,19 @@
                    
                     <div class="form-group">
                         <label>RTN</label>
-                        <input type="text" class="form-control" name="RTN" />
+                        <input type="text" class="form-control" name="RTN" required />
                     </div>
                     <div class="form-group">
-                        <label>NOMBRE EMPRESA</label>
-                        <input type="text" class="form-control" name="NOMBRE_EMPRESA" />
+                        <label>Nombre empresa</label>
+                        <input type="text" class="form-control" name="NOMBRE_EMPRESA" required />
                     </div>
                     <div class="form-group">
-                        <label>CORREO ELECTRONICO</label>
-                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" />
+                        <label>Correo electronico</label>
+                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" required />
                     </div>
 
                     <div class="form-group">
-                        <label for="ID_CORPORACION">CORPORACION</label>
+                        <label for="ID_CORPORACION">Corporacion</label>
                         @Html.DropDownListFor(model => model.ID_CORPORACION, (SelectList)ViewBag.Corporaciones, new { @class = "form-control" })
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>

@@ -1,0 +1,56 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Proveedor
+
+@{
+    ViewBag.Title = "Editarproveedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
+            <div class="panel-heading">
+                <h4>ACTUALIZAR PROVEEDOR</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Editarproveedor","Proveedor")" method="post">
+                    <div class="form-group">
+                        <label>RTN</label>
+
+                        <input type="hidden" class="form-control" name="ID_PROVEEDOR" value="@Html.DisplayTextFor(m=>m.ID_PROVEEDOR)" />
+
+                        <input type="text" class="form-control" name="RTN" required value="@Html.DisplayTextFor(m=>m.RTN)" />
+
+                        <label>Nombre proveedor</label>
+                        <input type="text" class="form-control" name="NOMBRE_PROVEEDOR" required value="@Html.DisplayTextFor(m=>m.NOMBRE_PROVEEDOR)" />
+
+                        <label>Correo electronico</label>
+                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" required value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" />
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    @if (ViewData["MENSAJEPROVEEDOR"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJEPROVEEDOR"]
+                        </div>
+                    }
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Proveedor","Proveedor")">Volver</a>
+
+
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

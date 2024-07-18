@@ -5,61 +5,78 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Sucursales</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="row" style="margin-top:30px">
+        <div class="col-sm-12">
 
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4>Lista de sucursal</h4>
-            </div>
-
-            <form asp-controller="Sucursal" asp-action="sucursal">
-                <p>
-                    <input type="text" name="buscar" class="form-text" />
-                    <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
-                </p>
-            </form>
-
-            </div>
-            <div class="panel-body">
-                <a class="btn btn-success" href="@Url.Action("Crear", "Sucursal")">Crear Nuevo</a>
-                <hr />
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Nombre sucursalL</th>
-                                <th>Correo electronico</th>
-                                <th>Direccion</th>
-                                <th>Empresa</th>
-                                <th>Comentario</th>
-                                <th>Fecha registro</th>
-                                <th style="width:150px"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Sucursal item in Model)
-                            {
+            <div class="panel panel-warning" style="font-size: 16px;">
+                <div class="panel-heading">
+                    <h4>Lista de Sucursales</h4>
+                </div>
+                <div class="panel-body">
+                    <a class="btn btn-success" href="@Url.Action("Crear", "Sucursal")">Crear Nuevo</a>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>@item.NOMBRE_SUCURSAL</td>
-                                    <td>@item.CORREO_ELECTRONICO</td>
-                                    <td>@item.DIRECCION</td>
-                                    <td>@item.EMPRESA.NOMBRE_EMPRESA</td>
-                                    <td>@item.COMENTARIO</td>
-                                    <td>@item.FECHA_REGISTRO</td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm" href="@Url.Action("Editarsucur","Sucursal", new { Idsucursal = item.ID_SUCURSAL })">Editar</a>
-                                        <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarsucur","Sucursal", new { Idsucursal= item.ID_SUCURSAL })">Eliminar</a>
-                                    </td>
-
+                                    <th>Sucursal</th>
+                                    <th>Correo electronico</th>
+                                    <th>Direccion</th>
+                                    <th>Empresa</th>
+                                    <th>Comentario</th>
+                                    <th>Fecha registro</th>
+                                    <th style="width:150px"></th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Sucursal item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.NOMBRE_SUCURSAL</td>
+                                        <td>@item.CORREO_ELECTRONICO</td>
+                                        <td>@item.DIRECCION</td>
+                                        <td>@item.EMPRESA.NOMBRE_EMPRESA</td>
+                                        <td>@item.COMENTARIO</td>
+                                        <td>@item.FECHA_REGISTRO</td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editarsucur","Sucursal", new { Idsucursal = item.ID_SUCURSAL })">
+                                                <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarsucur","Sucursal", new { Idsucursal= item.ID_SUCURSAL })">
+                                                <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
+                                            </a>
+                                        </td>
 
-                            }
+                                    </tr>
 
-                        </tbody>
-                    </table>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+

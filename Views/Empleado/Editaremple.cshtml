@@ -1,0 +1,89 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Empleado
+
+@{
+    ViewBag.Title = "Editaremple";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>ACTUALIZAR EMPLEADO</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Editaremple","Empleado")" method="post">
+
+                    <input type="hidden" class="form-control" name="ID_EMPLEADO" />
+
+                    <div class="form-group">
+                        <label>DNI</label>
+                        <input type="text" class="form-control" name="DNI" required value="@Html.DisplayTextFor(m=>m.DNI)" />
+                    </div>
+                    <div class="form-group">
+                        <label>Primer nombre</label>
+                        <input type="text" class="form-control" name="PRIMER_NOMBRE" required value="@Html.DisplayTextFor(m=>m.PRIMER_NOMBRE)" />
+                    </div>
+                    <div class="form-group">
+                        <label>Segundo nombre</label>
+                        <input type="text" class="form-control" name="SEGUNDO_NOMBRE" value="@Html.DisplayTextFor(m=>m.SEGUNDO_NOMBRE)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Primer apellido</label>
+                        <input type="text" class="form-control" name="PRIMER_APELLIDO" required value="@Html.DisplayTextFor(m=>m.PRIMER_APELLIDO)" />
+                    </div>
+                    <div class="form-group">
+                        <label>Segundo apellido</label>
+                        <input type="text" class="form-control" name="SEGUNDO_APELLIDO" value="@Html.DisplayTextFor(m=>m.SEGUNDO_APELLIDO)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_CORPORACION">Genero</label>
+                        @Html.DropDownListFor(model => model.ID_GENERO, (SelectList)ViewBag.Genero, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_CORPORACION">Sucursal</label>
+                        @Html.DropDownListFor(model => model.ID_SUCURSAL, (SelectList)ViewBag.Sucursal, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_CORPORACION">Departamento</label>
+                        @Html.DropDownListFor(model => model.ID_DEPARTAMENTO, (SelectList)ViewBag.Departamento, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_CORPORACION">Rol</label>
+                        @Html.DropDownListFor(model => model.ID_ROL, (SelectList)ViewBag.Rol, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_CORPORACION">Estado empleado</label>
+                        @Html.DropDownListFor(model => model.ID_ESTADO_EMPLEADO, (SelectList)ViewBag.Estado, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    @if (ViewData["MENSAJEEMPLEADO"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJEEMLPLEADO"]
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-warning" href="@Url.Action("empleado","Empleado")">Volver</a>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

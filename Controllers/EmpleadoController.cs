@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
@@ -43,7 +44,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         empleado.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
                         empleado.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
                         empleado.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
-                        empleado.ID_ESTADO_EMPLADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
+                        empleado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
                         empleado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         //GENERO
@@ -89,7 +90,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         iestado.DESCRIPCION_ESTADO_EMPLEADO = dr["DESCRIPCION_ESTADO_EMPLEADO"].ToString();
                         iestado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
-                        empleado.ESTADO_EMPELADO = iestado;
+                        empleado.ESTADO_EMPLEADO = iestado;
 
                         oempleado.Add(empleado);
 
@@ -97,6 +98,285 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 }
             }
             return View(oempleado);
+        }
+
+        //CREAR EMPLEADO
+        [HttpGet]
+        public ActionResult Registraremple()
+        {
+            //LISTA GENERO
+            List<Genero> ogenero = new List<Genero>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM GENERO", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Genero genero = new Genero();
+                    genero.ID_GENERO = Convert.ToInt32(reader["ID_GENERO"]);
+                    genero.DESCRIPCION_GENERO = reader["DESCRIPCION_GENERO"].ToString();
+                    ogenero.Add(genero);
+                }
+            }
+            ViewBag.Genero = new SelectList(ogenero, "ID_GENERO", "DESCRIPCION_GENERO");
+
+            //LISTA SUCURSAL
+            List<Sucursal> osucursal = new List<Sucursal>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM SUCURSAL", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Sucursal sucursal = new Sucursal();
+                    sucursal.ID_SUCURSAL = Convert.ToInt32(reader["ID_SUCURSAL"]);
+                    sucursal.NOMBRE_SUCURSAL = reader["NOMBRE_SUCURSAL"].ToString();
+                    osucursal.Add(sucursal);
+                }
+            }
+            ViewBag.Sucursal = new SelectList(osucursal, "ID_SUCURSAL", "NOMBRE_SUCURSAL");
+
+            //LISTA DEPARTAMENTO
+            List<Departamento> odepartamento = new List<Departamento>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM DEPARTAMENTO", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Departamento departamento = new Departamento();
+                    departamento.ID_DEPARTAMENTO = Convert.ToInt32(reader["ID_DEPARTAMENTO"]);
+                    departamento.DECRIPCION_DEPARTAMENTO = reader["DECRIPCION_DEPARTAMENTO"].ToString();
+                    odepartamento.Add(departamento);
+                }
+            }
+            ViewBag.Departamento = new SelectList(odepartamento, "ID_DEPARTAMENTO", "DECRIPCION_DEPARTAMENTO");
+
+            //LISTA ROL
+            List<Rol> orol = new List<Rol>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ROL", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Rol rol = new Rol();
+                    rol.ID_ROL = Convert.ToInt32(reader["ID_ROL"]);
+                    rol.DECRIPCION_ROL = reader["DECRIPCION_ROL"].ToString();
+                    orol.Add(rol);
+                }
+            }
+            ViewBag.Rol = new SelectList(orol, "ID_ROL", "DECRIPCION_ROL");
+
+            //LISTA ESTADO EMPELADO
+
+            List<Estado> oestado = new List<Estado>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ESTADO_EMPLEADO", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Estado estado = new Estado();
+                    estado.ID_ESTADO_EMPLEADO = Convert.ToInt32(reader["ID_ESTADO_EMPLEADO"]);
+                    estado.DESCRIPCION_ESTADO_EMPLEADO = reader["DESCRIPCION_ESTADO_EMPLEADO"].ToString();
+                    oestado.Add(estado);
+                }
+            }
+            ViewBag.Estado = new SelectList(oestado, "ID_ESTADO_EMPLEADO", "DESCRIPCION_ESTADO_EMPLEADO");
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Registraremple(Empleado oempleado)
+        {
+
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SP_CREATE_EMPLEADO", oconexion);
+
+                cmd.Parameters.AddWithValue("DNI", oempleado.DNI);
+                cmd.Parameters.AddWithValue("PRIMER_NOMBRE", oempleado.PRIMER_NOMBRE);
+                cmd.Parameters.AddWithValue("SEGUNDO_NOMBRE", oempleado.SEGUNDO_NOMBRE);
+                cmd.Parameters.AddWithValue("PRIMER_APELLIDO", oempleado.PRIMER_APELLIDO);
+                cmd.Parameters.AddWithValue("SEGUNDO_APELLIDO", oempleado.SEGUNDO_APELLIDO);
+                cmd.Parameters.AddWithValue("ID_GENERO", oempleado.ID_GENERO);
+                cmd.Parameters.AddWithValue("ID_SUCURSAL", oempleado.ID_SUCURSAL);
+                cmd.Parameters.AddWithValue("ID_DEPARTAMENTO", oempleado.ID_DEPARTAMENTO);
+                cmd.Parameters.AddWithValue("ID_ROL", oempleado.ID_ROL);
+                cmd.Parameters.AddWithValue("ID_ESTADO_EMPLEADO", oempleado.ID_ESTADO_EMPLEADO);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                oconexion.Open();
+                cmd.ExecuteNonQuery();
+            }
+            return RedirectToAction("empleado", "Empleado");
+        }
+
+        // ELIMINAR EMPLEADO
+        [HttpGet]
+        public ActionResult Eliminaremple(int? Idempleado)
+        {
+            Empleado aempleado = oempleado.Where(c => c.ID_EMPLEADO == Idempleado).FirstOrDefault();
+            return View(aempleado);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminaremple(string Idempleado)
+        {
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SP_DELETE_EMPLEADO", oconexion);
+                cmd.Parameters.AddWithValue("ID_EMPLEADO", Idempleado);
+                cmd.CommandType = CommandType.StoredProcedure;
+                oconexion.Open();
+                cmd.ExecuteNonQuery();
+            }
+            return RedirectToAction("empleado", "Empleado");
+        }
+
+        //ACTUALIZAR EMPLEADO
+        [HttpGet]
+        public ActionResult Editaremple(int? Idempleado)
+        {
+            //LISTA GENERO
+            List<Genero> ogenero = new List<Genero>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM GENERO", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Genero genero = new Genero();
+                    genero.ID_GENERO = Convert.ToInt32(reader["ID_GENERO"]);
+                    genero.DESCRIPCION_GENERO = reader["DESCRIPCION_GENERO"].ToString();
+                    ogenero.Add(genero);
+                }
+            }
+            ViewBag.Genero = new SelectList(ogenero, "ID_GENERO", "DESCRIPCION_GENERO");
+
+            //LISTA SUCURSAL
+            List<Sucursal> osucursal = new List<Sucursal>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM SUCURSAL", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Sucursal sucursal = new Sucursal();
+                    sucursal.ID_SUCURSAL = Convert.ToInt32(reader["ID_SUCURSAL"]);
+                    sucursal.NOMBRE_SUCURSAL = reader["NOMBRE_SUCURSAL"].ToString();
+                    osucursal.Add(sucursal);
+                }
+            }
+            ViewBag.Sucursal = new SelectList(osucursal, "ID_SUCURSAL", "NOMBRE_SUCURSAL");
+
+            //LISTA DEPARTAMENTO
+            List<Departamento> odepartamento = new List<Departamento>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM DEPARTAMENTO", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Departamento departamento = new Departamento();
+                    departamento.ID_DEPARTAMENTO = Convert.ToInt32(reader["ID_DEPARTAMENTO"]);
+                    departamento.DECRIPCION_DEPARTAMENTO = reader["DECRIPCION_DEPARTAMENTO"].ToString();
+                    odepartamento.Add(departamento);
+                }
+            }
+            ViewBag.Departamento = new SelectList(odepartamento, "ID_DEPARTAMENTO", "DECRIPCION_DEPARTAMENTO");
+
+            //LISTA ROL
+            List<Rol> orol = new List<Rol>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ROL", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Rol rol = new Rol();
+                    rol.ID_ROL = Convert.ToInt32(reader["ID_ROL"]);
+                    rol.DECRIPCION_ROL = reader["DECRIPCION_ROL"].ToString();
+                    orol.Add(rol);
+                }
+            }
+            ViewBag.Rol = new SelectList(orol, "ID_ROL", "DECRIPCION_ROL");
+
+            //LISTA ESTADO EMPELADO
+
+            List<Estado> oestado = new List<Estado>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM ESTADO_EMPLEADO", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Estado estado = new Estado();
+                    estado.ID_ESTADO_EMPLEADO = Convert.ToInt32(reader["ID_ESTADO_EMPLEADO"]);
+                    estado.DESCRIPCION_ESTADO_EMPLEADO = reader["DESCRIPCION_ESTADO_EMPLEADO"].ToString();
+                    oestado.Add(estado);
+                }
+            }
+            ViewBag.Estado = new SelectList(oestado, "ID_ESTADO_EMPLEADO", "DESCRIPCION_ESTADO_EMPLEADO");
+
+            Empleado empleado = oempleado.Where(c => c.ID_EMPLEADO == Idempleado).FirstOrDefault();
+
+            return View(empleado);
+        }
+
+        [HttpPost]
+        public ActionResult Editaremple(Empleado oempleado)
+        {
+            bool registrado;
+            string mensaje;
+
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SP_ACTUALIZAR_EMPLEADO", oconexion);
+
+                cmd.Parameters.AddWithValue("ID_EMPLEADO", oempleado.ID_EMPLEADO);
+                cmd.Parameters.AddWithValue("DNI", oempleado.DNI);
+                cmd.Parameters.AddWithValue("PRIMER_NOMBRE", oempleado.PRIMER_NOMBRE);
+                cmd.Parameters.AddWithValue("SEGUNDO_NOMBRE", oempleado.SEGUNDO_NOMBRE);
+                cmd.Parameters.AddWithValue("PRIMER_APELLIDO", oempleado.PRIMER_APELLIDO);
+                cmd.Parameters.AddWithValue("SEGUNDO_APELLIDO", oempleado.SEGUNDO_APELLIDO);
+                cmd.Parameters.AddWithValue("ID_GENERO", oempleado.ID_GENERO);
+                cmd.Parameters.AddWithValue("ID_SUCURSAL", oempleado.ID_SUCURSAL);
+                cmd.Parameters.AddWithValue("ID_DEPARTAMENTO", oempleado.ID_DEPARTAMENTO);
+                cmd.Parameters.AddWithValue("ID_ROL", oempleado.ID_ROL);
+                cmd.Parameters.AddWithValue("ID_ESTADO_EMPLEADO", oempleado.ID_ESTADO_EMPLEADO);
+                cmd.Parameters.Add("REGISTRADOEMPLEADO", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("MENSAJEEMPLEADO", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                cmd.CommandType = CommandType.StoredProcedure;
+                oconexion.Open();
+                cmd.ExecuteNonQuery();
+
+                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADOEMPLEADO"].Value);
+                mensaje = cmd.Parameters["MENSAJEEMPLEADO"].Value.ToString();
+            }
+            ViewData["MENSAJEEMPLEADO"] = mensaje;
+
+            if (registrado)
+            {
+                return RedirectToAction("empleado", "Empleado");
+            }
+            else
+            {
+                return View();
+            }
+
         }
     }
 }

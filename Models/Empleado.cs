@@ -17,12 +17,12 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         public int ID_SUCURSAL { get; set; }
         public int ID_DEPARTAMENTO { get; set; }
         public int ID_ROL { get; set; }
-        public int ID_ESTADO_EMPLADO { get; set; }
+        public int ID_ESTADO_EMPLEADO { get; set; }
         public Genero GENERO { get; set; }
         public Sucursal SUCURSAL { get; set; }
         public Departamento DEPARTAMENTO { get; set; }
         public Rol ROL { get; set; }
-        public Estado ESTADO_EMPELADO { get; set; }
+        public Estado ESTADO_EMPLEADO { get; set; }
         public DateTime FECHA_REGISTRO { get; set; }
     }
 

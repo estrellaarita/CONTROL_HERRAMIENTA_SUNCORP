@@ -4,37 +4,39 @@
     ViewBag.Title = "Empresa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
 
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4>Lista de empresa</h4>
-            </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Empresas</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="row" style="margin-top:30px">
+        <div class="col-sm-12">
 
-            <form asp-controller="Empresa" asp-action="empresa">
-                <p>
-                    <input type="text" name="buscar" class="form-text" />
-                    <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
-                </p>
-            </form>
+            <div class="panel panel-warning" style="font-size: 16px;">
+                <div class="panel-heading">
+                    <h4>Lista de Empresas</h4>
 
-                    <div>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="button" value="Tipo" class="btn btn-sm btn-dark" />
-                        <input type="button" value="Categoría" class="btn btn-sm btn-dark" />
-                        <input type="button" value="Categoría" class="btn btn-sm btn-dark" />
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <form asp-controller="Empresa" asp-action="empresa">
+                    <p>
+                        <input type="text" name="buscar" class="form-text" />
+                        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+                    </p>
+                </form>
 
-                    </div>
-               
-            <div class="panel-body">
-                <a class="btn btn-success" href="@Url.Action("Registrar", "Empresa")">Crear Nuevo</a>
-                <hr />
+                <div class="panel-body">
+                    <a class="btn btn-success" href="@Url.Action("Registrar", "Empresa")">Crear Nuevo</a>
+                    <hr />
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -57,19 +59,29 @@
                                         <td>@item.CORPORACION.NOMBRE_CORPORACION</td>
                                         <td>@item.FECHA_REGISTRO</td>
                                         <td>
-                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Empresa", new { Idempresa = item.ID_EMPRESA })">Editar</a>
-                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Empresa", new { Idempresa = item.ID_EMPRESA })">Eliminar</a>
+                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Empresa", new { Idempresa = item.ID_EMPRESA })">
+                                                <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminar","Empresa", new { Idempresa = item.ID_EMPRESA })">
+                                                <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
+                                            </a>
                                         </td>
 
-                                </tr>
+                                    </tr>
 
-                            }
+                                }
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
- 
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

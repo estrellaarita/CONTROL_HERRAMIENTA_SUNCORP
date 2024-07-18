@@ -17,24 +17,24 @@
 
 
                     <div class="form-group">
-                        <label>Nombre empresa</label>
-                        <input type="text" class="form-control" name="NOMBRE_SUCURSAL" />
+                        <label>Nombre sucursal</label>
+                        <input type="text" class="form-control" name="NOMBRE_SUCURSAL" required/>
                     </div>
 
                     <div class="form-group">
                         <label>Correo electronico</label>
-                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" />
+                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" required />
                     </div>
 
                     <div class="form-group">
                         <label>Direccion</label>
-                        <input type="text" class="form-control" name="DIRECCION" />
+                        <input type="text" class="form-control" name="DIRECCION" required />
                     </div>
 
                     <div class="form-group">
                         <label for="ID_EMPRESA">Empresa</label>
-                        @Html.DropDownListFor(model => model.ID_EMPRESA, (SelectList)ViewBag.Empresas, new { @class = "form-control" })
-                        
+                        @Html.DropDownListFor(model => model.ID_EMPRESA, (SelectList)ViewBag.iEmpresas, new { @class = "form-control" })
+
                     </div>
 
                     <div class="form-group">
@@ -42,6 +42,13 @@
                         <input type="text" class="form-control" name="COMENTARIO" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
+
+                    @if (ViewData["MENSAJESUCURSAL"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJESUCURSAL"]
+                        </div>
+                    }
 
                     <button type="submit" class="btn btn-primary">Registrar</button>
                     <a class="btn btn-warning" href="@Url.Action("sucursal","Sucursal")">Volver</a>

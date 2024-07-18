@@ -5,18 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Eliminar</h2>
-
 <div class="row" style="margin-top:30px">
     <div class="col-sm-12">
 
         <div class="panel panel-warning">
             <div class="panel-heading">
-                <h4>Eliminar sucursal</h4>
+                <h4>ELIMINAR SUCURSAL</h4>
             </div>
             <div class="panel-body">
                 <div class="alert alert-danger">
-                    ¿Desea eliminar la sucursal?: @Html.DisplayTextFor(m => m.NOMBRE_SUCURSAL) ?
+                    ¿Desea eliminar la sucursal @Html.DisplayTextFor(m => m.NOMBRE_SUCURSAL) ?
                 </div>
 
                 <form action="@Url.Action("Eliminarsucur","Sucursal")" method="post">

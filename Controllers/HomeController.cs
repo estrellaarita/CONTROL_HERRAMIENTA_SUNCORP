@@ -1,26 +1,21 @@
-﻿using CONTROL_HERRAMIENTA_SUNCORP.Models;
-using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
-    [ValidarSesion]
     public class HomeController : Controller
     {
+        // GET: Home
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Mostrar()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
@@ -30,11 +25,5 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             return RedirectToAction("login", "Acceso");
         }
 
-
-        public ActionResult crear()
-        {
-
-            return View();
-        }
     }
 }

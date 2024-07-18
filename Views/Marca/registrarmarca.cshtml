@@ -1,0 +1,44 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Marca
+
+@{
+    ViewBag.Title = "registrarmarca";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>NUEVA MARCA</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("registrarmarca","Marca")" method="post">
+                    <div class="form-group">
+                        <label>Marca</label>
+                        <input type="text" class="form-control" name="DECRIPCION_MARCA" required />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    @if (ViewData["MENSAJEMARCA"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJEMARCA"]
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Marca","Marca")">Volver</a>
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+

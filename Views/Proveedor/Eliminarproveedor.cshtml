@@ -1,0 +1,34 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Proveedor
+
+@{
+    ViewBag.Title = "Eliminarproveedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>ELIMINAR PROVEEDOR</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    ¿Desea eliminar el proveedor @Html.DisplayTextFor(m => m.NOMBRE_PROVEEDOR) ?
+                </div>
+
+                <form action="@Url.Action("Eliminarproveedor","Proveedor")" method="post">
+                    <input type="hidden" class="form-control" name="Idproveedor" value="@Html.DisplayTextFor(m => m.ID_PROVEEDOR)" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Proveedor","Proveedor")">Volver</a>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+

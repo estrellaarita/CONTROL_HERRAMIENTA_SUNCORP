@@ -63,7 +63,6 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         public ActionResult Crear()
         {
 
-
             List<Empresa> aempresa = new List<Empresa>();
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
@@ -78,7 +77,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     aempresa.Add(rempresa);
                 }
             }
-            ViewBag.Empresas = new SelectList(aempresa, "ID_EMPRESA", "NOMBRE_EMPRESA");
+            ViewBag.iEmpresas = new SelectList(aempresa, "ID_EMPRESA", "NOMBRE_EMPRESA");
 
 
             return View();
@@ -87,6 +86,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Crear(Sucursal osucursal)
         {
+            bool registrado;
+            string mensaje;
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
@@ -98,12 +99,26 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.Parameters.AddWithValue("DIRECCION", osucursal.DIRECCION);
                 cmd.Parameters.AddWithValue("ID_EMPRESA", osucursal.ID_EMPRESA);
                 cmd.Parameters.AddWithValue("COMENTARIO", osucursal.COMENTARIO);
+                cmd.Parameters.Add("REGISTRADOSUCURSAL", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("MENSAJESUCURSAL", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
+                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADOSUCURSAL"].Value);
+                mensaje = cmd.Parameters["MENSAJESUCURSAL"].Value.ToString();
             }
-            return RedirectToAction("sucursal", "Sucursal");
+            ViewData["MENSAJESUCURSAL"] = mensaje;
+
+            if (registrado)
+            {
+                return RedirectToAction("sucursal", "Sucursal");
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         //EDITAR SUCURSAL
@@ -126,8 +141,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 }
             }
 
-            ViewBag.Empresas = new SelectList(aempresa, "ID_EMPRESA", "NOMBRE_EMPRESA");
-
+            // ViewBag.eEmpresas = new SelectList(aempresa, "ID_EMPRESA", "NOMBRE_EMPRESA");
+            ViewData["ID_EMPRESA"] = new SelectList(aempresa, "ID_EMPRESA", "NOMBRE_EMPRESA");
             Sucursal arsucursal = osucursal.Where(c => c.ID_SUCURSAL == Idsucursal).FirstOrDefault();
 
             
@@ -137,7 +152,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Editarsucur(Sucursal osucursal)
         {
-
+            bool registrado;
+            string mensaje;
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
@@ -145,16 +161,32 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 
                 cmd.Parameters.AddWithValue("ID_SUCURSAL", osucursal.ID_SUCURSAL);
                 cmd.Parameters.AddWithValue("NOMBRE_SUCURSAL", osucursal.NOMBRE_SUCURSAL);
-                cmd.Parameters.AddWithValue("DIRECCION", osucursal.DIRECCION);
                 cmd.Parameters.AddWithValue("CORREO_ELECTRONICO", osucursal.CORREO_ELECTRONICO);
+                cmd.Parameters.AddWithValue("DIRECCION", osucursal.DIRECCION);
                 cmd.Parameters.AddWithValue("ID_EMPRESA", osucursal.ID_EMPRESA);
                 cmd.Parameters.AddWithValue("COMENTARIO", osucursal.COMENTARIO);
+                cmd.Parameters.Add("REGISTRADOSUCURSAL", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("MENSAJESUCURSAL", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
+
+                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADOSUCURSAL"].Value);
+                mensaje = cmd.Parameters["MENSAJESUCURSAL"].Value.ToString();
             }
-            return RedirectToAction("sucursal", "Sucursal");
+            ViewData["MENSAJESUCURSAL"] = mensaje;
+
+            if (registrado)
+            {
+                return RedirectToAction("sucursal", "Sucursal");
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         //ELIMINAR SUCURSAL

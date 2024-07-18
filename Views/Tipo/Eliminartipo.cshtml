@@ -1,0 +1,35 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Tipoherramienta
+
+@{
+    ViewBag.Title = "Eliminartipo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>ELIMINAR TIPO HERRAMIENTA</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    ¿Desea eliminar el tipo de herramienta @Html.DisplayTextFor(m => m.DECRIPCION_TIPO_HERRAMIENTA) ?
+                </div>
+
+                <form action="@Url.Action("Eliminartipo","Tipo")" method="post">
+                    <input type="hidden" class="form-control" name="Idtipo" value="@Html.DisplayTextFor(m => m.ID_TIPO_HERRAMIENTA)" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Tipo","Tipo")">Volver</a>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+

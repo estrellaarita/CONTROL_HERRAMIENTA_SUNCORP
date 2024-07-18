@@ -1,0 +1,33 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Rol
+
+@{
+    ViewBag.Title = "Eliminarrol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>ELIMINAR ROL</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    ¿Desea eliminar el rol @Html.DisplayTextFor(m => m.DECRIPCION_ROL) ?
+                </div>
+
+                <form action="@Url.Action("Eliminarrol","Rol")" method="post">
+                    <input type="hidden" class="form-control" name="Idrol" value="@Html.DisplayTextFor(m => m.ID_ROL)" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Rol","Rol")">Volver</a>
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

@@ -1,0 +1,55 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Proveedor
+
+@{
+    ViewBag.Title = "registrarproveedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>NUEVO PROVEEDOR</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("registrarproveedor","Proveedor")" method="post">
+                    <div class="form-group">
+                        <div class="form-label">
+
+                        <label>RTN</label>
+
+                        <input type="text" class="form-control" name="RTN" required/>
+
+                        <label>Nombre proveedor</label>
+
+                        <input type="text" class="form-control" name="NOMBRE_PROVEEDOR" required>
+
+                        <label>Correo electronico</label>
+
+                        <input type="text" class="form-control" name="CORREO_ELECTRONICO"/>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                        </div>
+                    @if (ViewData["MENSAJEPROVEEDOR"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["MENSAJEPROVEEDOR"]
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Proveedor","Proveedor")">Volver</a>
+
+                </form>
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
