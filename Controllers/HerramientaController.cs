@@ -1,11 +1,12 @@
-﻿using CONTROL_HERRAMIENTA_SUNCORP.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CONTROL_HERRAMIENTA_SUNCORP.Models;
+using System.Data;
+using System.Data.SqlClient;
+
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
@@ -62,6 +63,154 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 }
             }
             return View(oherramienta);
+        }
+
+        //CREATE HERRAMIENTA
+
+        [HttpGet]
+        public ActionResult Registrarherramienta()
+        {
+
+            List<Tipoherramienta> otipoherramienta = new List<Tipoherramienta>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM TIPO_HERRAMIENTA", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Tipoherramienta tipo = new Tipoherramienta();
+                    tipo.ID_TIPO_HERRAMIENTA = Convert.ToInt32(reader["ID_TIPO_HERRAMIENTA"]);
+                    tipo.DECRIPCION_TIPO_HERRAMIENTA = reader["DECRIPCION_TIPO_HERRAMIENTA"].ToString();
+                    otipoherramienta.Add(tipo);
+                }
+            }
+            ViewBag.Tipo = new SelectList(otipoherramienta, "ID_TIPO_HERRAMIENTA", "DECRIPCION_TIPO_HERRAMIENTA");
+
+            //LISTA MARCA
+            List<Marca> omarca = new List<Marca>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM MARCA", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Marca marca = new Marca();
+                    marca.ID_MARCA = Convert.ToInt32(reader["ID_MARCA"]);
+                    marca.DECRIPCION_MARCA= reader["DECRIPCION_MARCA"].ToString();
+                    omarca.Add(marca);
+                }
+            }
+            ViewBag.Marca = new SelectList(omarca, "ID_MARCA", "DECRIPCION_MARCA");
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Registrarherramienta(Herramienta oherramienta)
+        {
+
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SP_CREATE_HERAMIENTA", oconexion);
+                
+                cmd.Parameters.AddWithValue("ID_TIPO_HERRAMIENTA", oherramienta.ID_TIPO_HERRAMIENTA);
+                cmd.Parameters.AddWithValue("ID_MARCA", oherramienta.ID_MARCA);
+                cmd.Parameters.AddWithValue("MODELO", oherramienta.MODELO);
+                cmd.Parameters.AddWithValue("COMENTARIO", oherramienta.COMENTARIO);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                oconexion.Open();
+                cmd.ExecuteNonQuery();
+            }
+            return RedirectToAction("Herramienta", "Herramienta");
+        }
+
+        // ELIMINAR HERRAMIENTA
+        [HttpGet]
+        public ActionResult Eliminarherramienta(int? Idherramienta)
+        {
+            Herramienta aherramienta = oherramienta.Where(c => c.ID_HERRAMIENTA == Idherramienta).FirstOrDefault();
+            return View(aherramienta);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminarherramienta(string Idherramienta)
+        {
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SP_DELETE_HERRAMIENTA", oconexion);
+                cmd.Parameters.AddWithValue("ID_HERRAMIENTA", Idherramienta);
+                cmd.CommandType = CommandType.StoredProcedure;
+                oconexion.Open();
+                cmd.ExecuteNonQuery();
+            }
+            return RedirectToAction("Herramienta", "Herramienta");
+        }
+
+        //EDITAR HERRAMIENTA
+
+        [HttpGet]
+        public ActionResult Editarherramienta(int? Idherramienta)
+        {
+            List<Tipoherramienta> otipoherramienta = new List<Tipoherramienta>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM TIPO_HERRAMIENTA", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Tipoherramienta tipo = new Tipoherramienta();
+                    tipo.ID_TIPO_HERRAMIENTA = Convert.ToInt32(reader["ID_TIPO_HERRAMIENTA"]);
+                    tipo.DECRIPCION_TIPO_HERRAMIENTA = reader["DECRIPCION_TIPO_HERRAMIENTA"].ToString();
+                    otipoherramienta.Add(tipo);
+                }
+            }
+            ViewBag.Tipo = new SelectList(otipoherramienta, "ID_TIPO_HERRAMIENTA", "DECRIPCION_TIPO_HERRAMIENTA");
+
+            //LISTA MARCA
+            List<Marca> omarca = new List<Marca>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM MARCA", oconexion);
+                oconexion.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Marca marca = new Marca();
+                    marca.ID_MARCA = Convert.ToInt32(reader["ID_MARCA"]);
+                    marca.DECRIPCION_MARCA = reader["DECRIPCION_MARCA"].ToString();
+                    omarca.Add(marca);
+                }
+            }
+            ViewBag.Marca = new SelectList(omarca, "ID_MARCA", "DECRIPCION_MARCA");
+
+            Herramienta aherramienta = oherramienta.Where(c => c.ID_HERRAMIENTA == Idherramienta).FirstOrDefault();
+           
+            return View(aherramienta);
+        }
+
+        [HttpPost]
+        public ActionResult Editarherramienta(Herramienta oherramienta)
+        {
+
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SP_ACTUALIZAR_HERRAMIENTA", oconexion);
+
+                cmd.Parameters.AddWithValue("ID_HERRAMIENTA", oherramienta.ID_HERRAMIENTA);
+                cmd.Parameters.AddWithValue("ID_TIPO_HERRAMIENTA", oherramienta.ID_TIPO_HERRAMIENTA);
+                cmd.Parameters.AddWithValue("ID_MARCA", oherramienta.ID_MARCA);
+                cmd.Parameters.AddWithValue("MODELO", oherramienta.MODELO);
+                cmd.Parameters.AddWithValue("COMENTARIO", oherramienta.COMENTARIO);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                oconexion.Open();
+                cmd.ExecuteNonQuery();
+            }
+            return RedirectToAction("Herramienta", "Herramienta");
         }
     }
 }

@@ -115,12 +115,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\DescargasController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\HerramientaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RolController.cs" />
+    <Compile Include="Controllers\SerieherController.cs" />
     <Compile Include="Controllers\Serie_herramientaController.cs" />
     <Compile Include="Controllers\SucursalController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
@@ -128,6 +131,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Departamento.cs" />
+    <Compile Include="Models\Descargas.cs" />
     <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Factura.cs" />
@@ -137,6 +141,7 @@
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Serie.cs" />
+    <Compile Include="Models\Serieempleado.cs" />
     <Compile Include="Models\Sucursal.cs" />
     <Compile Include="Models\Tipoherramienta.cs" />
     <Compile Include="Models\usuario.cs" />
@@ -160,6 +165,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\empleado.css" />
     <Content Include="Content\css\Login.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -231,9 +237,17 @@
     <Content Include="Views\Tipo\registrartipo.cshtml" />
     <Content Include="Views\Tipo\Editartipo.cshtml" />
     <Content Include="Views\Tipo\Eliminartipo.cshtml" />
+    <Content Include="Views\Herramienta\Registrarherramienta.cshtml" />
+    <Content Include="Views\Herramienta\Eliminarherramienta.cshtml" />
+    <Content Include="Views\Herramienta\Editarherramienta.cshtml" />
+    <Content Include="Views\Factura\Factura.cshtml" />
+    <Content Include="Views\Serie_herramienta\Registrarserie.cshtml" />
+    <Content Include="Views\Serie_empleado\serie_empleado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Descargas\" />
+    <Folder Include="Views\Serieher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

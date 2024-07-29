@@ -15,7 +15,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
 
         public string CLAVE { get; set; }
 
-        public string FECHA_REGISTRO { get; set; }
+        public DateTime FECHA_REGISTRO { get; set; }
 
 
         public string confirmarclave { get; set; }

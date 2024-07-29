@@ -1,0 +1,49 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Herramienta
+
+@{
+    ViewBag.Title = "Registrarherramienta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>NUEVA HERRAMIENTA</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Registrarherramienta","Herramienta")" method="post">
+
+
+                    <div class="form-group">
+                        <label for="ID_TIPO_HERRAMIENTA">Tipo herramienta</label>
+                        @Html.DropDownListFor(model => model.ID_TIPO_HERRAMIENTA, (SelectList)ViewBag.Tipo, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_MARCA">Marca</label>
+                        @Html.DropDownListFor(model => model.ID_MARCA, (SelectList)ViewBag.Marca, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="form-group">
+                        <label>Modelo</label>
+                        <input type="text" class="form-control" name="Modelo" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comentario</label>
+                        <input type="text" class="form-control" name="Comentario"/>
+                     </div>
+
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <a class="btn btn-warning" href="@Url.Action("Herramienta","Herramienta")">Volver</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

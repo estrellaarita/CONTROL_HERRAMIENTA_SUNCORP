@@ -18,65 +18,88 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="row" style="margin-top:30px">
-        <div class="col-sm-12">
+    <div class="container">
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-12">
 
-            <div class="panel panel-warning" style="font-size: 16px;">
-                <div class="panel-heading">
-                    <h4>Lista de departamentos</h4>
-                </div>
-                <div class="panel-body">
-                    <a class="btn btn-success" href="@Url.Action("registrardept","Departamento")">Crear Nuevo</a>
-                    <hr />
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Departamento</th>
-                                    <th>Fecha registro</th>
-                                    <th style="width:150px"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Departamento item in Model)
-                                {
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h4>Lista de departamentos</h4>
+                    </div>
+                    <div class="panel-body">
+                        <a class="btn btn-success" href="@Url.Action("registrardept","Departamento")">Crear Nuevo</a>
+                        <hr />
+
+                        <!-- Formulario de búsqueda -->
+                        <form id="formBuscar" class="form-inline">
+                            <div class="form-group">
+                                <label for="txtBuscar">Buscar por Nombre:</label>
+                                <input type="text" class="form-control" id="txtBuscar" placeholder="Nombre del Departamento">
+                            </div>
+                        </form>
+
+                        <div class="table-responsive">
+                            <table id="tablaDepartamentos" class="table table-striped">
+                                <thead>
                                     <tr>
-                                        <td>@item.ID_DEPARTAMENTO</td>
-                                        <td>@item.DECRIPCION_DEPARTAMENTO</td>
-                                        <td>@item.FECHA_REGISTRO</td>
-
-                                        <td>
-
-
-                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editardept","Departamento", new { iddpt = item.ID_DEPARTAMENTO })">
-                                                <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
-                                            </a>
-                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminardept","Departamento", new { iddpt = item.ID_DEPARTAMENTO })">
-                                                <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
-                                            </a>
-
-                                        </td>
-
+                                        <th>ID</th>
+                                        <th>Departamento</th>
+                                        <th>Fecha registro</th>
+                                        <th>Acciones</th>
                                     </tr>
-
-                                }
-
-
-
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.ID_DEPARTAMENTO</td>
+                                            <td>@item.DECRIPCION_DEPARTAMENTO</td>
+                                            <td>@item.FECHA_REGISTRO</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" href="@Url.Action("Editardept", "Departamento", new { iddpt = item.ID_DEPARTAMENTO })">
+                                                    <span class="glyphicon glyphicon-pencil"></span> Editar
+                                                </a>
+                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminardept", "Departamento", new { iddpt = item.ID_DEPARTAMENTO })">
+                                                    <span class="glyphicon glyphicon-trash"></span> Eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
             </div>
-
-
         </div>
     </div>
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Script para búsqueda automática -->
+    <script>
+        $(document).ready(function () {
+            $('#txtBuscar').on('input', function () {
+                var query = $(this).val().trim();
+
+                $.ajax({
+                    url: '@Url.Action("Buscar", "Departamento")',
+                    type: 'POST',
+                    dataType: 'html',
+                    data: { nombre: query },
+                    success: function (response) {
+                        $('#tablaDepartamentos tbody').html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

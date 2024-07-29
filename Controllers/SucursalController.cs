@@ -141,8 +141,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 }
             }
 
-            // ViewBag.eEmpresas = new SelectList(aempresa, "ID_EMPRESA", "NOMBRE_EMPRESA");
-            ViewData["ID_EMPRESA"] = new SelectList(aempresa, "ID_EMPRESA", "NOMBRE_EMPRESA");
+            ViewBag.iEmpresas = new SelectList(aempresa, "ID_EMPRESA", "NOMBRE_EMPRESA");
+
             Sucursal arsucursal = osucursal.Where(c => c.ID_SUCURSAL == Idsucursal).FirstOrDefault();
 
             
@@ -167,8 +167,6 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.Parameters.AddWithValue("COMENTARIO", osucursal.COMENTARIO);
                 cmd.Parameters.Add("REGISTRADOSUCURSAL", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("MENSAJESUCURSAL", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
-
-
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();

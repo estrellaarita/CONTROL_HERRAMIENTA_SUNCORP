@@ -1,0 +1,34 @@
+﻿.usuario-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #337ab7;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+    .usuario-logo:hover {
+        background-color: #23527c;
+    }
+
+    .usuario-logo span {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+.btn-usuario {
+    background-color: #7acb29;
+    border-color: #337ab7;
+    color: #fff;
+}
+
+    .btn-usuario:hover {
+        background-color: #4bfd84;
+        border-color: #23527c;
+    }
+
+ 

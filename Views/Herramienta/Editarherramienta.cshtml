@@ -1,0 +1,50 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Herramienta
+
+@{
+    ViewBag.Title = "Editarherramienta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>EDITAR HERRAMIENTA</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Editarherramienta","Herramienta")" method="post">
+
+                    <input type="hidden" class="form-control" name="ID_HERRAMIENTA" value="@Html.DisplayTextFor(m=>m.ID_HERRAMIENTA)" />
+
+                    <div class="form-group">
+                        <label for="ID_TIPO_HERRAMIENTA">Tipo herramienta</label>
+                        @Html.DropDownListFor(model => model.ID_TIPO_HERRAMIENTA, (SelectList)ViewBag.Tipo, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_MARCA">Marca</label>
+                        @Html.DropDownListFor(model => model.ID_MARCA, (SelectList)ViewBag.Marca, new { @class = "form-control" })
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="form-group">
+                        <label>Modelo</label>
+                        <input type="text" class="form-control" name="MODELO" value="@Html.DisplayTextFor(m=>m.MODELO)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comentario</label>
+                        <input type="text" class="form-control" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" /><br />
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-warning" href="@Url.Action("Herramienta","Herramienta")">Volver</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Serie
+
+@{
+    ViewBag.Title = "Registrarserie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:30px">
+    <div class="col-sm-12">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4>NUEVA SERIE DE HERRAMIENTA</h4>
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Registrarserie","Serie_herramienta")" method="post">
+
+                    <div class="form-group">
+                        <label for="ID_SUCURSAL">Sucursal</label>
+                        @Html.DropDownListFor(model => model.ID_SUCURSAL, (SelectList)ViewBag.Sucursal, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_HERRAMIENTA">Herramienta</label>
+                        @Html.DropDownListFor(model => model.ID_HERRAMIENTA, (SelectList)ViewBag.Herramienta, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="UBICACION_FISICA">Ubicación Física</label>
+                        <input type="text" class="form-control" id="UBICACION_FISICA" name="UBICACION_FISICA" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="NUMERO_SERIE">Número de Serie</label>
+                        <input type="text" class="form-control" id="NUMERO_SERIE" name="NUMERO_SERIE" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PRECIO">Precio</label>
+                        <input type="text" class="form-control" id="PRECIO" name="PRECIO" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="estadoHerramientaDropdown" class="control-label">Estado de Herramienta</label>
+                        <select id="ID_ESTADO_HERRAMIENTA" asp-for="estadoHerramientaDropdown" class="form-control" asp-items="@ViewBag.Estado_herramienta"></select>
+                        <span asp-validation-for="estadoHerramientaDropdown" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_FACTURA">Factura</label>
+                        @Html.DropDownListFor(model => model.ID_FACTURA, (SelectList)ViewBag.Factura, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="COMENTARIO">Comentario</label>
+                        <input type="text" class="form-control" id="COMENTARIO" name="COMENTARIO" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <a class="btn btn-warning" href="@Url.Action("serie", "Serie_herramienta")">Volver</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#ID_ESTADO_HERRAMIENTA").select2();
+        });
+    </script>
+}
+

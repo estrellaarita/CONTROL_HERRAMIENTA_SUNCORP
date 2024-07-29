@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+
 </head>
 <body>
     <div class="row" style="margin-top:30px">
@@ -71,13 +73,15 @@
                                         <td>@item.MODELO</td>
                                         <td>@item.COMENTARIO</td>
                                         <td>@item.FECHA_REGISTRO</td>
+
                                         <td>
-                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editarherramienta","Herramienta", new { Idempleado = item.ID_HERRAMIENTA})">
+                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editarherramienta","Herramienta", new { Idherramienta = item.ID_HERRAMIENTA})">
                                                 <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarherramienta","Herramienta", new { Idempleado= item.ID_HERRAMIENTA })">
+                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarherramienta","Herramienta", new { Idherramienta= item.ID_HERRAMIENTA })">
                                                 <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
                                             </a>
+                                           
                                         </td>
 
                                     </tr>
@@ -96,5 +100,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

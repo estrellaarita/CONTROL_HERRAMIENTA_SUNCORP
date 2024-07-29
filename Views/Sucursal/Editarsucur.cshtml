@@ -34,7 +34,7 @@
 
                     <div class="form-group">
                         <label for="ID_EMPRESA">Empresa</label>
-                        @Html.DropDownListFor(model => model.ID_EMPRESA, (SelectList)ViewData["ID_EMPRESA"], new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.ID_EMPRESA, (SelectList)ViewBag.iEmpresas, new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">
