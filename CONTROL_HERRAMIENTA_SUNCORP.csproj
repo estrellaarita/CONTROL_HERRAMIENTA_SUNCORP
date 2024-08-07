@@ -123,7 +123,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RolController.cs" />
-    <Compile Include="Controllers\SerieherController.cs" />
+    <Compile Include="Controllers\SerieempleController.cs" />
     <Compile Include="Controllers\Serie_herramientaController.cs" />
     <Compile Include="Controllers\SucursalController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
@@ -240,14 +240,21 @@
     <Content Include="Views\Herramienta\Registrarherramienta.cshtml" />
     <Content Include="Views\Herramienta\Eliminarherramienta.cshtml" />
     <Content Include="Views\Herramienta\Editarherramienta.cshtml" />
-    <Content Include="Views\Factura\Factura.cshtml" />
     <Content Include="Views\Serie_herramienta\Registrarserie.cshtml" />
-    <Content Include="Views\Serie_empleado\serie_empleado.cshtml" />
+    <Content Include="Views\Serieemple\Serie_empleado.cshtml" />
+    <Content Include="Views\Factura\FACTURA.cshtml" />
+    <Content Include="Views\Factura\Registrarfactura.cshtml" />
+    <Content Include="Views\Serie_herramienta\Editarserieher.cshtml" />
+    <Content Include="Views\Serie_herramienta\Eliminarserieher.cshtml" />
+    <Content Include="Views\Factura\Eliminarfactura.cshtml" />
+    <Content Include="Views\Factura\Editarfactura.cshtml" />
+    <Content Include="Views\Descargas\descargas.cshtml" />
+    <Content Include="Views\Descargas\Registrardescarga.cshtml" />
+    <Content Include="Views\Descargas\Eliminardescargas.cshtml" />
+    <Content Include="Views\Descargas\Editardescargas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Descargas\" />
-    <Folder Include="Views\Serieher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -6,9 +6,12 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
+    [ValidarSesion]
+
     public class DepartamentoController : Controller
     {
 
@@ -70,7 +73,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 using (SqlDataReader dr = cmd.ExecuteReader())
 
                     while (dr.Read())
-                {
+                    {
                         Departamento departamento = new Departamento();
 
                         departamento.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);

@@ -6,9 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
+    [ValidarSesion]
     public class RolController : Controller
     {
         static string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
@@ -43,7 +45,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             return View(orol);
         }
 
-        //REGISTRAR
+        //REGISTRAR ROL
+
         [HttpGet]
         public ActionResult registrarrol()
         {
@@ -85,8 +88,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 
         }
 
+        //ELIMINAR ROL
 
-        //ELIMINAR
         [HttpGet]
         public ActionResult Eliminarrol(int? Idrol)
         {
@@ -109,6 +112,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         }
 
         //ACTUALIZAR ROL
+
         [HttpGet]
         public ActionResult Editarrol(int? Idrol)
         {

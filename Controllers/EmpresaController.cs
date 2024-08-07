@@ -9,9 +9,12 @@ using System.Data.SqlClient;
 using System.Collections;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
+using System.Web.Services.Description;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
+    [ValidarSesion]
     public class EmpresaController : Controller
     {
         static string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
@@ -23,8 +26,29 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
-                SqlCommand cmd = new SqlCommand("SELECT e.*, c.* FROM EMPRESA e INNER JOIN CORPORACION c ON e.ID_CORPORACION = c.ID_CORPORACION", oconexion);
+                SqlCommand cmd = new SqlCommand("SELECT " +
+                                               "epr.ID_EMPRESA, " +
+                                               "epr.RTN, " +
+                                               "epr.NOMBRE_EMPRESA, " +
+                                               "epr.CORREO_ELECTRONICO, " +
+                                               "c.NOMBRE_CORPORACION, " +
+                                               "COUNT(DISTINCT s.ID_SUCURSAL) AS CANTIDAD_DE_SUCURSALES, " +
+                                               "MAX(epr.FECHA_REGISTRO) AS FECHA_REGISTRO " +
+                                               "FROM EMPRESA epr " +
+
+                                               "INNER JOIN CORPORACION c ON epr.ID_CORPORACION = c.ID_CORPORACION " +
+                                               "LEFT JOIN SUCURSAL s ON epr.ID_EMPRESA = s.ID_EMPRESA " +
+                                               
+
+                                               "GROUP BY " +
+                                               "epr.ID_EMPRESA, " +
+                                               "epr.RTN, " +
+                                               "epr.NOMBRE_EMPRESA, " +
+                                               "epr.CORREO_ELECTRONICO, " +
+                                               "c.NOMBRE_CORPORACION " +
+                                               "ORDER BY MAX(epr.FECHA_REGISTRO) DESC;", oconexion);
                 cmd.CommandType = CommandType.Text;
+
                 oconexion.Open();
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -37,14 +61,15 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         empresa.RTN = dr["RTN"].ToString();
                         empresa.NOMBRE_EMPRESA = dr["NOMBRE_EMPRESA"].ToString();
                         empresa.CORREO_ELECTRONICO = dr["CORREO_ELECTRONICO"].ToString();
-                        empresa.ID_CORPORACION = Convert.ToInt32(dr["ID_CORPORACION"]);
+                        //empresa.ID_CORPORACION = Convert.ToInt32(dr["ID_CORPORACION"]);
+                       empresa.CANTIDAD_DE_SUCURSALES = Convert.ToInt32(dr["CANTIDAD_DE_SUCURSALES"]);
                         empresa.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         Corporacion corporacion = new Corporacion();
 
-                        corporacion.ID_CORPORACION = Convert.ToInt32(dr["ID_CORPORACION"]);
+                       // corporacion.ID_CORPORACION = Convert.ToInt32(dr["ID_CORPORACION"]);
                         corporacion.NOMBRE_CORPORACION = dr["NOMBRE_CORPORACION"].ToString();
-                        corporacion.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                       // corporacion.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empresa.CORPORACION = corporacion;
 

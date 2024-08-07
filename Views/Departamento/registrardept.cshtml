@@ -6,17 +6,18 @@
 }
 
 <div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-
-        <div class="panel panel-warning">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>NUEVO DEPARTAMENTO</h4>
+                <h4>NUEVO DEPARTAMENTO</h4><br />
             </div>
             <div class="panel-body">
                 <form action="@Url.Action("registrardept","Departamento")" method="post">
                     <div class="form-group">
                         <label>Departamento</label>
-                        <input type="text" class="form-control" name="DECRIPCION_DEPARTAMENTO" required />
+                        <input type="text" class="form-control" name="DECRIPCION_DEPARTAMENTO" required /><br />
                         @Html.ValidationMessageFor(model => model.DECRIPCION_DEPARTAMENTO, "", new { @class = "text-danger" })
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>

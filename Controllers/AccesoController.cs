@@ -9,11 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using CONTROL_HERRAMIENTA_SUNCORP.Models;
 using System.Web.Services.Description;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
 
-    
+  
     public class AccesoController : Controller
     {
         // PARAMETROS PARA LA CONEXION DE LA BD

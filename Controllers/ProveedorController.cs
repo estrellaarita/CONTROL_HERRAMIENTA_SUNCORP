@@ -6,9 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
+    [ValidarSesion]
     public class ProveedorController : Controller
     {
         static string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
@@ -47,6 +49,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         }
 
         //REGISTRAR PROVEEDOR
+
         [HttpGet]
         public ActionResult registrarproveedor()
         {
@@ -62,7 +65,6 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_CREATE_PROVEEDOR", oconexion);
-
 
                 cmd.Parameters.AddWithValue("RTN", oproveedor.RTN);
                 cmd.Parameters.AddWithValue("NOMBRE_PROVEEDOR", oproveedor.NOMBRE_PROVEEDOR);
@@ -89,6 +91,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         }
 
         //ACTUALIZAR PROVEEDOR
+
         [HttpGet]
         public ActionResult Editarproveedor(int? Idproveedor)
         {
@@ -133,6 +136,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         }
 
         //ELIMINAR PROVEEDOR
+
         [HttpGet]
         public ActionResult Eliminarproveedor(int? Idproveedor)
         {

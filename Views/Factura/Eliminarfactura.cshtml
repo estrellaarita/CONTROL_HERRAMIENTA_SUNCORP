@@ -1,10 +1,9 @@
-﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Tipoherramienta
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Factura
 
 @{
-    ViewBag.Title = "Eliminartipo";
+    ViewBag.Title = "Eliminarfactura";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <div class="row" style="margin-top:30px">
     <div class="col-sm-12 text-center">
@@ -12,18 +11,18 @@
         <div class="panel panel-warning" style="display: inline-block;">
             <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>ELIMINAR TIPO HERRAMIENTA</h4><br />
+                <h4>ELIMINAR FACTURA</h4><br />
             </div>
             <div class="panel-body">
                 <div class="alert alert-danger">
-                    ¿Desea eliminar el tipo de herramienta @Html.DisplayTextFor(m => m.DECRIPCION_TIPO_HERRAMIENTA) ?
+                    ¿Desea eliminar la factura @Html.DisplayTextFor(m => m.NUMERO_FACTURA) ?
                 </div>
 
-                <form action="@Url.Action("Eliminartipo","Tipo")" method="post">
-                    <input type="hidden" class="form-control" name="Idtipo" value="@Html.DisplayTextFor(m => m.ID_TIPO_HERRAMIENTA)" /><br />
+                <form action="@Url.Action("Eliminarfactura","Factura")" method="post">
+                    <input type="hidden" class="form-control" name="Idfactura" value="@Html.DisplayTextFor(m => m.ID_FACTURA)" />
 
                     <button type="submit" class="btn btn-danger">Eliminar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Tipo","Tipo")">Volver</a>
+                    <a class="btn btn-warning" href="@Url.Action("FACTURA","Factura")">Volver</a>
                 </form>
 
             </div>

@@ -23,6 +23,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         public Departamento DEPARTAMENTO { get; set; }
         public Rol ROL { get; set; }
         public Estado ESTADO_EMPLEADO { get; set; }
+        public int NUMERO_DE_HERRAMIENTAS { get; set; }
         public DateTime FECHA_REGISTRO { get; set; }
     }
 

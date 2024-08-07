@@ -11,34 +11,48 @@
         <div class="panel panel-warning" style="display: inline-block;">
             <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>ACTUALIZAR ROL</h4>
+                <h4>ACTUALIZAR ROL</h4><br />
             </div>
             <div class="panel-body">
                 <form action="@Url.Action("Editarrol","Rol")" method="post">
                     <div class="form-group">
                         <label>Rol</label>
 
-                        <input type="hidden" class="form-control" name="ID_ROL" value="@Html.DisplayTextFor(m=>m.ID_ROL)" />
-
-                        <input type="text" class="form-control" name="DECRIPCION_ROL" value="@Html.DisplayTextFor(m=>m.DECRIPCION_ROL)" />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                    @if (ViewData["MENSAJEROL"] != null)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @ViewData["MENSAJEROL"]
-                        </div>
-                    }
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Rol","Rol")">Volver</a>
-
-                </form>
+                        <input type="hidden" class="form-control" name="ID_ROL" value="@Html.DisplayTextFor(m=>m.ID_ROL)" /><br />
 
 
+                        <style>
+                            .center-input {
+                                text-align: center; /* Centra el contenido en línea */
+                                margin-top: 20px; /* Espacio superior opcional */
+                            }
+
+                                .center-input input {
+                                    display: inline-block; /* Permite centrar el input dentro del contenedor */
+                                }
+                        </style>
+
+                        <div class="form-container">
+                            <div class="center-input">
+                         
+                                    <input type="text" class="form-control" name="DECRIPCION_ROL" value="@Html.DisplayTextFor(m=>m.DECRIPCION_ROL)" /><br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+                                </div>
+                         </div>
+                       
+                                @if (ViewData["MENSAJEROL"] != null)
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @ViewData["MENSAJEROL"]
+                                    </div>
+                                }
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                                <a class="btn btn-warning" href="@Url.Action("Rol","Rol")">Volver</a>
+
+</form>         
             </div>
         </div>
-
-
     </div>
 </div>
 

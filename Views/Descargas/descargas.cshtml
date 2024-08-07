@@ -1,7 +1,7 @@
-﻿@model IEnumerable<CONTROL_HERRAMIENTA_SUNCORP.Models.Factura>
+﻿@model IEnumerable<CONTROL_HERRAMIENTA_SUNCORP.Models.Descargas>
 
 @{
-    ViewBag.Title = "FACTURA";
+    ViewBag.Title = "descargas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Empresas</title>
+    <title>Lista de Descargas</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Optional theme -->
@@ -23,23 +23,21 @@
 
             <div class="panel panel-warning" style="font-size: 16px;">
                 <div class="panel-heading">
-                    <h4>Lista de Factura</h4>
+                    <h4>Lista de Descargas</h4>
 
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-
                 <div class="panel-body">
-                    <a class="btn btn-success" href="@Url.Action("Registrarfactura", "Factura")">Crear Nuevo</a>
+                    <a class="btn btn-success" href="@Url.Action("Registrardescarga", "Descargas")">Crear Nuevo</a>
                     <hr />
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Numero factura</th>
+                                    <th>Numero serie</th>
                                     <th>Usuario</th>
-                                    <th>Fecha compra</th>
-                                    <th>Proveedor</th>
+                                    <th>Fecha desecho</th>
                                     <th>Comentario</th>
                                     <th>Foto</th>
                                     <th>Fecha registro</th>
@@ -47,21 +45,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                @if (Model != null)
-                                {
-                                    foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Factura item in Model)
-                                    {
+                                    @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Descargas item in Model)
+                                     {
                                         <tr>
-                                            <td>@item.NUMERO_FACTURA</td>
+                                            <td>@item.SERIE.NUMERO_SERIE</td>
                                             <td>@item.USUARIO_BD.USUARIO</td>
-                                            <td>@item.FECHA_COMPRA</td>
-                                            <td>@item.PROVEEDOR.NOMBRE_PROVEEDOR</td>
+                                            <td>@item.FECHA_DESECHO</td>
                                             <td>@item.COMENTARIO</td>
                                             <td>
                                                 @if (item.FOTO != null)
                                                 {
-                                                    <img src="@Url.Action("ConvertirImagen", "Factura", new { codigo = item.ID_FACTURA })" alt="Imagen de factura" width="200" height="160" />
+                                                    <img src="@Url.Action("ConvertirImagen", "Descargas", new { codigo = item.ID_DESECHOS })" alt="Imagen de la descarga" width="200" height="160" />
                                                 }
                                                 else
                                                 {
@@ -70,23 +64,16 @@
                                             </td>
                                             <td>@item.FECHA_REGISTRO</td>
                                             <td>
-                                                <a class="btn btn-primary btn-sm" href="@Url.Action("Editarfactura","Factura", new { Idfactura = item.ID_FACTURA })">
+                                                <a class="btn btn-primary btn-sm" href="@Url.Action("Editardescargas","Descargas", new { Iddescargas = item.ID_DESECHOS })">
                                                     <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
                                                 </a>
-                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarfactura","Factura", new { Idfactura = item.ID_FACTURA })">
+                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminardescargas","Descargas", new { Iddescargas = item.ID_DESECHOS })">
                                                     <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
                                                 </a>
                                             </td>
 
                                         </tr>
-                                    }
-                                }
-
-                                else
-                                {
-                                    <p>No hay facturas disponibles.</p>
-                                }
-
+                                     }
                             </tbody>
                         </table>
                     </div>

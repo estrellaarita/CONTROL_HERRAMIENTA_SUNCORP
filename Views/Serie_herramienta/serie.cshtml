@@ -32,7 +32,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="button" value="Herramienta" class="btn btn-sm btn-dark" onclick="location.href='@Url.Action("Herramienta", "Herramienta")'" />
+                        <input type="button" value="HERRAMIENTA" class="btn btn-sm btn-dark" onclick="location.href='@Url.Action("Herramienta", "Herramienta")'" />
                     </div>
 
                     <div class="panel-body">
@@ -44,13 +44,13 @@
                                 <thead>
                                     <tr>
                                         <th>Sucursal</th>
-                                        <th>Herramienta</th>
-                                        <th>Ubicacon fisica</th>
+                                        <th>Modelo</th>
+                                        <th>Ubicacion fisica</th>
                                         <th>Numero serie</th>
                                         <th>Precio</th>
                                         <th>Estado herramienta</th>
                                         <th>Numero factura</th>
-                                        <th>Comentario</th>
+                                        <th>Cantidad de empleados</th>
                                         <th>Comentario</th>
                                         <th>Fecha registro</th>
                                         <th style="width:150px"></th>
@@ -68,15 +68,16 @@
                                             <td>@item.ESTADO_HERRAMIENTA.DECRIPCION_ESTADO_HERRAMIENTA</td>
                                             <td>@item.FACTURA.NUMERO_FACTURA</td>
                                             <td>@item.COMENTARIO</td>
+                                            <td>@item.CANTIDAD_DE_EMPLEADOS</td>
                                             <td>@item.FECHA_REGISTRO</td>
                                             <td>
-                                                <a class="btn btn-primary btn-sm" href="@Url.Action("Editarsucur","Sucursal", new { Idsucursal = item.ID_REGISTRO_SERIE_HERRAMIENTA })">
+                                                <a class="btn btn-primary btn-sm" href="@Url.Action("Editarserieher","Serie_herramienta", new { Idserie = item.ID_REGISTRO_SERIE_HERRAMIENTA})">
                                                     <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
                                                 </a>
-                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarsucur","Sucursal", new { Idsucursal= item.ID_REGISTRO_SERIE_HERRAMIENTA })">
+                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarserieher","Serie_herramienta", new { Idserie= item.ID_REGISTRO_SERIE_HERRAMIENTA })">
                                                     <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
                                                 </a>
-                                                <a class="btn btn-usuario btn-sm" value="Herramienta" onclick="location.href='@Url.Action("serie_empleado", "Serie_empleado")'">
+                                                <a class="btn btn-usuario btn-sm" href="@Url.Action("Serie_empleado", "Serieemple", new { idseries = item.ID_REGISTRO_SERIE_HERRAMIENTA})">
                                                     <span class="glyphicon glyphicon-user" style="font-size: 14px !important;"></span>
                                                 </a>
                                             </td>

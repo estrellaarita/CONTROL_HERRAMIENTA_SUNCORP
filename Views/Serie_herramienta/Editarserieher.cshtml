@@ -1,20 +1,22 @@
 ﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Serie
 
 @{
-    ViewBag.Title = "Registrarserie";
+    ViewBag.Title = "Editarserieher";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row" style="margin-top:30px">
+<div class="row" style="margin-top:25px">
     <div class="col-sm-12 text-center">
         <!-- Agregué la clase text-center -->
         <div class="panel panel-warning" style="display: inline-block;">
             <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>NUEVA SERIE DE HERRAMIENTA</h4><br />
+                <h4>ACTUALIZAR SERIE HERRAMIENTA</h4>
             </div>
             <div class="panel-body">
-                <form action="@Url.Action("Registrarserie","Serie_herramienta")" method="post">
+                <form action="@Url.Action("Editarserieher","Serie_herramienta")" method="post">
+
+                    <input type="hidden" class="form-control" name="ID_REGISTRAR_SERIE_HERRAMIENTA" value="@Html.DisplayTextFor(m=>m.ID_REGISTRO_SERIE_HERRAMIENTA)" /><br />
 
                     <div class="form-group">
                         <label for="ID_SUCURSAL">Sucursal</label>
@@ -26,15 +28,15 @@
                     </div>
                     <div class="form-group">
                         <label for="UBICACION_FISICA">Ubicación Física</label>
-                        <input type="text" class="form-control" name="UBICACION_FISICA" required /><br />
+                        <input type="text" class="form-control" name="UBICACION_FISICA" required value="@Html.DisplayTextFor(m=>m.UBICACION_FISICA)" /><br />
                     </div>
                     <div class="form-group">
                         <label>Número de Serie</label>
-                        <input type="text" class="form-control" name="NUMERO_SERIE" required /><br />
+                        <input type="text" class="form-control" name="NUMERO_SERIE" required value="@Html.DisplayTextFor(m=>m.NUMERO_SERIE)" /><br />
                     </div>
                     <div class="form-group">
                         <label>Precio</label>
-                        <input type="text" class="form-control" name="PRECIO" /><br />
+                        <input type="text" class="form-control" name="PRECIO" value="@Html.DisplayTextFor(m=>m.PRECIO)" /><br />
                     </div>
 
                     <div class="form-group">
@@ -47,12 +49,9 @@
                         @Html.DropDownListFor(model => model.ID_FACTURA, (SelectList)ViewBag.Factura, new { @class = "form-control" })<br />
                     </div>
 
-                    <div class="form-group">
-                        <label for="COMENTARIO">Comentario</label>
-                        <input type="text" class="form-control" name="COMENTARIO" /><br />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a class="btn btn-warning" href="@Url.Action("serie", "Serie_herramienta")">Volver</a>
+
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a class="btn btn-warning" href="@Url.Action("serie","Serie_herramienta")">Volver</a>
 
                 </form>
 
@@ -60,5 +59,6 @@
         </div>
     </div>
 </div>
+
 
 

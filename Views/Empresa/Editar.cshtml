@@ -5,45 +5,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-
-        <div class="panel panel-warning">
+<div class="row" style="margin-top:25px">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
             <div class="panel-heading">
                 <h4>ACTUALIZAR EMPRESA</h4>
             </div>
             <div class="panel-body">
                 <form action="@Url.Action("Editar","Empresa")" method="post">
-                        
-                        <input type="hidden" class="form-control" name="ID_EMPRESA" value="@Html.DisplayTextFor(m=>m.ID_EMPRESA)" />
-                   
+
+                    <input type="hidden" class="form-control" name="ID_EMPRESA" value="@Html.DisplayTextFor(m=>m.ID_EMPRESA)" /><br />
+
                     <div class="form-group">
                         <label>RTN</label>
-                        <input type="text" class="form-control" name="RTN" required value="@Html.DisplayTextFor(m=>m.RTN)" />
+                        <input type="text" class="form-control" name="RTN" required value="@Html.DisplayTextFor(m=>m.RTN)" /><br />
                     </div>
                     <div class="form-group">
                         <label>Nombre empresa</label>
-                        <input type="text" class="form-control" name="NOMBRE_EMPRESA" required value="@Html.DisplayTextFor(m=>m.NOMBRE_EMPRESA)" />
+                        <input type="text" class="form-control" name="NOMBRE_EMPRESA" required value="@Html.DisplayTextFor(m=>m.NOMBRE_EMPRESA)" /><br />
                     </div>
                     <div class="form-group">
                         <label>Correo electronico</label>
-                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" required value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" />
+                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" required value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" /><br />
                     </div>
 
                     <div class="form-group">
                         <label for="ID_CORPORACION">Corporacion</label>
-                        @Html.DropDownListFor(model => model.ID_CORPORACION, (SelectList)ViewBag.Corporaciones, new { @class = "form-control" })
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+                        @Html.DropDownListFor(model => model.ID_CORPORACION, (SelectList)ViewBag.Corporaciones, new { @class = "form-control" })<br />
                     </div>
 
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                     <a class="btn btn-warning" href="@Url.Action("empresa","Empresa")">Volver</a>
 
                 </form>
-
-
             </div>
         </div>
     </div>

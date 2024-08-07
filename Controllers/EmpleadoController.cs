@@ -7,9 +7,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
+    [ValidarSesion]
+
     public class EmpleadoController : Controller
     {
 
@@ -24,7 +27,43 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
-                SqlCommand cmd = new SqlCommand("SELECT e.*, g.*, s.*, d.*, r.*, ee.* FROM EMPLEADO e INNER JOIN GENERO g ON e.ID_GENERO = g.ID_GENERO INNER JOIN SUCURSAL s ON e.ID_SUCURSAL = s.ID_SUCURSAL INNER JOIN DEPARTAMENTO d ON e.ID_DEPARTAMENTO = d.ID_DEPARTAMENTO INNER JOIN ROL r ON e.ID_ROL = r.ID_ROL INNER JOIN ESTADO_EMPLEADO ee ON e.ID_ESTADO_EMPLEADO = ee.ID_ESTADO_EMPLEADO", oconexion);
+                SqlCommand cmd = new SqlCommand("SELECT " +
+                                               "e.DNI, " +
+                                               "e.PRIMER_NOMBRE, " +
+                                               "e.SEGUNDO_NOMBRE, " +
+                                               "e.PRIMER_APELLIDO, " +
+                                               "e.SEGUNDO_APELLIDO, " +
+                                               "g.DESCRIPCION_GENERO, " +
+                                               "s.NOMBRE_SUCURSAL, " +
+                                               "d.DECRIPCION_DEPARTAMENTO, " +
+                                               "r.DECRIPCION_ROL, " +
+                                               "es.DESCRIPCION_ESTADO_EMPLEADO, " +
+
+                                               "COUNT(DISTINCT sr.NUMERO_SERIE) AS NUMERO_DE_HERRAMIENTAS, " +
+                                               "MAX(e.FECHA_REGISTRO) AS FECHA_REGISTRO " +
+                                               "FROM EMPLEADO e " +
+
+                                               "INNER JOIN GENERO g ON e.ID_GENERO = g.ID_GENERO " +
+                                               "INNER JOIN SUCURSAL s ON e.ID_SUCURSAL = s.ID_SUCURSAL " +
+                                               "INNER JOIN DEPARTAMENTO d ON e.ID_DEPARTAMENTO = d.ID_DEPARTAMENTO " +
+                                               "INNER JOIN ROL r ON e.ID_ROL = r.ID_ROL " +
+                                               "INNER JOIN ESTADO_EMPLEADO es ON e.ID_ESTADO_EMPLEADO = es.ID_ESTADO_EMPLEADO " +
+                                               "LEFT JOIN EMPLEADO_REGISTRO_SERIE_HERRAMIENTA ersh ON e.ID_EMPLEADO = ersh.ID_EMPLEADO " +
+                                               "LEFT JOIN REGISTRO_SERIE_HERRAMIENTA sr ON ersh.ID_REGISTRO_SERIE_HERRAMIENTA = sr.ID_REGISTRO_SERIE_HERRAMIENTA " +
+                                               
+                                               "GROUP BY " +
+
+                                               "e.DNI, " +
+                                               "e.PRIMER_NOMBRE, " +
+                                               "e.SEGUNDO_NOMBRE, " +
+                                               "e.PRIMER_APELLIDO, " +
+                                               "e.SEGUNDO_APELLIDO, " +
+                                               "g.DESCRIPCION_GENERO, " +
+                                               "s.NOMBRE_SUCURSAL, " +
+                                               "d.DECRIPCION_DEPARTAMENTO, " +
+                                               "r.DECRIPCION_ROL, " +
+                                               "es.DESCRIPCION_ESTADO_EMPLEADO " +
+                                               "ORDER BY MAX(e.FECHA_REGISTRO) DESC;", oconexion);
                 cmd.CommandType = CommandType.Text;
                 oconexion.Open();
 
@@ -34,61 +73,62 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     {
                         Empleado empleado = new Empleado();
 
-                        empleado.ID_EMPLEADO = Convert.ToInt32(dr["ID_EMPLEADO"]);
+                       //empleado.ID_EMPLEADO = Convert.ToInt32(dr["ID_EMPLEADO"]);
                         empleado.DNI = dr["DNI"].ToString();
                         empleado.PRIMER_NOMBRE = dr["PRIMER_NOMBRE"].ToString();
                         empleado.SEGUNDO_NOMBRE = dr["SEGUNDO_NOMBRE"].ToString();
                         empleado.PRIMER_APELLIDO = dr["PRIMER_APELLIDO"].ToString();
                         empleado.SEGUNDO_APELLIDO = dr["SEGUNDO_APELLIDO"].ToString();
-                        empleado.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
-                        empleado.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
-                        empleado.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
-                        empleado.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
-                        empleado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
+                        /* empleado.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
+                         empleado.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
+                         empleado.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
+                         empleado.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
+                         empleado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);*/
+                        empleado.NUMERO_DE_HERRAMIENTAS = Convert.ToInt32(dr["NUMERO_DE_HERRAMIENTAS"]);
                         empleado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         //GENERO
                         Genero igenero = new Genero();
 
-                        igenero.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
+                      //  igenero.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
                         igenero.DESCRIPCION_GENERO= dr["DESCRIPCION_GENERO"].ToString();
-                        igenero.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                       // igenero.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.GENERO = igenero;
 
                         //SUCURSAL
                         Sucursal asucursal = new Sucursal();
 
-                        asucursal.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
+                       // asucursal.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
                         asucursal.NOMBRE_SUCURSAL = dr["NOMBRE_SUCURSAL"].ToString();
-                        asucursal.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                      //  asucursal.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.SUCURSAL = asucursal;
 
                         //DEPARTAMENTO
                         Departamento odepartamento = new Departamento();
 
-                        odepartamento.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
+                       // odepartamento.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
                         odepartamento.DECRIPCION_DEPARTAMENTO = dr["DECRIPCION_DEPARTAMENTO"].ToString();
-                        odepartamento.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                       // odepartamento.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.DEPARTAMENTO = odepartamento;
 
                         //ROL
                         Rol erol = new Rol();
 
-                        erol.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
+                      //  erol.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
                         erol.DECRIPCION_ROL = dr["DECRIPCION_ROL"].ToString();
-                        erol.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                       // erol.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.ROL = erol;
 
                         //ESTADO EMPLEADO
                         Estado iestado= new Estado();
 
-                        iestado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
+                       // iestado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
                         iestado.DESCRIPCION_ESTADO_EMPLEADO = dr["DESCRIPCION_ESTADO_EMPLEADO"].ToString();
-                        iestado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                       // iestado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.ESTADO_EMPLEADO = iestado;
 
@@ -242,6 +282,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         }
 
         //ACTUALIZAR EMPLEADO
+
         [HttpGet]
         public ActionResult Editaremple(int? Idempleado)
         {

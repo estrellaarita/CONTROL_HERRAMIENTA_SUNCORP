@@ -6,10 +6,12 @@ using System.Web.Mvc;
 using CONTROL_HERRAMIENTA_SUNCORP.Models;
 using System.Data;
 using System.Data.SqlClient;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
+    [ValidarSesion]
     public class HerramientaController : Controller
     {
         static string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
@@ -70,6 +72,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpGet]
         public ActionResult Registrarherramienta()
         {
+            //LSTA DE TIPO HERRAMIENTA
 
             List<Tipoherramienta> otipoherramienta = new List<Tipoherramienta>();
             using (SqlConnection oconexion = new SqlConnection(cadena))
@@ -88,6 +91,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             ViewBag.Tipo = new SelectList(otipoherramienta, "ID_TIPO_HERRAMIENTA", "DECRIPCION_TIPO_HERRAMIENTA");
 
             //LISTA MARCA
+
             List<Marca> omarca = new List<Marca>();
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
@@ -154,6 +158,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpGet]
         public ActionResult Editarherramienta(int? Idherramienta)
         {
+            //LISTA DE TIPO HERRAMIENTA
+
             List<Tipoherramienta> otipoherramienta = new List<Tipoherramienta>();
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {

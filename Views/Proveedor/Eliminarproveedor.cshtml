@@ -6,11 +6,12 @@
 }
 
 <div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-
-        <div class="panel panel-warning">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>ELIMINAR PROVEEDOR</h4>
+                <h4>ELIMINAR PROVEEDOR</h4><br />
             </div>
             <div class="panel-body">
                 <div class="alert alert-danger">
@@ -18,7 +19,7 @@
                 </div>
 
                 <form action="@Url.Action("Eliminarproveedor","Proveedor")" method="post">
-                    <input type="hidden" class="form-control" name="Idproveedor" value="@Html.DisplayTextFor(m => m.ID_PROVEEDOR)" />
+                    <input type="hidden" class="form-control" name="Idproveedor" value="@Html.DisplayTextFor(m => m.ID_PROVEEDOR)" /><br />
 
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                     <a class="btn btn-warning" href="@Url.Action("Proveedor","Proveedor")">Volver</a>

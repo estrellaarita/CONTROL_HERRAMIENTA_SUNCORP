@@ -5,9 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Models
 {
+    [ValidarSesion]
     public class MarcaController : Controller
     {
 
@@ -84,6 +86,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         }
 
         //ACTUALIZAR MARCA
+
         [HttpGet]
         public ActionResult Editarmarca(int? Idmarca)
         {
@@ -125,7 +128,9 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
             }
 
         }
-        //ELIMINAR
+
+        //ELIMINAR MARCA
+
         [HttpGet]
         public ActionResult Eliminarmarca(int? Idmarca)
         {

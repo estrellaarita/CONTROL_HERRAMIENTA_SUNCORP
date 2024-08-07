@@ -13,6 +13,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         public string CORREO_ELECTRONICO { get; set; }
         public int ID_CORPORACION { get; set; }
        public Corporacion CORPORACION { get; set; }
+        public int CANTIDAD_DE_SUCURSALES { get; set; }
         public DateTime FECHA_REGISTRO { get; set; }
     }
 

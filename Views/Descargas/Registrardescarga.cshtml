@@ -1,0 +1,54 @@
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Descargas
+
+@{
+    ViewBag.Title = "Registrardescarga";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:25px">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
+            <div class="panel-heading">
+                <h4>NUEVA DESCARGAS</h4><br />
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Registrardescarga", "Descargas")" enctype="multipart/form-data" method="post">
+
+
+                    <div class="form-group">
+                        <label for="ID_REGISTRO_SERIE_HERRAMIENTA">Numero serie</label>
+                        @Html.DropDownListFor(model => model.ID_REGISTRO_SERIE_HERRAMIENTA, (SelectList)ViewBag.zSerie, new { @class = "form-control" })<br />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ID_USUARIO_BD">Usuario</label>
+                        @Html.DropDownListFor(model => model.ID_USUARIO_BD, (SelectList)ViewBag.tUsuario, new { @class = "form-control" })<br />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha de desecho</label>
+                        <input type="date" class="form-control" name="FECHA_DESECHO" required /><br />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comentario</label>
+                        <input type="text" class="form-control" name="Comentario" /><br />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" class="form-control" id="FOTO" name="upload" /><br />
+                    </div><br>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <a class="btn btn-warning" href="@Url.Action("descargas","Descargas")">Volver</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

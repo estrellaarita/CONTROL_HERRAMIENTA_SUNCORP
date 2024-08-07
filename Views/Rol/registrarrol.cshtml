@@ -5,37 +5,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4>Nuevo rol</h4>
-            </div>
-            <div class="panel-body">
-                <form action="@Url.Action("registrarrol","Rol")" method="post">
-                    <div class="form-group">
-                        <label>Rol</label>
-                        <input type="text" class="form-control" name="DECRIPCION_ROL" />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-
-                    @if (ViewData["MENSAJEROL"] != null)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @ViewData["MENSAJEROL"]
+<div class="container">
+    <div class="row" style="margin-top:30px">
+        <div class="col-sm-12 text-center">
+            <!-- Agregué la clase text-center -->
+            <div class="panel panel-warning" style="display: inline-block;">
+                <!-- Agregué display: inline-block -->
+                <div class="panel-heading">
+                    <h4>Nuevo rol</h4><br />
+                </div>
+                <div class="panel-body">
+                    <form action="@Url.Action("registrarrol","Rol")" method="post">
+                        <div class="form-group">
+                            <label>Rol</label>
+                            <input type="text" class="form-control" name="DECRIPCION_ROL" /><br />
                         </div>
-                    }
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Rol","Rol")">Volver</a>
 
-                </form>
+                        @if (ViewData["MENSAJEROL"] != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @ViewData["MENSAJEROL"]
+                            </div>
+                        }
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <a class="btn btn-warning" href="@Url.Action("Rol","Rol")">Volver</a>
+
+                    </form>
 
 
+                </div>
             </div>
+
+
         </div>
-
-
     </div>
-</div>
 
+</div>

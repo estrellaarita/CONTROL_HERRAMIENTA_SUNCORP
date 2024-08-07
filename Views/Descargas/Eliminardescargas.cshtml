@@ -1,7 +1,7 @@
-﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Tipoherramienta
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Descargas
 
 @{
-    ViewBag.Title = "Eliminartipo";
+    ViewBag.Title = "Eliminardescargas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,18 +12,18 @@
         <div class="panel panel-warning" style="display: inline-block;">
             <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>ELIMINAR TIPO HERRAMIENTA</h4><br />
+                <h4>ELIMINAR DESECHO</h4><br />
             </div>
             <div class="panel-body">
                 <div class="alert alert-danger">
-                    ¿Desea eliminar el tipo de herramienta @Html.DisplayTextFor(m => m.DECRIPCION_TIPO_HERRAMIENTA) ?
+                    ¿Desea eliminar la herramienta @Html.DisplayTextFor(m => m.ID_DESECHOS) ?
                 </div>
 
-                <form action="@Url.Action("Eliminartipo","Tipo")" method="post">
-                    <input type="hidden" class="form-control" name="Idtipo" value="@Html.DisplayTextFor(m => m.ID_TIPO_HERRAMIENTA)" /><br />
+                <form action="@Url.Action("Eliminardescargas","Descargas")" method="post">
+                    <input type="hidden" class="form-control" name="Iddescargas" value="@Html.DisplayTextFor(m => m.ID_DESECHOS)" />
 
                     <button type="submit" class="btn btn-danger">Eliminar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Tipo","Tipo")">Volver</a>
+                    <a class="btn btn-warning" href="@Url.Action("descargas","Descargas")">Volver</a>
                 </form>
 
             </div>

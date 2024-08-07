@@ -1,36 +1,33 @@
-﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Tipoherramienta
+﻿@model CONTROL_HERRAMIENTA_SUNCORP.Models.Serie
 
 @{
-    ViewBag.Title = "Eliminartipo";
+    ViewBag.Title = "Eliminarserieher";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <div class="row" style="margin-top:30px">
     <div class="col-sm-12 text-center">
         <!-- Agregué la clase text-center -->
         <div class="panel panel-warning" style="display: inline-block;">
             <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>ELIMINAR TIPO HERRAMIENTA</h4><br />
+                <h4>ELIMINAR SERIE HERRAMIENTA</h4><br />
             </div>
             <div class="panel-body">
                 <div class="alert alert-danger">
-                    ¿Desea eliminar el tipo de herramienta @Html.DisplayTextFor(m => m.DECRIPCION_TIPO_HERRAMIENTA) ?
+                    ¿Desea eliminar la serie @Html.DisplayTextFor(m => m.NUMERO_SERIE) ?
                 </div>
 
-                <form action="@Url.Action("Eliminartipo","Tipo")" method="post">
-                    <input type="hidden" class="form-control" name="Idtipo" value="@Html.DisplayTextFor(m => m.ID_TIPO_HERRAMIENTA)" /><br />
+                <form action="@Url.Action("Eliminarserieher","Serie_herramienta")" method="post">
+                    <input type="hidden" class="form-control" name="Idserie" value="@Html.DisplayTextFor(m => m.ID_REGISTRO_SERIE_HERRAMIENTA)" />
 
                     <button type="submit" class="btn btn-danger">Eliminar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Tipo","Tipo")">Volver</a>
+                    <a class="btn btn-warning" href="@Url.Action("serie","Serie_herramienta")">Volver</a>
                 </form>
 
             </div>
         </div>
-
-
     </div>
 </div>
+
 
 

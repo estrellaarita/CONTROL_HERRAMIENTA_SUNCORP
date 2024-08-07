@@ -6,32 +6,31 @@
 }
 
 <div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-
-        <div class="panel panel-warning">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>NUEVO PROVEEDOR</h4>
+                <h4>NUEVO PROVEEDOR</h4><br />
             </div>
             <div class="panel-body">
                 <form action="@Url.Action("registrarproveedor","Proveedor")" method="post">
                     <div class="form-group">
                         <div class="form-label">
 
-                        <label>RTN</label>
+                            <label>RTN</label>
 
-                        <input type="text" class="form-control" name="RTN" required/>
+                            <input type="text" class="form-control" name="RTN" required /><br />
 
-                        <label>Nombre proveedor</label>
+                            <label>Nombre proveedor</label>
 
-                        <input type="text" class="form-control" name="NOMBRE_PROVEEDOR" required>
+                            <input type="text" class="form-control" name="NOMBRE_PROVEEDOR" required><br />
 
-                        <label>Correo electronico</label>
+                            <label>Correo electronico</label>
 
-                        <input type="text" class="form-control" name="CORREO_ELECTRONICO"/>
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
+                            <input type="text" class="form-control" name="CORREO_ELECTRONICO" required /><br />
                         </div>
+                    </div>
                     @if (ViewData["MENSAJEPROVEEDOR"] != null)
                     {
                         <div class="alert alert-danger" role="alert">

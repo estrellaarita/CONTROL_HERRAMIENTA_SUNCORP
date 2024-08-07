@@ -10,7 +10,6 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         public int ID_REGISTRO_SERIE_HERRAMIENTA { get; set; }
         public int ID_SUCURSAL { get; set; }
         public int ID_HERRAMIENTA { get; set; }
-        
         public string UBICACION_FISICA { get; set; }
         public string NUMERO_SERIE { get; set; }
         public string PRECIO { get; set; }
@@ -21,6 +20,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         public Herramienta HERRAMIENTA { get; set; }
         public Estado_herramienta ESTADO_HERRAMIENTA { get; set; }
         public Factura FACTURA { get; set; }
+        public int CANTIDAD_DE_EMPLEADOS { get; set; }
         public DateTime FECHA_REGISTRO { get; set; }
     }
 

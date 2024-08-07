@@ -6,9 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
+    [ValidarSesion]
     public class TipoController : Controller
     {
         static string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
@@ -44,6 +46,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         }
 
         //REGISTRAR TIPO HERRAMIENTA
+
         [HttpGet]
         public ActionResult registrartipo()
         {
@@ -84,6 +87,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         }
 
         //ACTUALIZAR TIPO HERRAMIENTA
+
         [HttpGet]
         public ActionResult Editartipo(int? Idtipo)
         {
@@ -125,7 +129,9 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             }
 
         }
+
         //ELIMINAR TIPO HERRAMIENTA
+
         [HttpGet]
             public ActionResult Eliminartipo(int? Idtipo)
             {

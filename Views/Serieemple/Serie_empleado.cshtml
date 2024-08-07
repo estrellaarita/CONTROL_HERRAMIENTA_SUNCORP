@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CONTROL_HERRAMIENTA_SUNCORP.Models.Serieempleado>
 
 @{
-    ViewBag.Title = "serie_empleado";
+    ViewBag.Title = "Serie_empleado";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,14 +9,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Lista de herramientas</title>
+    <title>Lista de herramientas y empleados</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   
+
 
 </head>
 <body>
@@ -25,16 +25,10 @@
 
             <div class="panel panel-warning" style="font-size: 16px;">
                 <div class="panel-heading">
-                    <h4>Lista de herramientas</h4>
+                    <h4>Lista de herramientas y empleados</h4>
 
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <form asp-controller="Serie" asp-action="serie">
-                    <p>
-                        <input type="text" name="buscar" class="form-text" />
-                        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
-                    </p>
-                </form>
 
                 <div class="panel-body">
                     <a class="btn btn-success" href="@Url.Action("Registrarherramienta", "Herramienta")">Crear Nuevo</a>
@@ -43,9 +37,12 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Empleado</th>
+                                    <th>ID</th>
+                                    <th>Sucursal</th>
                                     <th>Numero serie</th>
-                                    <th>Fecha registro</th>
+                                    <th>Modelo</th>
+                                    <th>Primer nombre</th>
+                                    <th>Primer apellido</th>
                                     <th style="width:150px"></th>
                                 </tr>
                             </thead>
@@ -56,9 +53,12 @@
                                     foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Serieempleado item in Model)
                                     {
                                         <tr>
-                                            <td>@item.EMPLEADO.PRIMER_NOMBRE</td>
+                                            <td>@item.ID_EMPLEADO_REGISTRO_SERIE_HERRAMIENTA</td>
+                                            <td>@item.SUCURSAL.NOMBRE_SUCURSAL</td>
+                                            <td>@item.HERRAMIENTA.MODELO</td>
                                             <td>@item.SERIE.NUMERO_SERIE</td>
-                                            <td>@item.FECHA_REGISTRO</td>
+                                            <td>@item.EMPLEADO.PRIMER_NOMBRE</td>
+                                            <td>@item.EMPLEADO.PRIMER_APELLIDO</td>
 
                                             <td>
                                                 <a class="btn btn-primary btn-sm" href="@Url.Action("Editarherramienta","Herramienta", new { Idherramienta = item.ID_EMPLEADO_REGISTRO_SERIE_HERRAMIENTA})">
@@ -67,7 +67,7 @@
                                                 <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarherramienta","Herramienta", new { Idherramienta= item.ID_EMPLEADO_REGISTRO_SERIE_HERRAMIENTA })">
                                                     <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
                                                 </a>
-                                                
+
                                             </td>
 
                                         </tr>
@@ -77,7 +77,7 @@
                                 {
                                     <p>No hay datos disponibles.</p>
                                 }
-                              
+
 
                             </tbody>
                         </table>
@@ -93,5 +93,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
-
 

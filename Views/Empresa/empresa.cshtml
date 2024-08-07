@@ -40,6 +40,7 @@
                                     <th>Nombre empresa</th>
                                     <th>Correo electronico</th>
                                     <th>Corporacion</th>
+                                    <th>Cantidad de sucursales</th>
                                     <th>Fecha registro</th>
                                     <th style="width:150px"></th>
                                 </tr>
@@ -52,6 +53,7 @@
                                         <td>@item.NOMBRE_EMPRESA</td>
                                         <td>@item.CORREO_ELECTRONICO</td>
                                         <td>@item.CORPORACION.NOMBRE_CORPORACION</td>
+                                        <td>@item.CANTIDAD_DE_SUCURSALES</td>
                                         <td>@item.FECHA_REGISTRO</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm" href="@Url.Action("Editar","Empresa", new { Idempresa = item.ID_EMPRESA })">

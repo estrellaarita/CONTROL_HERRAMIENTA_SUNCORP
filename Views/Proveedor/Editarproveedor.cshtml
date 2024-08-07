@@ -11,7 +11,7 @@
         <div class="panel panel-warning" style="display: inline-block;">
             <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>ACTUALIZAR PROVEEDOR</h4>
+                <h4>ACTUALIZAR PROVEEDOR</h4><br />
             </div>
             <div class="panel-body">
                 <form action="@Url.Action("Editarproveedor","Proveedor")" method="post">
@@ -20,16 +20,13 @@
 
                         <input type="hidden" class="form-control" name="ID_PROVEEDOR" value="@Html.DisplayTextFor(m=>m.ID_PROVEEDOR)" />
 
-                        <input type="text" class="form-control" name="RTN" required value="@Html.DisplayTextFor(m=>m.RTN)" />
+                        <input type="text" class="form-control" name="RTN" required value="@Html.DisplayTextFor(m=>m.RTN)" /><br />
 
                         <label>Nombre proveedor</label>
-                        <input type="text" class="form-control" name="NOMBRE_PROVEEDOR" required value="@Html.DisplayTextFor(m=>m.NOMBRE_PROVEEDOR)" />
+                        <input type="text" class="form-control" name="NOMBRE_PROVEEDOR" required value="@Html.DisplayTextFor(m=>m.NOMBRE_PROVEEDOR)" /><br />
 
                         <label>Correo electronico</label>
-                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" required value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" />
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" required value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" /><br />
                     </div>
 
                     @if (ViewData["MENSAJEPROVEEDOR"] != null)

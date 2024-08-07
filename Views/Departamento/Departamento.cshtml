@@ -19,12 +19,13 @@
 </head>
 <body>
     <div class="container">
-        <div class="row" style="margin-top: 30px;">
-            <div class="col-md-12">
+        <div class="row" style="margin-top:30px">
+            <div class="col-sm-12">
 
-                <div class="panel panel-warning">
+                <div class="panel panel-warning" style="font-size: 16px;">
                     <div class="panel-heading">
-                        <h4>Lista de departamentos</h4>
+                        <h4>Lista de Departamentos</h4>
+
                     </div>
                     <div class="panel-body">
                         <a class="btn btn-success" href="@Url.Action("registrardept","Departamento")">Crear Nuevo</a>
@@ -34,10 +35,10 @@
                         <form id="formBuscar" class="form-inline">
                             <div class="form-group">
                                 <label for="txtBuscar">Buscar por Nombre:</label>
-                                <input type="text" class="form-control" id="txtBuscar" placeholder="Nombre del Departamento">
+                                <input type="text" class="form-control" id="txtBuscar" placeholder="Nombre del Departamento"><br />
                             </div>
                         </form>
-
+                        <br />
                         <div class="table-responsive">
                             <table id="tablaDepartamentos" class="table table-striped">
                                 <thead>
@@ -45,7 +46,7 @@
                                         <th>ID</th>
                                         <th>Departamento</th>
                                         <th>Fecha registro</th>
-                                        <th>Acciones</th>
+                                      
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,14 +58,14 @@
                                             <td>@item.FECHA_REGISTRO</td>
                                             <td>
                                                 <a class="btn btn-primary btn-sm" href="@Url.Action("Editardept", "Departamento", new { iddpt = item.ID_DEPARTAMENTO })">
-                                                    <span class="glyphicon glyphicon-pencil"></span> Editar
+                                                    <span class="glyphicon glyphicon-pencil"></span>
                                                 </a>
                                                 <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminardept", "Departamento", new { iddpt = item.ID_DEPARTAMENTO })">
-                                                    <span class="glyphicon glyphicon-trash"></span> Eliminar
+                                                    <span class="glyphicon glyphicon-trash"></span>
                                                 </a>
                                             </td>
                                         </tr>
-                                    }
+                                     }
                                 </tbody>
                             </table>
                         </div>

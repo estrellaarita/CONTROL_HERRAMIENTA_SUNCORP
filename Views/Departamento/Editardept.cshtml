@@ -11,32 +11,47 @@
         <div class="panel panel-warning" style="display: inline-block;">
             <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>ACTUALIZAR DEPARTAMENTO</h4>
+                <h4>ACTUALIZAR DEPARTAMENTO</h4><br />
             </div>
             <div class="panel-body">
                 <form action="@Url.Action("Editardept","Departamento")" method="post">
                     <div class="form-group">
                         <label>Departamento</label>
 
-                        <input type="hidden" class="form-control" name="ID_DEPARTAMENTO" value="@Html.DisplayTextFor(m=>m.ID_DEPARTAMENTO)" />
+                        <style>
+                            .center-input {
+                                text-align: center; /* Centra el contenido en línea */
+                                margin-top: 20px; /* Espacio superior opcional */
+                            }
 
-                        <input type="text" class="form-control" name="DECRIPCION_DEPARTAMENTO" value="@Html.DisplayTextFor(m=>m.DECRIPCION_DEPARTAMENTO)" required/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
+                                .center-input input {
+                                    display: inline-block; /* Permite centrar el input dentro del contenedor */
+                                }
+                        </style>
 
-                    @if (ViewData["MENSAJEDEPT"] != null)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @ViewData["MENSAJEDEPT"]
+                        <div class="form-container">
+                            <div class="center-input">
+                                <input type="hidden" class="form-control" name="ID_DEPARTAMENTO" value="@Html.DisplayTextFor(m=>m.ID_DEPARTAMENTO)" /><br />
+
+                                <input type="text" class="form-control" name="DECRIPCION_DEPARTAMENTO" value="@Html.DisplayTextFor(m=>m.DECRIPCION_DEPARTAMENTO)" required /><br />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            </div>
                         </div>
-                    }
 
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Departamento","Departamento")">Volver</a>
+                            @if (ViewData["MENSAJEDEPT"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewData["MENSAJEDEPT"]
+                                </div>
+                            }
+
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <a class="btn btn-warning" href="@Url.Action("Departamento","Departamento")">Volver</a>
 
 
 
-                </form>
+</form>
 
 
             </div>

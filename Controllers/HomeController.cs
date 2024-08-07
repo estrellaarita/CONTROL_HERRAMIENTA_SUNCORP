@@ -1,11 +1,14 @@
-﻿using System;
+﻿using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
+    [ValidarSesion]
     public class HomeController : Controller
     {
         // GET: Home

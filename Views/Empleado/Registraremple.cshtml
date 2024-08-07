@@ -6,71 +6,66 @@
 }
 
 <div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-
-        <div class="panel panel-warning">
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
             <div class="panel-heading">
-                <h4>NUEVO EMPLEADO</h4>
+                <h4>NUEVO EMPLEADO</h4><br />
             </div>
             <div class="panel-body">
-                <form action="@Url.Action("Registraremple","Empleado")" method="post">      
+                <form action="@Url.Action("Registraremple","Empleado")" method="post">
                     <div class="form-group">
                         <label>DNI</label>
-                        <input type="text" class="form-control" name="DNI" required />
+                        <input type="text" class="form-control" name="DNI" required /><br />
                     </div>
                     <div class="form-group">
                         <label>Primer nombre</label>
-                        <input type="text" class="form-control" name="PRIMER_NOMBRE" required />
+                        <input type="text" class="form-control" name="PRIMER_NOMBRE" required /><br />
                     </div>
                     <div class="form-group">
                         <label>Segundo nombre</label>
-                        <input type="text" class="form-control" name="SEGUNDO_NOMBRE" />
+                        <input type="text" class="form-control" name="SEGUNDO_NOMBRE" /><br />
                     </div>
 
                     <div class="form-group">
                         <label>Primer apellido</label>
-                        <input type="text" class="form-control" name="PRIMER_APELLIDO" required />
+                        <input type="text" class="form-control" name="PRIMER_APELLIDO" required /><br />
                     </div>
                     <div class="form-group">
                         <label>Segundo apellido</label>
-                        <input type="text" class="form-control" name="SEGUNDO_APELLIDO"/>
+                        <input type="text" class="form-control" name="SEGUNDO_APELLIDO" /><br />
                     </div>
 
                     <div class="form-group">
                         <label for="ID_CORPORACION">Genero</label>
-                        @Html.DropDownListFor(model => model.ID_GENERO, (SelectList)ViewBag.Genero, new { @class = "form-control" })
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.DropDownListFor(model => model.ID_GENERO, (SelectList)ViewBag.Genero, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
                         <label for="ID_CORPORACION">Sucursal</label>
-                        @Html.DropDownListFor(model => model.ID_SUCURSAL, (SelectList)ViewBag.Sucursal, new { @class = "form-control" })
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.DropDownListFor(model => model.ID_SUCURSAL, (SelectList)ViewBag.Sucursal, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
                         <label for="ID_CORPORACION">Departamento</label>
-                        @Html.DropDownListFor(model => model.ID_DEPARTAMENTO, (SelectList)ViewBag.Departamento, new { @class = "form-control" })
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.DropDownListFor(model => model.ID_DEPARTAMENTO, (SelectList)ViewBag.Departamento, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
                         <label for="ID_CORPORACION">Rol</label>
-                        @Html.DropDownListFor(model => model.ID_ROL, (SelectList)ViewBag.Rol, new { @class = "form-control" })
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.DropDownListFor(model => model.ID_ROL, (SelectList)ViewBag.Rol, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
                         <label for="ID_CORPORACION">Estado empleado</label>
-                        @Html.DropDownListFor(model => model.ID_ESTADO_EMPLEADO, (SelectList)ViewBag.Estado, new { @class = "form-control" })
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.DropDownListFor(model => model.ID_ESTADO_EMPLEADO, (SelectList)ViewBag.Estado, new { @class = "form-control" })<br />
                     </div>
+
                     <button type="submit" class="btn btn-primary">Registrar</button>
                     <a class="btn btn-warning" href="@Url.Action("empleado","Empleado")">Volver</a>
 
                 </form>
-
-
             </div>
         </div>
     </div>
