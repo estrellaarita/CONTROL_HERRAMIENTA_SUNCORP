@@ -17,32 +17,32 @@
                 <form action="@Url.Action("Registrarfactura", "Factura")" enctype="multipart/form-data" method="post">
 
                     <div class="form-group">
-                        <label>Numero factura</label>
+                        <label style="font-weight: bold;">Numero factura</label>
                         <input type="text" class="form-control" name="Numero_factura" required /><br />
                     </div>
 
                     <div class="form-group">
-                        <label for="ID_USUARIO_BD">Usuario</label>
+                        <label style="font-weight: bold;" for="ID_USUARIO_BD">Usuario</label>
                         @Html.DropDownListFor(model => model.ID_USUARIO_BD, (SelectList)ViewBag.aUsuario, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
-                        <label>Fecha de Compra</label>
+                        <label style="font-weight: bold;">Fecha de Compra</label>
                         <input type="date" class="form-control" name="Fecha_compra" required/><br />
                     </div>
 
                     <div class="form-group">
-                        <label for="ID_MARCA">Proveedor</label>
+                        <label style="font-weight: bold;" for="ID_MARCA">Proveedor</label>
                         @Html.DropDownListFor(model => model.ID_PROVEEDOR, (SelectList)ViewBag.iProveedor, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
-                        <label>Comentario</label>
+                        <label style="font-weight: bold;">Comentario</label>
                         <input type="text" class="form-control" name="Comentario" /><br />
                     </div>
 
                     <div class="form-group">
-                        <label>Foto</label>
+                        <label style="font-weight: bold;">Foto</label>
                         <input type="file" class="form-control" id="FOTO" name="upload" /><br />
                     </div><br>
 

@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
 <div class="row" style="margin-top:30px">
     <div class="col-sm-12 text-center">
         <!-- Agregué la clase text-center -->
@@ -19,27 +21,43 @@
                     <input type="hidden" class="form-control" name="ID_HERRAMIENTA" value="@Html.DisplayTextFor(m=>m.ID_HERRAMIENTA)" />
 
                     <div class="form-group">
-                        <label for="ID_TIPO_HERRAMIENTA">Tipo herramienta</label>
+                        <label style="font-weight: bold; float: left;" for="ID_TIPO_HERRAMIENTA">Tipo herramienta</label>
                         @Html.DropDownListFor(model => model.ID_TIPO_HERRAMIENTA, (SelectList)ViewBag.Tipo, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
-                        <label for="ID_MARCA">Marca</label>
+                        <label style="font-weight: bold; float: left;" for="ID_MARCA">Marca</label>
                         @Html.DropDownListFor(model => model.ID_MARCA, (SelectList)ViewBag.Marca, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
-                        <label>Modelo</label>
-                        <input type="text" class="form-control" name="MODELO" required value="@Html.DisplayTextFor(m=>m.MODELO)" />
+                        <label style="font-weight: bold; float: left;">Modelo</label>
+                        <input type="text" class="form-control" name="MODELO" required style="height: 40px; font-size: 16px; background-color: #FFFFCC;" value="@Html.DisplayTextFor(m=>m.MODELO)" /><br />
                     </div>
 
                     <div class="form-group">
-                        <label>Comentario</label>
-                        <input type="text" class="form-control" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" /><br />
+                        <label style="font-weight: bold; float: left;">Comentario</label>
+                        <input type="text" class="form-control" name="COMENTARIO" style="height: 40px; font-size: 16px; background-color: #FFFFCC;" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" /><br />
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Herramienta","Herramienta")">Volver</a>
+                    <style>
+                        .center-input {
+                            text-align: center; /* Centra el contenido en línea */
+                            margin-top: 20px; /* Espacio superior opcional */
+                        }
+
+                            .center-input input {
+                                display: inline-block; /* Permite centrar el input dentro del contenedor */
+                            }
+                    </style>
+
+                    <button type="submit" class="btn btn-primary ml-4" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                    </button>
+                    <a class="btn btn-warning ml-4" href="@Url.Action("Herramienta","Herramienta")" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+
 
                 </form>
             </div>

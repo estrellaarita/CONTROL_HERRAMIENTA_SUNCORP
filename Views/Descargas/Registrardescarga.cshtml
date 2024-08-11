@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
 <div class="row" style="margin-top:25px">
     <div class="col-sm-12 text-center">
         <!-- Agregué la clase text-center -->
@@ -29,12 +31,12 @@
 
                     <div class="form-group">
                         <label>Fecha de desecho</label>
-                        <input type="date" class="form-control" name="FECHA_DESECHO" required /><br />
+                        <input type="date" class="form-control" name="FECHA_DESECHO" required style="height: 40px; font-size: 18px; background-color: #FFFFCC;" /><br />
                     </div>
 
                     <div class="form-group">
                         <label>Comentario</label>
-                        <input type="text" class="form-control" name="Comentario" /><br />
+                        <input type="text" class="form-control" name="Comentario" style="height: 40px; font-size: 18px; background-color: #FFFFCC;" /><br />
                     </div>
 
                     <div class="form-group">
@@ -43,9 +45,12 @@
                     </div><br>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a class="btn btn-warning" href="@Url.Action("descargas","Descargas")">Volver</a>
-
+                    <button type="submit" class="btn btn-primary ml-2" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </button>
+                    <a class="btn btn-warning ml-2" href="@Url.Action("descargas","Descargas")" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </a>
                 </form>
             </div>
         </div>

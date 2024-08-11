@@ -111,6 +111,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                             
                             serie.ID_FACTURA = 0; // Asignando un valor predeterminado, en este caso 0
                         }
+
                         afactura.NUMERO_FACTURA = dr["NUMERO_FACTURA"].ToString();
                        /* afactura.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);*/
                         serie.FACTURA = afactura;
@@ -230,7 +231,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         //EDITAR SERIE HERRAMIENTA
 
         [HttpGet]
-        public ActionResult Editarserieher(int? Idserie)
+        public ActionResult Editarserieher(int? IdSERIE)
         {
             //Lista sucursal
             List<Sucursal> osucursal = new List<Sucursal>();
@@ -247,7 +248,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     osucursal.Add(sucursal);
                 }
             }
-            ViewBag.Sucursal = new SelectList(osucursal, "ID_SUCURSAL", "NOMBRE_SUCURSAL");
+            ViewBag.Sucursaly = new SelectList(osucursal, "ID_SUCURSAL", "NOMBRE_SUCURSAL");
 
             //Lita herramienta
             List<Herramienta> oherramienta = new List<Herramienta>();
@@ -264,7 +265,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     oherramienta.Add(herramienta);
                 }
             }
-            ViewBag.Herramienta = new SelectList(oherramienta, "ID_HERRAMIENTA", "MODELO");
+            ViewBag.Herramientay = new SelectList(oherramienta, "ID_HERRAMIENTA", "MODELO");
 
             //Lista Estado herramienta
             List<Estado_herramienta> oestado = new List<Estado_herramienta>();
@@ -281,7 +282,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     oestado.Add(estado);
                 }
             }
-            ViewBag.Estado_herramienta = new SelectList(oestado, "ID_ESTADO_HERRAMIENTA", "DECRIPCION_ESTADO_HERRAMIENTA");
+            ViewBag.Estado_herramientay = new SelectList(oestado, "ID_ESTADO_HERRAMIENTA", "DECRIPCION_ESTADO_HERRAMIENTA");
 
             //Lista Factura
             List<Factura> ofactura = new List<Factura>();
@@ -298,10 +299,11 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     ofactura.Add(factura);
                 }
             }
-            ViewBag.Factura = new SelectList(ofactura, "ID_FACTURA", "NUMERO_FACTURA");
-            Serie serie = oserie.Where(c => c.ID_REGISTRO_SERIE_HERRAMIENTA == Idserie).FirstOrDefault();
+            ViewBag.Facturay = new SelectList(ofactura, "ID_FACTURA", "NUMERO_FACTURA");
 
-            return View(serie);
+            Serie pserie = oserie.Where(c => c.ID_REGISTRO_SERIE_HERRAMIENTA == IdSERIE).FirstOrDefault();
+
+            return View(pserie);
         }
 
         [HttpPost]

@@ -16,18 +16,18 @@
             <div class="panel-body">
                 <form action="@Url.Action("Editarserieher","Serie_herramienta")" method="post">
 
-                    <input type="hidden" class="form-control" name="ID_REGISTRAR_SERIE_HERRAMIENTA" value="@Html.DisplayTextFor(m=>m.ID_REGISTRO_SERIE_HERRAMIENTA)" /><br />
+                    <input type="hidden" class="form-control" name="ID_REGISTRAR_SERIE_HERRAMIENTA" /><br />
 
                     <div class="form-group">
                         <label for="ID_SUCURSAL">Sucursal</label>
-                        @Html.DropDownListFor(model => model.ID_SUCURSAL, (SelectList)ViewBag.Sucursal, new { @class = "form-control" })<br />
+                        @Html.DropDownListFor(model => model.ID_SUCURSAL, (SelectList)ViewBag.Sucursaly, new { @class = "form-control" })<br />
                     </div>
                     <div class="form-group">
                         <label for="ID_HERRAMIENTA">Herramienta</label>
-                        @Html.DropDownListFor(model => model.ID_HERRAMIENTA, (SelectList)ViewBag.Herramienta, new { @class = "form-control" })<br />
+                        @Html.DropDownListFor(model => model.ID_HERRAMIENTA, (SelectList)ViewBag.Herramientay, new { @class = "form-control" })<br />
                     </div>
                     <div class="form-group">
-                        <label for="UBICACION_FISICA">Ubicación Física</label>
+                        <label>Ubicación Física</label>
                         <input type="text" class="form-control" name="UBICACION_FISICA" required value="@Html.DisplayTextFor(m=>m.UBICACION_FISICA)" /><br />
                     </div>
                     <div class="form-group">
@@ -41,14 +41,18 @@
 
                     <div class="form-group">
                         <label for="ID_FACTURA">Estado herramienta</label>
-                        @Html.DropDownListFor(model => model.ID_ESTADO_HERRAMIENTA, (SelectList)ViewBag.Estado_herramienta, new { @class = "form-control" })<br />
+                        @Html.DropDownListFor(model => model.ID_ESTADO_HERRAMIENTA, (SelectList)ViewBag.Estado_herramientay, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
                         <label for="ID_FACTURA">Factura</label>
-                        @Html.DropDownListFor(model => model.ID_FACTURA, (SelectList)ViewBag.Factura, new { @class = "form-control" })<br />
+                        @Html.DropDownListFor(model => model.ID_FACTURA, (SelectList)ViewBag.Facturay, new { @class = "form-control" })<br />
                     </div>
 
+                    <div class="form-group">
+                        <label>Comentario</label>
+                        <input type="text" class="form-control" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" /><br />
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                     <a class="btn btn-warning" href="@Url.Action("serie","Serie_herramienta")">Volver</a>

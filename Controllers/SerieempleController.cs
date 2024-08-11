@@ -23,21 +23,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
-                SqlCommand cmd = new SqlCommand("SELECT " +
-                    "er.ID_EMPLEADO_REGISTRO_SERIE_HERRAMIENTA, " +
-                    "s.NOMBRE_SUCURSAL, " +
-                    "h.MODELO, " +
-                    "sr.NUMERO_SERIE, " +
-                    "e.PRIMER_NOMBRE, " +
-                    "e.SEGUNDO_NOMBRE, " +
-                    "e.PRIMER_APELLIDO, " +
-                    "er.FECHA_REGISTRO " +
-                    "FROM " +
-                    "EMPLEADO_REGISTRO_SERIE_HERRAMIENTA er " +
-                    "INNER JOIN REGISTRO_SERIE_HERRAMIENTA sr ON er.ID_REGISTRO_SERIE_HERRAMIENTA = sr.ID_REGISTRO_SERIE_HERRAMIENTA " +
-                    "INNER JOIN HERRAMIENTA h ON sr.ID_HERRAMIENTA = h.ID_HERRAMIENTA " +
-                    "INNER JOIN EMPLEADO e ON er.ID_EMPLEADO = e.ID_EMPLEADO " +
-                    "INNER JOIN SUCURSAL s ON e.ID_SUCURSAL = s.ID_SUCURSAL", oconexion);
+                SqlCommand cmd = new SqlCommand("sp_EmpleadosDeHerramienta", oconexion);
                 oconexion.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();

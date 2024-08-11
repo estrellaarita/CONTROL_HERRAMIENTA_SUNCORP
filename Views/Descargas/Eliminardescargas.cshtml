@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 <div class="row" style="margin-top:30px">
     <div class="col-sm-12 text-center">
@@ -20,10 +21,18 @@
                 </div>
 
                 <form action="@Url.Action("Eliminardescargas","Descargas")" method="post">
-                    <input type="hidden" class="form-control" name="Iddescargas" value="@Html.DisplayTextFor(m => m.ID_DESECHOS)" />
 
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                    <a class="btn btn-warning" href="@Url.Action("descargas","Descargas")">Volver</a>
+                    <input type="hidden" class="form-control" name="Iddescargas" value="@Html.DisplayTextFor(m => m.ID_DESECHOS)" /><br />
+
+
+                    <button type="submit" class="btn btn-danger" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                    </button>
+
+                    <a class="btn btn-warning" href="@Url.Action("descargas","Descargas")" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+
                 </form>
 
             </div>

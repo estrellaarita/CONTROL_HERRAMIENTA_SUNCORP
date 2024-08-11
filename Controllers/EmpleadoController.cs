@@ -27,43 +27,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
-                SqlCommand cmd = new SqlCommand("SELECT " +
-                                               "e.DNI, " +
-                                               "e.PRIMER_NOMBRE, " +
-                                               "e.SEGUNDO_NOMBRE, " +
-                                               "e.PRIMER_APELLIDO, " +
-                                               "e.SEGUNDO_APELLIDO, " +
-                                               "g.DESCRIPCION_GENERO, " +
-                                               "s.NOMBRE_SUCURSAL, " +
-                                               "d.DECRIPCION_DEPARTAMENTO, " +
-                                               "r.DECRIPCION_ROL, " +
-                                               "es.DESCRIPCION_ESTADO_EMPLEADO, " +
-
-                                               "COUNT(DISTINCT sr.NUMERO_SERIE) AS NUMERO_DE_HERRAMIENTAS, " +
-                                               "MAX(e.FECHA_REGISTRO) AS FECHA_REGISTRO " +
-                                               "FROM EMPLEADO e " +
-
-                                               "INNER JOIN GENERO g ON e.ID_GENERO = g.ID_GENERO " +
-                                               "INNER JOIN SUCURSAL s ON e.ID_SUCURSAL = s.ID_SUCURSAL " +
-                                               "INNER JOIN DEPARTAMENTO d ON e.ID_DEPARTAMENTO = d.ID_DEPARTAMENTO " +
-                                               "INNER JOIN ROL r ON e.ID_ROL = r.ID_ROL " +
-                                               "INNER JOIN ESTADO_EMPLEADO es ON e.ID_ESTADO_EMPLEADO = es.ID_ESTADO_EMPLEADO " +
-                                               "LEFT JOIN EMPLEADO_REGISTRO_SERIE_HERRAMIENTA ersh ON e.ID_EMPLEADO = ersh.ID_EMPLEADO " +
-                                               "LEFT JOIN REGISTRO_SERIE_HERRAMIENTA sr ON ersh.ID_REGISTRO_SERIE_HERRAMIENTA = sr.ID_REGISTRO_SERIE_HERRAMIENTA " +
-                                               
-                                               "GROUP BY " +
-
-                                               "e.DNI, " +
-                                               "e.PRIMER_NOMBRE, " +
-                                               "e.SEGUNDO_NOMBRE, " +
-                                               "e.PRIMER_APELLIDO, " +
-                                               "e.SEGUNDO_APELLIDO, " +
-                                               "g.DESCRIPCION_GENERO, " +
-                                               "s.NOMBRE_SUCURSAL, " +
-                                               "d.DECRIPCION_DEPARTAMENTO, " +
-                                               "r.DECRIPCION_ROL, " +
-                                               "es.DESCRIPCION_ESTADO_EMPLEADO " +
-                                               "ORDER BY MAX(e.FECHA_REGISTRO) DESC;", oconexion);
+                SqlCommand cmd = new SqlCommand("SP_VERempleado", oconexion);
                 cmd.CommandType = CommandType.Text;
                 oconexion.Open();
 
@@ -73,13 +37,13 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     {
                         Empleado empleado = new Empleado();
 
-                       //empleado.ID_EMPLEADO = Convert.ToInt32(dr["ID_EMPLEADO"]);
+                        empleado.ID_EMPLEADO = Convert.ToInt32(dr["ID_EMPLEADO"]);
                         empleado.DNI = dr["DNI"].ToString();
                         empleado.PRIMER_NOMBRE = dr["PRIMER_NOMBRE"].ToString();
                         empleado.SEGUNDO_NOMBRE = dr["SEGUNDO_NOMBRE"].ToString();
                         empleado.PRIMER_APELLIDO = dr["PRIMER_APELLIDO"].ToString();
                         empleado.SEGUNDO_APELLIDO = dr["SEGUNDO_APELLIDO"].ToString();
-                        /* empleado.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
+                        /*empleado.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
                          empleado.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
                          empleado.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
                          empleado.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
@@ -90,7 +54,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         //GENERO
                         Genero igenero = new Genero();
 
-                      //  igenero.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
+                      //igenero.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
                         igenero.DESCRIPCION_GENERO= dr["DESCRIPCION_GENERO"].ToString();
                        // igenero.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
@@ -99,7 +63,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         //SUCURSAL
                         Sucursal asucursal = new Sucursal();
 
-                       // asucursal.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
+                      // asucursal.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
                         asucursal.NOMBRE_SUCURSAL = dr["NOMBRE_SUCURSAL"].ToString();
                       //  asucursal.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
@@ -117,7 +81,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         //ROL
                         Rol erol = new Rol();
 
-                      //  erol.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
+                      // erol.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
                         erol.DECRIPCION_ROL = dr["DECRIPCION_ROL"].ToString();
                        // erol.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
@@ -380,8 +344,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Editaremple(Empleado oempleado)
         {
-            bool registrado;
-            string mensaje;
+          
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
@@ -398,26 +361,15 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.Parameters.AddWithValue("ID_DEPARTAMENTO", oempleado.ID_DEPARTAMENTO);
                 cmd.Parameters.AddWithValue("ID_ROL", oempleado.ID_ROL);
                 cmd.Parameters.AddWithValue("ID_ESTADO_EMPLEADO", oempleado.ID_ESTADO_EMPLEADO);
-                cmd.Parameters.Add("REGISTRADOEMPLEADO", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("MENSAJEEMPLEADO", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
 
-                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADOEMPLEADO"].Value);
-                mensaje = cmd.Parameters["MENSAJEEMPLEADO"].Value.ToString();
-            }
-            ViewData["MENSAJEEMPLEADO"] = mensaje;
 
-            if (registrado)
-            {
-                return RedirectToAction("empleado", "Empleado");
             }
-            else
-            {
-                return View();
-            }
-
+            return RedirectToAction("empleado", "Empleado");
         }
+
     }
 }

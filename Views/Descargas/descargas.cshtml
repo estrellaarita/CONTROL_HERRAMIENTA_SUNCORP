@@ -11,25 +11,21 @@
     <meta charset="UTF-8">
     <title>Lista de Descargas</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="row" style="margin-top:30px">
         <div class="col-sm-12">
-
-            <div class="panel panel-warning" style="font-size: 16px;">
-                <div class="panel-heading">
-                    <h4>Lista de Descargas</h4>
-
+            <div class="card">
+                <div class="card-header bg-yellow">
+                    <h4>Lista de descargas</h4>
                 </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                <div class="panel-body">
-                    <a class="btn btn-success" href="@Url.Action("Registrardescarga", "Descargas")">Crear Nuevo</a>
+                <div class="card-body">
+                    <a class="btn btn-success" style="font-size: 20px; padding: 6px 16px;" href="@Url.Action("Registrardescarga", "Descargas")">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
                     <hr />
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -45,35 +41,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Descargas item in Model)
-                                     {
-                                        <tr>
-                                            <td>@item.SERIE.NUMERO_SERIE</td>
-                                            <td>@item.USUARIO_BD.USUARIO</td>
-                                            <td>@item.FECHA_DESECHO</td>
-                                            <td>@item.COMENTARIO</td>
-                                            <td>
-                                                @if (item.FOTO != null)
-                                                {
-                                                    <img src="@Url.Action("ConvertirImagen", "Descargas", new { codigo = item.ID_DESECHOS })" alt="Imagen de la descarga" width="200" height="160" />
-                                                }
-                                                else
-                                                {
-                                                    <p>No hay imagen</p>
-                                                }
-                                            </td>
-                                            <td>@item.FECHA_REGISTRO</td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm" href="@Url.Action("Editardescargas","Descargas", new { Iddescargas = item.ID_DESECHOS })">
-                                                    <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
-                                                </a>
-                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminardescargas","Descargas", new { Iddescargas = item.ID_DESECHOS })">
-                                                    <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
-                                                </a>
-                                            </td>
+                                @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Descargas item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.SERIE.NUMERO_SERIE</td>
+                                        <td>@item.USUARIO_BD.USUARIO</td>
+                                        <td>@item.FECHA_DESECHO</td>
+                                        <td>@item.COMENTARIO</td>
+                                        <td>
+                                            @if (item.FOTO != null)
+                                            {
+                                                <img src="@Url.Action("ConvertirImagen", "Descargas", new { codigo = item.ID_DESECHOS })" alt="Imagen de la descarga" width="200" height="160" />
+                                            }
+                                            else
+                                            {
+                                                <p>No hay imagen</p>
+                                            }
+                                        </td>
+                                        <td>@item.FECHA_REGISTRO</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-primary btn-sm" style="font-size: 15px; padding: 4px 10px; " href="@Url.Action("Editardescargas","Descargas", new { Iddescargas = item.ID_DESECHOS})">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" style="font-size: 15px; padding: 4px 10px;" href="@Url.Action("Eliminardescargas","Descargas", new { Iddescargas= item.ID_DESECHOS})">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
 
-                                        </tr>
-                                     }
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -83,8 +79,14 @@
     </div>
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
     <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <style>
+        .bg-yellow {
+            background-color: #F7DC6F; /* Amarillo claro */
+        }
+    </style>
 </body>
 </html>

@@ -88,9 +88,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Crear(Sucursal osucursal)
         {
-            bool registrado;
-            string mensaje;
-
+           
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_CREATE_SUCURSAL", oconexion);
@@ -101,27 +99,14 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.Parameters.AddWithValue("DIRECCION", osucursal.DIRECCION);
                 cmd.Parameters.AddWithValue("ID_EMPRESA", osucursal.ID_EMPRESA);
                 cmd.Parameters.AddWithValue("COMENTARIO", osucursal.COMENTARIO);
-                cmd.Parameters.Add("REGISTRADOSUCURSAL", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("MENSAJESUCURSAL", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
-
+              
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
-                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADOSUCURSAL"].Value);
-                mensaje = cmd.Parameters["MENSAJESUCURSAL"].Value.ToString();
             }
-            ViewData["MENSAJESUCURSAL"] = mensaje;
-
-            if (registrado)
-            {
-                return RedirectToAction("sucursal", "Sucursal");
-            }
-            else
-            {
-                return View();
-            }
-
+            return RedirectToAction("sucursal", "Sucursal");
         }
+
 
         //EDITAR SUCURSAL
 
@@ -154,8 +139,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Editarsucur(Sucursal osucursal)
         {
-            bool registrado;
-            string mensaje;
+      
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
@@ -167,27 +151,15 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.Parameters.AddWithValue("DIRECCION", osucursal.DIRECCION);
                 cmd.Parameters.AddWithValue("ID_EMPRESA", osucursal.ID_EMPRESA);
                 cmd.Parameters.AddWithValue("COMENTARIO", osucursal.COMENTARIO);
-                cmd.Parameters.Add("REGISTRADOSUCURSAL", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("MENSAJESUCURSAL", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
 
-                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADOSUCURSAL"].Value);
-                mensaje = cmd.Parameters["MENSAJESUCURSAL"].Value.ToString();
             }
-            ViewData["MENSAJESUCURSAL"] = mensaje;
-
-            if (registrado)
-            {
-                return RedirectToAction("sucursal", "Sucursal");
-            }
-            else
-            {
-                return View();
-            }
-
+            return RedirectToAction("sucursal", "Sucursal");
         }
+
 
         //ELIMINAR SUCURSAL
 

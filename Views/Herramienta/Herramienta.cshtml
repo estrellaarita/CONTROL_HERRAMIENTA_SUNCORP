@@ -11,30 +11,18 @@
     <meta charset="UTF-8">
     <title>Lista de herramientas</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <div class="row" style="margin-top:30px">
         <div class="col-sm-12">
-
-            <div class="panel panel-warning" style="font-size: 16px;">
-                <div class="panel-heading">
+            <div class="card">
+                <div class="card-header bg-yellow">
                     <h4>Lista de herramientas</h4>
-
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <form asp-controller="Serie" asp-action="serie">
-                    <p>
-                        <input type="text" name="buscar" class="form-text" />
-                        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
-                    </p>
-                </form>
 
                 <div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -43,14 +31,17 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                     <input type="button" value="TIPO HERRAMIENTA" class="btn btn-sm btn-dark" onclick="location.href='@Url.Action("Tipo", "Tipo")'" />
 
                     <input type="button" value="MARCA" class="btn btn-sm btn-dark" onclick="location.href='@Url.Action("Marca", "Marca")'" />
 
                 </div>
 
-                <div class="panel-body">
-                    <a class="btn btn-success" href="@Url.Action("Registrarherramienta", "Herramienta")">Crear Nuevo</a>
+                <div class="card-body">
+                    <a class="btn btn-success" style="font-size: 20px; padding: 6px 16px;" href="@Url.Action("Registrarherramienta", "Herramienta")">
+                        <i class="fas fa-plus-circle"></i> 
+                    </a>
                     <hr />
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -74,14 +65,14 @@
                                         <td>@item.COMENTARIO</td>
                                         <td>@item.FECHA_REGISTRO</td>
 
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href="@Url.Action("Editarherramienta","Herramienta", new { Idherramienta = item.ID_HERRAMIENTA})">
-                                                <span class="glyphicon glyphicon-pencil" style="font-size: 14px !important;"></span>
+                                        <td class="text-center">
+                                            <a class="btn btn-primary btn-sm" style="font-size: 15px; padding: 4px 10px; " href="@Url.Action("Editarherramienta","Herramienta", new { Idherramienta = item.ID_HERRAMIENTA})">
+                                                <i class="fas fa-edit"></i>
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="@Url.Action("Eliminarherramienta","Herramienta", new { Idherramienta= item.ID_HERRAMIENTA })">
-                                                <span class="glyphicon glyphicon-trash" style="font-size: 14px !important;"></span>
+                                            <a class="btn btn-danger btn-sm" style="font-size: 15px; padding: 4px 10px;" href="@Url.Action("Eliminarherramienta","Herramienta", new { Idherramienta= item.ID_HERRAMIENTA })">
+                                                <i class="fas fa-trash-alt"></i>
                                             </a>
-                                           
+                                            <td>
                                         </td>
 
                                     </tr>
@@ -97,10 +88,15 @@
     </div>
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+    <style>
+        .bg-yellow {
+            background-color: #F7DC6F; /* Amarillo claro */
+        }
+    </style>
 
 </body>
 </html>

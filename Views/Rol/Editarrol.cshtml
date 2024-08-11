@@ -15,10 +15,11 @@
             </div>
             <div class="panel-body">
                 <form action="@Url.Action("Editarrol","Rol")" method="post">
-                    <div class="form-group">
-                        <label>Rol</label>
 
-                        <input type="hidden" class="form-control" name="ID_ROL" value="@Html.DisplayTextFor(m=>m.ID_ROL)" /><br />
+                    <div class="form-group">
+                        <label style="font-weight: bold; font-size: 1.2em;">Rol</label>
+
+                        <input type="hidden" class="form-control" name="ID_ROL" value="@Html.DisplayTextFor(m=>m.ID_ROL)" />
 
 
                         <style>
@@ -31,6 +32,8 @@
                                     display: inline-block; /* Permite centrar el input dentro del contenedor */
                                 }
                         </style>
+
+
 
                         <div class="form-container">
                             <div class="center-input">

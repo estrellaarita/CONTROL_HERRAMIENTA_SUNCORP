@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
 <div class="row" style="margin-top:30px">
     <div class="col-sm-12 text-center">
         <!-- Agregué la clase text-center -->
@@ -18,28 +20,43 @@
 
 
                     <div class="form-group">
-                        <label for="ID_TIPO_HERRAMIENTA">Tipo herramienta</label>
+                        <label style="font-weight: bold; float: left;" for="ID_TIPO_HERRAMIENTA">Tipo herramienta</label>
                         @Html.DropDownListFor(model => model.ID_TIPO_HERRAMIENTA, (SelectList)ViewBag.Tipo, new { @class = "form-control" })<br />
                     </div>
 
                     <div class="form-group">
-                        <label for="ID_MARCA">Marca</label>
+                        <label style="font-weight: bold; float: left;" for="ID_MARCA">Marca</label>
                         @Html.DropDownListFor(model => model.ID_MARCA, (SelectList)ViewBag.Marca, new { @class = "form-control" })<br />
                     </div>
 
-                       
+
                     <div class="form-group">
-                        <label>Modelo</label>
-                        <input type="text" class="form-control" name="Modelo" required /><br />
+                        <label style="font-weight: bold; float: left;">Modelo</label>
+                        <input type="text" class="form-control" name="Modelo" required style="height: 40px; font-size: 18px; background-color: #FFFFCC;" /><br />
                     </div>
 
                     <div class="form-group">
-                        <label>Comentario</label>
-                        <input type="text" class="form-control" name="Comentario" /><br />
+                        <label style="font-weight: bold; float: left;">Comentario</label>
+                        <input type="text" class="form-control" name="Comentario" style="height: 40px; font-size: 18px; background-color: #FFFFCC;" /><br />
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                    <a class="btn btn-warning" href="@Url.Action("Herramienta","Herramienta")">Volver</a>
+                    <style>
+                        .center-input {
+                            text-align: center; /* Centra el contenido en línea */
+                            margin-top: 20px; /* Espacio superior opcional */
+                        }
+
+                            .center-input input {
+                                display: inline-block; /* Permite centrar el input dentro del contenedor */
+                            }
+                    </style>
+
+                    <button type="submit" class="btn btn-primary ml-2" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                    </button>
+                    <a class="btn btn-warning ml-2" href="@Url.Action("Herramienta","Herramienta")" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </a>
 
                 </form>
             </div>

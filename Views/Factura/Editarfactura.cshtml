@@ -31,7 +31,7 @@
 
                     <div class="center-input">
                         <div class="form-group">
-                            <label>Numero factura</label>
+                            <label style="font-weight: bold; font-size: 1.2em;">Numero factura</label>
                             <input type="text" class="form-control" name="Numero_factura" required value="@Html.DisplayTextFor(m=>m.NUMERO_FACTURA)" /><br />
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                     <div class="form-container">
                         <div class="center-input">
                             <div class="form-group">
-                                <label for="ID_USUARIO_BD">Usuario</label>
+                                <label style="font-weight: bold; font-size: 1.2em;" for="ID_USUARIO_BD">Usuario</label>
                                 @Html.DropDownListFor(model => model.ID_USUARIO_BD, (SelectList)ViewBag.aUsuario, new { @class = "form-control" })
                             </div>
                         </div>
@@ -60,7 +60,7 @@
 
                     <div class="center-input">
                          <div class="form-group">
-                            <label>Fecha de Compra</label>
+                             <label style="font-weight: bold; font-size: 1.2em;">Fecha de Compra</label>
                             <input type="date" class="form-control" name="Fecha_compra" required value="@Model.FECHA_COMPRA.ToString("yyyy-MM-dd")" />
                          </div>
                     </div>
@@ -68,7 +68,7 @@
                     <div class="form-container">
                          <div class="center-input">
                              <div class="form-group">
-                               <label for="ID_MARCA">Proveedor</label>
+                               <label style="font-weight: bold; font-size: 1.2em;" for="ID_MARCA">Proveedor</label>
                                @Html.DropDownListFor(model => model.ID_PROVEEDOR, (SelectList)ViewBag.iProveedor, new { @class = "form-control" })
                                </div>
                          </div>
@@ -76,14 +76,14 @@
 
                     <div class="center-input">
                           <div class="form-group">
-                            <label>Comentario</label>
+                              <label style="font-weight: bold; font-size: 1.2em;">Comentario</label>
                             <input type="text" class="form-control" name="Comentario" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" /><br />
                           </div>
                     </div>
                      <br />
 
                     <div class="form-group">
-                      <label>Imagen actual</label><br />
+                        <label style="font-weight: bold; font-size: 1.2em;">Imagen actual</label><br />
                        <div class="col-md-10">
                          <img width="365" height="300" src="@Url.Action("ConvertirImagen", "Factura", new { codigo = Model.ID_FACTURA})" alt="Imagen de factura" /><br />
                        </div>
@@ -91,11 +91,11 @@
                     <br />
 
                     <div class="form-group">
-                      <label>Nueva imagen</label><br />
+                        <label style="font-weight: bold; font-size: 1.2em;">Nueva imagen</label><br />
                       <input type="file" class="form-control" id="FOTO" name="upload" value="@Html.DisplayTextFor(m=>m.FOTO)" /><br />
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                     <a class="btn btn-warning" href="@Url.Action("FACTURA","Factura")">Volver</a>
                 </form>
             </div>

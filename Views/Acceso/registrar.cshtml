@@ -35,7 +35,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" name="NOMBRE_COMPLETO" class="form-control" value="" placeholder="nombre completo">
+                            <input type="text" name="NOMBRE_COMPLETO" class="form-control" value="" placeholder="nombre completo" required>
 
                         </div>
 
@@ -43,21 +43,21 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" name="USUARIO" class="form-control" value="" placeholder="usuario">
+                            <input type="text" name="USUARIO" class="form-control" value="" placeholder="usuario" required>
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="CLAVE" class="form-control" value="" placeholder="contraseña">
+                            <input type="password" name="CLAVE" class="form-control" value="" placeholder="contraseña" required>
                         </div>
 
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="confirmarclave" class="form-control" value="" placeholder="confirme la contraseña">
+                            <input type="password" name="confirmarclave" class="form-control" value="" placeholder="confirme la contraseña" required>
                         </div>
                         @if (ViewData["MENSAJE"] != null)
                         {
