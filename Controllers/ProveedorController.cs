@@ -147,16 +147,30 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Eliminarproveedor(string Idproveedor)
         {
-            using (SqlConnection oconexion = new SqlConnection(cadena))
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_DELETE_PROVEEDOR", oconexion);
                 cmd.Parameters.AddWithValue("ID_PROVEEDOR", Idproveedor);
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
+                }
+                // Si la eliminación es exitosa, redirigir a la vista deseada
+                return RedirectToAction("Proveedor", "Proveedor");
             }
-            return RedirectToAction("Proveedor", "Proveedor");
+            catch (SqlException ex)
+            {
+                // En caso de un conflicto, retornar un mensaje de error a la vista
+                ViewBag.ErrorMessage = "No puede eliminar el proceedor porque hay registros relacionados";
+                // Aquí podrías registrar el error en un log si es necesario
+
+                // Redirigir a la vista actual con el mensaje de error
+                return View();  // Asegúrate de que "Marca" sea la vista correcta
+            }
         }
+
     }
 
 }

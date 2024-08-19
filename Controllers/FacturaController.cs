@@ -29,19 +29,23 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SELECT " +
-                    "f.ID_FACTURA, " +
-                    "f.NUMERO_FACTURA, " +
-                    "u.USUARIO, " +
-                    "f.FECHA_COMPRA, " +
-                    "p.NOMBRE_PROVEEDOR, " +
-                    "f.COMENTARIO, " +
-                    "f.FOTO," +
-                    "f.FECHA_REGISTRO " +
-                    "FROM FACTURA f " +
-                    "INNER JOIN USUARIO_BD u ON f.ID_USUARIO_BD = u.ID_USUARIO_BD " +
-                    "INNER JOIN PROVEEDOR p ON f.ID_PROVEEDOR = p.ID_PROVEEDOR", oconexion);
+          "f.ID_FACTURA, " +
+          "f.NUMERO_FACTURA, " +
+          "f.ID_USUARIO_BD, " +
+          "u.USUARIO, " +
+          "f.FECHA_COMPRA, " +
+          "f.ID_PROVEEDOR, " +
+          "p.NOMBRE_PROVEEDOR, " +
+          "f.COMENTARIO, " +
+          "f.FOTO, " +
+          "f.MONTO_TOTAL, " +
+          "f.FECHA_REGISTRO " +
+          "FROM FACTURA f " +
+          "INNER JOIN USUARIO_BD u ON f.ID_USUARIO_BD = u.ID_USUARIO_BD " +
+          "INNER JOIN PROVEEDOR p ON f.ID_PROVEEDOR = p.ID_PROVEEDOR ", oconexion);
 
                 cmd.CommandType = CommandType.Text;
+
                 oconexion.Open();
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -52,9 +56,10 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 
                         factura.ID_FACTURA = Convert.ToInt32(dr["ID_FACTURA"]);
                         factura.NUMERO_FACTURA = dr["NUMERO_FACTURA"].ToString();
-                      //  factura.ID_USUARIO_BD = Convert.ToInt32(dr["ID_USUARIO_BD"]);
+                        factura.ID_USUARIO_BD = Convert.ToInt32(dr["ID_USUARIO_BD"]);
                         factura.FECHA_COMPRA = Convert.ToDateTime(dr["FECHA_COMPRA"]);
-                      //  factura.ID_PROVEEDOR = Convert.ToInt32(dr["ID_PROVEEDOR"]);
+                        factura.ID_PROVEEDOR = Convert.ToInt32(dr["ID_PROVEEDOR"]);
+                        factura.MONTO_TOTAL = dr["MONTO_TOTAL"].ToString();
                         factura.COMENTARIO = dr["COMENTARIO"].ToString();
 
                         factura.FOTO = dr["FOTO"] != DBNull.Value ? (byte[])dr["FOTO"] : null;
@@ -64,18 +69,18 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         //USUARIO BD
                         usuario eusuario = new usuario();
 
-                      //  eusuario.ID_USUARIO_BD = Convert.ToInt32(dr["ID_USUARIO_BD"]);
+                        eusuario.ID_USUARIO_BD = Convert.ToInt32(dr["ID_USUARIO_BD"]);
                         eusuario.USUARIO = dr["USUARIO"].ToString();
-                      //  eusuario.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                        eusuario.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         factura.USUARIO_BD = eusuario;
 
                         //PROVEEDOR
                        Proveedor aproveedor = new Proveedor();
 
-                      //  aproveedor.ID_PROVEEDOR = Convert.ToInt32(dr["ID_PROVEEDOR"]);
+                        aproveedor.ID_PROVEEDOR = Convert.ToInt32(dr["ID_PROVEEDOR"]);
                         aproveedor.NOMBRE_PROVEEDOR = dr["NOMBRE_PROVEEDOR"].ToString();
-                     //   aproveedor.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                        aproveedor.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         factura.PROVEEDOR = aproveedor;
 
@@ -85,6 +90,76 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 }
             }
             return View(ofactura);
+        }
+
+        [HttpGet]
+        public JsonResult ListaFactura()
+        {
+
+            ofactura = new List<Factura>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT " +
+        "f.ID_FACTURA, " +
+        "f.NUMERO_FACTURA, " +
+        "f.ID_USUARIO_BD, " +
+        "u.USUARIO, " +
+        "f.FECHA_COMPRA, " +
+        "f.ID_PROVEEDOR, " +
+        "p.NOMBRE_PROVEEDOR, " +
+        "f.COMENTARIO, " +
+        "f.FOTO, " +
+         "f.MONTO_TOTAL,  " +
+        "f.FECHA_REGISTRO " +
+        "FROM FACTURA f " +
+        "INNER JOIN USUARIO_BD u ON f.ID_USUARIO_BD = u.ID_USUARIO_BD " +
+        "INNER JOIN PROVEEDOR p ON f.ID_PROVEEDOR = p.ID_PROVEEDOR ", oconexion);
+
+                cmd.CommandType = CommandType.Text;
+                oconexion.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Factura factura = new Factura();
+
+                       factura.ID_FACTURA = Convert.ToInt32(dr["ID_FACTURA"]);
+                        factura.NUMERO_FACTURA = dr["NUMERO_FACTURA"].ToString();
+                        factura.ID_USUARIO_BD = Convert.ToInt32(dr["ID_USUARIO_BD"]);
+                        factura.MONTO_TOTAL = dr["MONTO_TOTAL"].ToString();
+                        factura.FECHA_COMPRA = Convert.ToDateTime(dr["FECHA_COMPRA"]);
+                        factura.ID_PROVEEDOR = Convert.ToInt32(dr["ID_PROVEEDOR"]);
+                        factura.COMENTARIO = dr["COMENTARIO"].ToString();
+
+                        factura.FOTO = dr["FOTO"] != DBNull.Value ? (byte[])dr["FOTO"] : null;
+
+                        factura.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        //USUARIO BD
+                        usuario eusuario = new usuario();
+
+                       eusuario.ID_USUARIO_BD = Convert.ToInt32(dr["ID_USUARIO_BD"]);
+                        eusuario.USUARIO = dr["USUARIO"].ToString();
+                        eusuario.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        factura.USUARIO_BD = eusuario;
+
+                        //PROVEEDOR
+                        Proveedor aproveedor = new Proveedor();
+
+                       aproveedor.ID_PROVEEDOR = Convert.ToInt32(dr["ID_PROVEEDOR"]);
+                        aproveedor.NOMBRE_PROVEEDOR = dr["NOMBRE_PROVEEDOR"].ToString();
+                       aproveedor.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        factura.PROVEEDOR = aproveedor;
+
+                        ofactura.Add(factura);
+
+                    }
+                }
+            }
+            return Json(new { data = ofactura }, JsonRequestBehavior.AllowGet);
         }
 
         //CREATE FACTURA
@@ -153,7 +228,8 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.Parameters.AddWithValue("FECHA_COMPRA", ofactura.FECHA_COMPRA);
                 cmd.Parameters.AddWithValue("ID_PROVEEDOR", ofactura.ID_PROVEEDOR);
                 cmd.Parameters.AddWithValue("COMENTARIO", ofactura.COMENTARIO);
-                cmd.Parameters.AddWithValue("FOTO",ofactura.FOTO); 
+                cmd.Parameters.AddWithValue("FOTO",ofactura.FOTO);
+                cmd.Parameters.AddWithValue("MONTO_TOTAL", ofactura.MONTO_TOTAL);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
@@ -164,8 +240,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 
         public ActionResult ConvertirImagen(int codigo)
         {
-           // string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
-
+   
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 // Abrir la conexión a la base de datos
@@ -216,7 +291,9 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Eliminarfactura(string Idfactura)
         {
-            using (SqlConnection oconexion = new SqlConnection(cadena))
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_DELETE_FACTURA", oconexion);
                 cmd.Parameters.AddWithValue("ID_FACTURA", Idfactura);
@@ -224,9 +301,21 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
+                }
+                // Si la eliminación es exitosa, redirigir a la vista deseada
+                return RedirectToAction("FACTURA", "Factura");
             }
-            return RedirectToAction("FACTURA", "Factura");
+            catch (SqlException ex)
+            {
+                // En caso de un conflicto, retornar un mensaje de error a la vista
+                ViewBag.ErrorMessage = "No puede eliminar la factura porque hay registros relacionados";
+                // Aquí podrías registrar el error en un log si es necesario
+
+                // Redirigir a la vista actual con el mensaje de error
+                return View();  // Asegúrate de que "Marca" sea la vista correcta
+            }
         }
+
 
         //EDITAR FACTURA
 
@@ -277,19 +366,20 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
+                try
                 {
-                    byte[] imagenData = null;
-                    using (var imagen = new BinaryReader(upload.InputStream))
+                    // Verifica si se ha cargado una nueva imagen
+                    if (upload != null && upload.ContentLength > 0)
                     {
-                        imagenData = imagen.ReadBytes(upload.ContentLength);
+                        using (var imagen = new BinaryReader(upload.InputStream))
+                        {
+                            ofactura.FOTO = imagen.ReadBytes(upload.ContentLength);
+                        }
                     }
-                    ofactura.FOTO = imagenData;
-                }
-                else
-                {
-                    // Si no se ha seleccionado una imagen nueva, obtener la imagen actual de la base de datos
-                    using (SqlConnection oconexion = new SqlConnection(cadena))
+                    else
+                    {
+                        // Si no se ha seleccionado una imagen nueva, obtener la imagen actual de la base de datos
+                        using (SqlConnection oconexion = new SqlConnection(cadena))
                     {
                         SqlCommand cmd = new SqlCommand("SELECT FOTO FROM FACTURA WHERE ID_FACTURA = @ID_FACTURA", oconexion);
                         cmd.Parameters.AddWithValue("ID_FACTURA", ofactura.ID_FACTURA);
@@ -299,6 +389,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     }
                 }
 
+                    //ACtualiza los datos en la BD
                 using (SqlConnection oconexion = new SqlConnection(cadena))
                 {
                     SqlCommand cmd = new SqlCommand("SP_ACTUALIZAR_FACTURA", oconexion);
@@ -310,12 +401,19 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     cmd.Parameters.AddWithValue("ID_PROVEEDOR", ofactura.ID_PROVEEDOR);
                     cmd.Parameters.AddWithValue("COMENTARIO", ofactura.COMENTARIO);
                     cmd.Parameters.AddWithValue("FOTO", ofactura.FOTO);
+                    cmd.Parameters.AddWithValue("MONTO_TOTAL", ofactura.MONTO_TOTAL);
 
                     cmd.CommandType = CommandType.StoredProcedure;
                     oconexion.Open();
-                    cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Maneja la excepción (por ejemplo, loguea el error o muestra un mensaje al usuario)
+                    ModelState.AddModelError("", "Se produjo un error al actualizar los datos: " + ex.Message);
                 }
             }
+
             return RedirectToAction("FACTURA", "Factura");
         }
 

@@ -13,87 +13,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <link href="~/Content/MENU/Menu_lateral.css" rel="stylesheet" />
 </head>
 
 <body>
 
-    <h3 class="text-center mt-4 justify">Registro de empleados</h3>
+    <h3 class="text-center mt-3 justify">Actualizar empleado</h3>
     <br />
 
     <div class="container mt-3 d-flex justify-content-center col-sm-12">
 
         <form action="@Url.Action("Editaremple","Empleado")" method="post">
 
-            <input type="hidden" class="form-control" name="ID_EMPLEADO" /><br />
+            <input type="hidden" class="form-control" name="ID_EMPLEADO" value="@Html.DisplayTextFor(m=>m.ID_EMPLEADO)" /><br />
 
             <div class="form-row">
-             <div class="form-group col-md-12">
-                <input type="text" class="form-control" name="DNI" required style="height: 40px; font-size: 16px; background-color: #FFFFCC;" value="@Html.DisplayTextFor(m=>m.DNI)" /><br />
+                <div class="form-group col-md-12">
+                    <label>DNI</label>
+                    <input type="number" class="form-control" name="DNI" required value="@Html.DisplayTextFor(m=>m.DNI)" /><br />
+                </div>
             </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label>Primer nombre</label>
+                    <input type="text" class="form-control" name="PRIMER_NOMBRE" required value="@Html.DisplayTextFor(m=>m.PRIMER_NOMBRE)" /><br />
                 </div>
+                <div class="form-group">
+                    <label>Segundo nombre</label>
+                    <input type="text" class="form-control" name="SEGUNDO_NOMBRE" value="@Html.DisplayTextFor(m=>m.SEGUNDO_NOMBRE)" /><br />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label>Primer apellido</label>
+                    <input type="text" class="form-control" name="PRIMER_APELLIDO" required value="@Html.DisplayTextFor(m=>m.PRIMER_APELLIDO)" /><br />
+                </div>
+                <div class="form-group">
+                    <label>Segundo apellido</label>
+                    <input type="text" class="form-control" name="SEGUNDO_APELLIDO" value="@Html.DisplayTextFor(m=>m.SEGUNDO_APELLIDO)" /><br />
+                </div>
+            </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label style="font-weight: bold;">Primer nombre</label>
-                    <input type="text" class="form-control" name="PRIMER_NOMBRE" required style="height: 40px; font-size: 16px; background-color: #FFFFCC;" value="@Html.DisplayTextFor(m=>m.PRIMER_NOMBRE)" /><br />
+                    <label for="ID_GENERO">Genero</label><br />
+                    <select class="form-control" name="ID_GENERO" id="ID_GENERO_G" required>
+                        <option value="">Seleccione un genero</option>
+                        @foreach (var itemg in ViewBag.Genero)
+                        {
+                            <option value="@itemg.Value" @(itemg.Value.Equals(Model.ID_GENERO.ToString()) ? "selected" : "")>@itemg.Text</option>
+
+                        }
+                    </select>
                 </div>
-                </div>
+            </div>
+            <br />
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label style="font-weight: bold;">Segundo nombre</label>
-                    <input type="text" class="form-control" name="SEGUNDO_NOMBRE" style="height: 40px; font-size: 16px; background-color: #FFFFCC;" value="@Html.DisplayTextFor(m=>m.SEGUNDO_NOMBRE)" /><br />
-                </div>
-                </div>
+                    <label for="ID_SUCURSAL">Sucursal</label><br />
+                    <select class="form-control" name="ID_SUCURSAL" id="ID_SUCURSAL_P" required>
+                        <option value="">Seleccione una sucursal</option>
+                        @foreach (var item in ViewBag.Sucursal)
+                        {
+                            <option value="@item.Value" @(item.Value.Equals(Model.ID_SUCURSAL.ToString()) ? "selected" : "")>@item.Text</option>
 
-                <div class="form-group">
-                    <label style="font-weight: bold;">Primer apellido</label>
-                    <input type="text" class="form-control" name="PRIMER_APELLIDO" style="height: 40px; font-size: 16px; background-color: #FFFFCC;" required value="@Html.DisplayTextFor(m=>m.PRIMER_APELLIDO)" /><br />
+                        }
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label style="font-weight: bold;">Segundo apellido</label>
-                    <input type="text" class="form-control" name="SEGUNDO_APELLIDO" style="height: 40px; font-size: 16px; background-color: #FFFFCC;" value="@Html.DisplayTextFor(m=>m.SEGUNDO_APELLIDO)" /><br />
+            </div>
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="ID_DEPARTAMENTO">Departamento</label><br />
+                    <select class="form-control" name="ID_DEPARTAMENTO" id="ID_DEPARTAMENTO_G" required>
+                        <option value="">Seleccione un departamento</option>
+                        @foreach (var itemd in ViewBag.Departamento)
+                        {
+                            <option value="@itemd.Value" @(itemd.Value.Equals(Model.ID_DEPARTAMENTO.ToString()) ? "selected" : "")>@itemd.Text</option>
+
+                        }
+                    </select>
                 </div>
+            </div>
+            <br />
 
-                <div class="form-group">
-                    <label style="font-weight: bold;" for="ID_GENERO">Genero</label>
-                    @Html.DropDownListFor(model => model.ID_GENERO, (SelectList)ViewBag.Genero, new { @class = "form-control" })<br />
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="ID_ROL">Rol</label><br />
+                    <select class="form-control" name="ID_ROL" id="ID_ROL_P" required>
+                        <option value="">Seleccione un rol</option>
+                        @foreach (var itemR in ViewBag.Rol)
+                        {
+                            <option value="@itemR.Value" @(itemR.Value.Equals(Model.ID_ROL.ToString()) ? "selected" : "")>@itemR.Text</option>
+
+                        }
+                    </select>
                 </div>
+            </div>
+            <br />
 
-                <div class="form-group">
-                    <label style="font-weight: bold;" for="ID_SUCURSAL">Sucursal</label>
-                    @Html.DropDownListFor(model => model.ID_SUCURSAL, (SelectList)ViewBag.Sucursal, new { @class = "form-control" })<br />
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="ID_ESTADO_EMPLEADO">Estado</label><br />
+                    <select class="form-control" name="ID_ESTADO_EMPLEADO" id="ID_ESTADO_E" required>
+                        <option value="">Seleccione un estado</option>
+                        @foreach (var item in ViewBag.Estado)
+                        {
+                            <option value="@item.Value" @(item.Value.Equals(Model.ID_ESTADO_EMPLEADO.ToString()) ? "selected" : "")>@item.Text</option>
+
+                        }
+                    </select>
                 </div>
+            </div>
+            <br />
 
-                <div class="form-group">
-                    <label style="font-weight: bold;" for="ID_DEPARTAMENTO">Departamento</label>
-                    @Html.DropDownListFor(model => model.ID_DEPARTAMENTO, (SelectList)ViewBag.Departamento, new { @class = "form-control" })<br />
-                </div>
+            <button type="submit" class="btn btn-primary ml-4" style="font-size: 20px; color: #FFFFFF;">
+                <i class="fas fa-sync-alt" aria-hidden="true"></i>
+            </button>
+            <a class="btn btn-warning ml-4" href="@Url.Action("empleado","Empleado")" style="font-size: 20px; color: #FFFFFF;">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            </a>
 
-                <div class="form-group">
-                    <label style="font-weight: bold;" for="ID_ROL">Rol</label>
-                    @Html.DropDownListFor(model => model.ID_ROL, (SelectList)ViewBag.Rol, new { @class = "form-control" })<br />
-                </div>
+        </form>
+    </div>
+    @section Scripts{
 
-                <div class="form-group">
-                    <label style="font-weight: bold;" for="ID_ESTADO_EMPLEADO">Estado empleado</label>
-                    @Html.DropDownListFor(model => model.ID_ESTADO_EMPLEADO, (SelectList)ViewBag.Estado, new { @class = "form-control" })<br />
-                </div>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-                <button type="submit" class="btn btn-primary ml-4" style="font-size: 20px; color: #FFFFFF;">
-                    <i class="fas fa-sync-alt" aria-hidden="true"></i>
-                </button>
-                <a class="btn btn-warning ml-4" href="@Url.Action("empleado","Empleado")" style="font-size: 20px; color: #FFFFFF;">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
-                </a>
+        <script type="text/javascript">
 
-</form>
-        </div>
-  </body>
+            $(document).ready(function () {
+                $('#ID_SUCURSAL_P').select2();
+                $('#ID_ESTADO_E').select2();
+                $('#ID_GENERO_G').select2();
+                $('#ID_DEPARTAMENTO_G').select2();
+                $('#ID_ROL_P').select2();
+            });
+
+        </script>
+    }
+</body>
 </html>
 

@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 <div class="row" style="margin-top:30px">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
     <div class="col-sm-12 text-center">
         <!-- Agregué la clase text-center -->
         <div class="panel panel-warning" style="display: inline-block;">

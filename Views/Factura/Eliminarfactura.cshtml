@@ -4,8 +4,15 @@
     ViewBag.Title = "Eliminarfactura";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 <div class="row" style="margin-top:30px">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
     <div class="col-sm-12 text-center">
         <!-- Agregué la clase text-center -->
         <div class="panel panel-warning" style="display: inline-block;">
@@ -21,8 +28,12 @@
                 <form action="@Url.Action("Eliminarfactura","Factura")" method="post">
                     <input type="hidden" class="form-control" name="Idfactura" value="@Html.DisplayTextFor(m => m.ID_FACTURA)" />
 
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                    <a class="btn btn-warning" href="@Url.Action("FACTURA","Factura")">Volver</a>
+                    <button type="submit" class="btn btn-danger" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                    </button>
+                    <a class="btn btn-warning" href="@Url.Action("FACTURA","Factura")" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </a>
                 </form>
 
             </div>

@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 using CONTROL_HERRAMIENTA_SUNCORP.Permisos;
+using System.Collections.ObjectModel;
+using System.Collections;
+using System.Text;
 
 namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
 {
@@ -43,56 +46,56 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         empleado.SEGUNDO_NOMBRE = dr["SEGUNDO_NOMBRE"].ToString();
                         empleado.PRIMER_APELLIDO = dr["PRIMER_APELLIDO"].ToString();
                         empleado.SEGUNDO_APELLIDO = dr["SEGUNDO_APELLIDO"].ToString();
-                        /*empleado.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
-                         empleado.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
+                        empleado.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
+                        empleado.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
                          empleado.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
                          empleado.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
-                         empleado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);*/
+                         empleado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
                         empleado.NUMERO_DE_HERRAMIENTAS = Convert.ToInt32(dr["NUMERO_DE_HERRAMIENTAS"]);
                         empleado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         //GENERO
                         Genero igenero = new Genero();
 
-                      //igenero.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
-                        igenero.DESCRIPCION_GENERO= dr["DESCRIPCION_GENERO"].ToString();
-                       // igenero.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                        igenero.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
+                        igenero.DESCRIPCION_GENERO = dr["DESCRIPCION_GENERO"].ToString();
+                        igenero.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.GENERO = igenero;
 
                         //SUCURSAL
                         Sucursal asucursal = new Sucursal();
 
-                      // asucursal.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
+                        asucursal.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
                         asucursal.NOMBRE_SUCURSAL = dr["NOMBRE_SUCURSAL"].ToString();
-                      //  asucursal.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                        asucursal.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.SUCURSAL = asucursal;
 
                         //DEPARTAMENTO
                         Departamento odepartamento = new Departamento();
 
-                       // odepartamento.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
+                        odepartamento.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
                         odepartamento.DECRIPCION_DEPARTAMENTO = dr["DECRIPCION_DEPARTAMENTO"].ToString();
-                       // odepartamento.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                        odepartamento.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.DEPARTAMENTO = odepartamento;
 
                         //ROL
                         Rol erol = new Rol();
 
-                      // erol.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
+                        erol.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
                         erol.DECRIPCION_ROL = dr["DECRIPCION_ROL"].ToString();
-                       // erol.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                        erol.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.ROL = erol;
 
                         //ESTADO EMPLEADO
-                        Estado iestado= new Estado();
+                        Estado iestado = new Estado();
 
-                       // iestado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
+                        iestado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
                         iestado.DESCRIPCION_ESTADO_EMPLEADO = dr["DESCRIPCION_ESTADO_EMPLEADO"].ToString();
-                       // iestado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                        iestado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
 
                         empleado.ESTADO_EMPLEADO = iestado;
 
@@ -102,6 +105,146 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 }
             }
             return View(oempleado);
+        }
+
+
+        [HttpGet]
+        public JsonResult ListaEmpleados()
+        {
+
+            oempleado = new List<Empleado>();
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                SqlCommand cmd = new SqlCommand("SP_VERempleado", oconexion);
+                cmd.CommandType = CommandType.Text;
+                oconexion.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Empleado empleado = new Empleado();
+
+                        empleado.ID_EMPLEADO = Convert.ToInt32(dr["ID_EMPLEADO"]);
+                        empleado.DNI = dr["DNI"].ToString();
+                        empleado.PRIMER_NOMBRE = dr["PRIMER_NOMBRE"].ToString();
+                        empleado.SEGUNDO_NOMBRE = dr["SEGUNDO_NOMBRE"].ToString();
+                        empleado.PRIMER_APELLIDO = dr["PRIMER_APELLIDO"].ToString();
+                        empleado.SEGUNDO_APELLIDO = dr["SEGUNDO_APELLIDO"].ToString();
+                        empleado.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
+                         empleado.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
+                         empleado.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
+                         empleado.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
+                         empleado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
+                        empleado.NUMERO_DE_HERRAMIENTAS = Convert.ToInt32(dr["NUMERO_DE_HERRAMIENTAS"]);
+                        empleado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        //GENERO
+                        Genero igenero = new Genero();
+
+                        igenero.ID_GENERO = Convert.ToInt32(dr["ID_GENERO"]);
+                        igenero.DESCRIPCION_GENERO = dr["DESCRIPCION_GENERO"].ToString();
+                        igenero.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        empleado.GENERO = igenero;
+
+                        //SUCURSAL
+                        Sucursal asucursal = new Sucursal();
+
+                        asucursal.ID_SUCURSAL = Convert.ToInt32(dr["ID_SUCURSAL"]);
+                        asucursal.NOMBRE_SUCURSAL = dr["NOMBRE_SUCURSAL"].ToString();
+                        asucursal.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        empleado.SUCURSAL = asucursal;
+
+                        //DEPARTAMENTO
+                        Departamento odepartamento = new Departamento();
+
+                        odepartamento.ID_DEPARTAMENTO = Convert.ToInt32(dr["ID_DEPARTAMENTO"]);
+                        odepartamento.DECRIPCION_DEPARTAMENTO = dr["DECRIPCION_DEPARTAMENTO"].ToString();
+                        odepartamento.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        empleado.DEPARTAMENTO = odepartamento;
+
+                        //ROL
+                        Rol erol = new Rol();
+
+                        erol.ID_ROL = Convert.ToInt32(dr["ID_ROL"]);
+                        erol.DECRIPCION_ROL = dr["DECRIPCION_ROL"].ToString();
+                        erol.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        empleado.ROL = erol;
+
+                        //ESTADO EMPLEADO
+                        Estado iestado = new Estado();
+
+                       iestado.ID_ESTADO_EMPLEADO = Convert.ToInt32(dr["ID_ESTADO_EMPLEADO"]);
+                        iestado.DESCRIPCION_ESTADO_EMPLEADO = dr["DESCRIPCION_ESTADO_EMPLEADO"].ToString();
+                        iestado.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+
+                        empleado.ESTADO_EMPLEADO = iestado;
+
+                        oempleado.Add(empleado);
+
+                    }
+                }
+            }
+            return Json(new { data = oempleado }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetSerieHerramientas(int idEmpleado)
+        {
+            List<Ver_herramientas> serieHerramientas = new List<Ver_herramientas>();
+
+            using (SqlConnection oconexion = new SqlConnection(cadena))
+            {
+                string query = @"
+        SELECT 
+            RSH.ID_REGISTRO_SERIE_HERRAMIENTA, 
+            RSH.NUMERO_SERIE, 
+            H.ID_HERRAMIENTA, 
+            TPH.DECRIPCION_TIPO_HERRAMIENTA AS HERRAMIENTA, 
+            M.DECRIPCION_MARCA AS MARCA, 
+            H.MODELO  
+        FROM 
+            EMPLEADO_REGISTRO_SERIE_HERRAMIENTA EH
+        INNER JOIN 
+            REGISTRO_SERIE_HERRAMIENTA RSH ON RSH.ID_REGISTRO_SERIE_HERRAMIENTA = EH.ID_REGISTRO_SERIE_HERRAMIENTA
+        INNER JOIN 
+            EMPLEADO E ON EH.ID_EMPLEADO = E.ID_EMPLEADO
+        INNER JOIN 
+            HERRAMIENTA H ON RSH.ID_HERRAMIENTA = H.ID_HERRAMIENTA
+        INNER JOIN 
+            TIPO_HERRAMIENTA TPH ON TPH.ID_TIPO_HERRAMIENTA = H.ID_TIPO_HERRAMIENTA
+        INNER JOIN 
+            MARCA M ON M.ID_MARCA = H.ID_MARCA 
+        WHERE 
+            E.ID_EMPLEADO = @IdEmpleado";
+
+                SqlCommand cmd = new SqlCommand(query, oconexion);
+                cmd.Parameters.AddWithValue("@IdEmpleado", idEmpleado);
+
+                oconexion.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Ver_herramientas serieHerramienta = new Ver_herramientas
+                    {
+                        IdRegistroSerieHerramienta = Convert.ToInt32(reader["ID_REGISTRO_SERIE_HERRAMIENTA"]),
+                        NumeroSerie = reader["NUMERO_SERIE"].ToString(),
+                        IdHerramienta = Convert.ToInt32(reader["ID_HERRAMIENTA"]),
+                        Herramienta = reader["HERRAMIENTA"].ToString(),
+                        Marca = reader["MARCA"].ToString(),
+                        Modelo = reader["MODELO"].ToString()
+                    };
+
+                    serieHerramientas.Add(serieHerramienta);
+                }
+            }
+
+            return Json(serieHerramientas, JsonRequestBehavior.AllowGet);
         }
 
         //CREAR EMPLEADO
@@ -234,15 +377,28 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Eliminaremple(string Idempleado)
         {
-            using (SqlConnection oconexion = new SqlConnection(cadena))
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_DELETE_EMPLEADO", oconexion);
                 cmd.Parameters.AddWithValue("ID_EMPLEADO", Idempleado);
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
+                }
+                // Si la eliminación es exitosa, redirigir a la vista deseada
+                return RedirectToAction("empleado", "Empleado");
             }
-            return RedirectToAction("empleado", "Empleado");
+            catch (SqlException ex)
+            {
+                // En caso de un conflicto, retornar un mensaje de error a la vista
+                ViewBag.ErrorMessage = "No puede eliminar el empleado porque hay registros relacionados";
+                // Aquí podrías registrar el error en un log si es necesario
+
+                // Redirigir a la vista actual con el mensaje de error
+                return View();  // Asegúrate de que "Marca" sea la vista correcta
+            }
         }
 
         //ACTUALIZAR EMPLEADO

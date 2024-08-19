@@ -4,13 +4,20 @@
     ViewBag.Title = "Eliminarsucur";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 <div class="row" style="margin-top:30px">
-  <div class="col-sm-12 text-center">
-     <!-- Agregué la clase text-center -->
-     <div class="panel panel-warning" style="display: inline-block;">
-         <!-- Agregué display: inline-block -->
-         <div class="panel-heading">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    <div class="col-sm-12 text-center">
+        <!-- Agregué la clase text-center -->
+        <div class="panel panel-warning" style="display: inline-block;">
+            <!-- Agregué display: inline-block -->
+            <div class="panel-heading">
                 <h4>ELIMINAR SUCURSAL</h4><br />
             </div>
             <div class="panel-body">
@@ -21,8 +28,12 @@
                 <form action="@Url.Action("Eliminarsucur","Sucursal")" method="post">
                     <input type="hidden" class="form-control" name="Idsucursal" value="@Html.DisplayTextFor(m => m.ID_SUCURSAL)" />
 
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                    <a class="btn btn-warning" href="@Url.Action("sucursal","Sucursal")">Volver</a>
+                    <button type="submit" class="btn btn-danger" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                    </button>
+                    <a class="btn btn-warning" href="@Url.Action("sucursal","Sucursal")" style="font-size: 20px; color: #FFFFFF;">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </a>
                 </form>
 
             </div>

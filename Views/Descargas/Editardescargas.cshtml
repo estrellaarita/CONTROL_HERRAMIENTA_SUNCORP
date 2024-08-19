@@ -5,103 +5,143 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<div class="row" style="margin-top:25px">
-    <div class="col-sm-12 text-center">
-        <!-- Agregué la clase text-center -->
-        <div class="panel panel-warning" style="display: inline-block;">
-            <!-- Agregué display: inline-block -->
-            <div class="panel-heading">
-                <h4>EDITAR DESECHOS</h4>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+
+    <h3 class="text-center mt-4 justify">Actualizar descarga</h3>
+
+    <div class="container mt-3 d-flex justify-content-center col-sm-12">
+        <form action="@Url.Action("Editardescargas", "Descargas")" enctype="multipart/form-data" method="post">
+
+            <input type="hidden" class="form-control" name="ID_DESECHOS" value="@Html.DisplayTextFor(m=>m.ID_DESECHOS)" />
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="ID_REGISTRO_SERIE_HERRAMIENTAL"> Numero serie</label>
+                    <select class="form-control" name="ID_REGISTRO_SERIE_HERRAMIENTA" id="ID_REGISTRO_SERIE_HERRAMIENTA_S" required>
+                        <option value="">Seleccione una serie</option>
+                        @foreach (var itemz in ViewBag.zSerie)
+                        {
+                            <option value="@itemz.Value" @(itemz.Value.Equals(Model.ID_REGISTRO_SERIE_HERRAMIENTA.ToString()) ? "selected" : "")>@itemz.Text</option>
+                        }
+                    </select>
+                </div>
             </div>
-            <div class="panel-body">
-                <form action="@Url.Action("Editardescargas", "Descargas")" enctype="multipart/form-data" method="post">
+            <br />
 
-                    <input type="hidden" class="form-control" name="ID_DESECHOS" value="@Html.DisplayTextFor(m=>m.ID_DESECHOS)" />
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="ID_USUARIO_BD">Usuario</label><br />
+                    <select class="form-control" name="ID_USUARIO_BD" id="ID_USUARIO_BD" required>
+                        <option value="">Seleccione un usuario</option>
+                        @foreach (var itemg in ViewBag.tUsuario)
+                        {
+                            <option value="@itemg.Value" @(itemg.Value.Equals(Model.ID_USUARIO_BD.ToString()) ? "selected" : "")>@itemg.Text</option>
 
-                    <div class="form-container">
-                        <div class="center-input">
-                            <div class="form-group">
-                                <label for="ID_USUARIO_BD">Usuario</label>
-                                @Html.DropDownListFor(model => model.ID_USUARIO_BD, (SelectList)ViewBag.tUsuario, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <style>
-                        .center-input {
-                            text-align: center; /* Centra el contenido en línea */
-                            margin-top: 20px; /* Espacio superior opcional */
                         }
-
-                            .center-input input {
-                                display: inline-block; /* Permite centrar el input dentro del contenedor */
-                            }
-                    </style>
-
-                    <div class="center-input">
-                        <div class="form-group">
-                            <label>Fecha de descarga</label>
-                            <input type="date" class="form-control" name="FECHA_DESECHO" style="height: 40px; font-size: 16px; background-color: #FFFFCC;" required value="@Model.FECHA_DESECHO.ToString("yyyy-MM-dd")" /><br />
-                        </div>
-                    </div>
-
-                    <style>
-                        .form-container {
-                            text-align: center; /* Centra el contenido en línea */
-                            margin: 50px; /* Espacio opcional alrededor del contenedor */
-                        }
-
-
-                        .form-group label {
-                            display: block; /* Asegura que el label ocupe una línea completa */
-                            margin-bottom: 10px; /* Espacio entre el label y el DropDownList */
-                        }
-                    </style>
-
-                    <div class="form-container">
-                        <div class="center-input">
-                            <div class="form-group">
-                                <label for="ID_MARCA">Serie</label>
-                                @Html.DropDownListFor(model => model.ID_REGISTRO_SERIE_HERRAMIENTA, (SelectList)ViewBag.zSerie, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="center-input">
-                        <div class="form-group">
-                            <label>Comentario</label>
-                            <input type="text" class="form-control" name="Comentario" style="height: 40px; font-size: 16px; background-color: #FFFFCC;" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" /><br />
-                        </div>
-                    </div>
-                    <br />
-
-                    <div class="form-group">
-                        <label>Imagen actual</label>
-                        <div class="col-md-10">
-                            <img width="365" height="300" src="@Url.Action("ConvertirImagen", "Descargas", new { codigo = Model.ID_DESECHOS})" alt="Imagen de factura" /><br />
-                        </div>
-                    </div>
-                    <br />
-
-                    <div class="form-group">
-                        <label>Nueva imagen</label><br />
-                        <input type="file" class="form-control" id="FOTO" name="upload" value="@Html.DisplayTextFor(m=>m.FOTO)" /><br />
-                    </div>
-
-                    <button type="submit" class="btn btn-primary ml-4" style="font-size: 20px; color: #FFFFFF;">
-                        <i class="fas fa-sync-alt" aria-hidden="true"></i>
-                    </button>
-                    <a class="btn btn-warning ml-4" href="@Url.Action("descargas","Descargas")" style="font-size: 20px; color: #FFFFFF;">
-                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
-                    </a>
-
-                </form>
+                    </select>
+                </div>
             </div>
-        </div>
+            <br />
+
+            <style>
+                .center-input {
+                    text-align: left; /* Centra el contenido en línea */
+                    margin-top: 20px; /* Espacio superior opcional */
+                }
+
+                    .center-input input {
+                        display: inline-block; /* Permite centrar el input dentro del contenedor */
+                    }
+            </style>
+
+            <style>
+
+
+                .form-group label {
+                    display: block; /* Asegura que el label ocupe una línea completa */
+                    margin-bottom: 10px; /* Espacio entre el label y el DropDownList */
+                }
+            </style>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Fecha de descarga</label>
+                    <input type="date" class="form-control" name="FECHA_DESECHO" required value="@Model.FECHA_DESECHO.ToString("yyyy-MM-dd")" /><br />
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Comentario</label>
+                    <textarea type="text" class="form-control" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)"></textarea><br />
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Imagen actual</label>
+                    <div class="col-md-10">
+                        <img width="365" height="300" src="@Url.Action("ConvertirImagen", "Descargas", new { codigo = Model.ID_DESECHOS})" alt="Imagen de factura" /><br />
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Nueva imagen</label><br />
+                    <input type="file" class="form-control" id="FOTO" name="upload" value="@Html.DisplayTextFor(m=>m.FOTO)" /><br />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary ml-4" style="font-size: 20px; color: #FFFFFF;">
+                <i class="fas fa-sync-alt" aria-hidden="true"></i>
+            </button>
+            <a class="btn btn-warning ml-4" href="@Url.Action("descargas","Descargas")" style="font-size: 20px; color: #FFFFFF;">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            </a>
+
+
+        </form>
+
+        @section Scripts{
+
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $('#ID_REGISTRO_SERIE_HERRAMIENTA_S').select2();
+                    $('#ID_USUARIO_BD').select2();
+
+                });
+
+            </script>
+        }
+
+
     </div>
-</div>
+</body>
+</html>
 
 
 

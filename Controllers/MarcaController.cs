@@ -55,33 +55,18 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         [HttpPost]
         public ActionResult registrarmarca(Marca omarca)
         {
-            bool registrado;
-            string mensaje;
-
+       
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_CREATE_MARCA", oconexion);
 
-                cmd.Parameters.AddWithValue("DESCRIPCION_MARCA", omarca.DECRIPCION_MARCA);
-                cmd.Parameters.Add("REGISTRADOMARCA", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("MENSAJEMARCA", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                cmd.Parameters.AddWithValue("DECRIPCION_MARCA", omarca.DECRIPCION_MARCA);
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
 
-                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADOMARCA"].Value);
-                mensaje = cmd.Parameters["MENSAJEMARCA"].Value.ToString();
             }
-            ViewData["MENSAJEMARCA"] = mensaje;
-
-            if (registrado)
-            {
-                return RedirectToAction("Marca", "Marca");
-            }
-            else
-            {
-                return View();
-            }
+            return RedirectToAction("Marca", "Marca");
 
         }
 
@@ -97,36 +82,21 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         [HttpPost]
         public ActionResult Editarmarca(Marca omarca)
         {
-            bool registrado;
-            string mensaje;
+           
 
             using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_ACTUALIZAR_MARCA", oconexion);
 
                 cmd.Parameters.AddWithValue("ID_MARCA", omarca.ID_MARCA);
-                cmd.Parameters.AddWithValue("DESCRIPCION_MARCA", omarca.DECRIPCION_MARCA);
-                cmd.Parameters.Add("REGISTRADOMARCA", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("MENSAJEMARCA", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
-
+                cmd.Parameters.AddWithValue("DECRIPCION_MARCA", omarca.DECRIPCION_MARCA);
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
 
-                registrado = Convert.ToBoolean(cmd.Parameters["REGISTRADOMARCA"].Value);
-                mensaje = cmd.Parameters["MENSAJEMARCA"].Value.ToString();
+            
             }
-            ViewData["MENSAJEMARCA"] = mensaje;
-
-            if (registrado)
-            {
-                return RedirectToAction("Marca", "Marca");
-            }
-            else
-            {
-                return View();
-            }
-
+            return RedirectToAction("Marca", "Marca");
         }
 
         //ELIMINAR MARCA
@@ -141,15 +111,28 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         [HttpPost]
         public ActionResult Eliminarmarca(string Idmarca)
         {
-            using (SqlConnection oconexion = new SqlConnection(cadena))
+            try
             {
-                SqlCommand cmd = new SqlCommand("SP_DELETE_MARCA", oconexion);
-                cmd.Parameters.AddWithValue("ID_MARCA", Idmarca);
-                cmd.CommandType = CommandType.StoredProcedure;
-                oconexion.Open();
-                cmd.ExecuteNonQuery();
+                using (SqlConnection oconexion = new SqlConnection(cadena))
+                {
+                    SqlCommand cmd = new SqlCommand("SP_DELETE_MARCA", oconexion);
+                    cmd.Parameters.AddWithValue("ID_MARCA", Idmarca);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    oconexion.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                // Si la eliminación es exitosa, redirigir a la vista deseada
+                return RedirectToAction("Marca", "Marca");
             }
-            return RedirectToAction("Marca", "Marca");
+            catch (SqlException ex)
+            {
+                // En caso de un conflicto, retornar un mensaje de error a la vista
+                ViewBag.ErrorMessage = "No puede eliminar la marca porque hay registros relacionados";
+                // Aquí podrías registrar el error en un log si es necesario
+
+                // Redirigir a la vista actual con el mensaje de error
+                return View();  // Asegúrate de que "Marca" sea la vista correcta
+            }
         }
 
 

@@ -13,17 +13,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
 </head>
-
 <body>
 
-    <h3 class="text-center mt-4 justify">Registro de series herramientas</h3>
+    <h3 class="text-center mt-3 justify">Registrar serie de la herramientas</h3>
     <br />
 
     <div class="container mt-3 d-flex justify-content-center col-sm-12">
@@ -35,9 +33,9 @@
                     <label for="ID_SUCURSAL"> Sucursal</label><br />
                     <select class="form-control" name="ID_SUCURSAL" id="ID_SUCURSAL_P" required>
                         <option value="">Seleccione una sucursal</option>
-                        @foreach (var item in ViewBag.Sucursal)
+                        @foreach (var itemA in ViewBag.Sucursal)
                         {
-                            <option value="@item.Value">@item.Text</option>
+                            <option value="@itemA.Value">@itemA.Text</option>
                         }
                     </select>
                 </div>
@@ -46,7 +44,7 @@
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="ID_SUCURSAL">Herramienta</label><br />
+                    <label for="ID_HERRAMIENTA">Modelo</label><br />
                     <select class="form-control" name="ID_HERRAMIENTA" id="ID_HERRAMIENTA_R" required>
                         <option value="">Seleccione un modelo de herramienta</option>
                         @foreach (var items in ViewBag.Herramienta)
@@ -95,7 +93,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Factura</label><br />
-                    <select class="form-control" name="ID_FACTURA" id="ID_FACTURA_S" required>
+                    <select class="form-control" name="ID_FACTURA" id="ID_FACTURA_S">
                         <option value="">Seleccione una factura</option>
                         @foreach (var iteml in ViewBag.Factura)
                         {
@@ -106,18 +104,20 @@
             </div>
             <br />
 
-            <div class="form-group">
-                <label for="COMENTARIO">Comentario</label>
-                <input type="text" class="form-control" name="COMENTARIO" /><br />
-            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="COMENTARIO">Comentario</label>
+                    <textarea type="text" class="form-control" rows="5" name="COMENTARIO" ></textarea><br />
+                </div>
+                </div>
 
-            <button type="submit" class="btn btn-primary ml-2" style="font-size: 20px; color: #FFFFFF;">
-                <i class="fas fa-check" aria-hidden="true"></i>
-            </button>
-            <a class="btn btn-warning ml-2" href="@Url.Action("serie","Serie_herramienta")" style="font-size: 20px; color: #FFFFFF;">
-                <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            </a>
-        </form>
+                <button type="submit" class="btn btn-primary ml-2" style="font-size: 20px; color: #FFFFFF;">
+                    <i class="fas fa-check" aria-hidden="true"></i>
+                </button>
+                <a class="btn btn-warning ml-2" href="@Url.Action("serie","Serie_herramienta")" style="font-size: 20px; color: #FFFFFF;">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                </a>
+</form>
     </div>
 
 
@@ -131,6 +131,8 @@
                 $('#ID_SUCURSAL_P').select2();
                 $('#ID_HERRAMIENTA_R').select2();
                 $('#ID_FACTURA_S').select2();
+                $('#ID_ESTADO_HERRAMIENTA').select2();
+                
             });
 
         </script>

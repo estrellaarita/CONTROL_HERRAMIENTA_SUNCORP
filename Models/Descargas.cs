@@ -16,6 +16,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         public byte[] FOTO { get; set; }
         public usuario USUARIO_BD { get; set; }
         public Serie SERIE { get; set; }
+        public string Tipoherramienta  { get; set; }
         public DateTime FECHA_REGISTRO { get; set; }
 
     }

@@ -149,6 +149,8 @@
     <Compile Include="Models\Sucursal.cs" />
     <Compile Include="Models\Tipoherramienta.cs" />
     <Compile Include="Models\usuario.cs" />
+    <Compile Include="Models\Ver_empleado.cs" />
+    <Compile Include="Models\Ver_herramientas.cs" />
     <Compile Include="Permisos\ValidarSesionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -174,6 +176,8 @@
     <Content Include="Content\fontawesome\font-awesome.css" />
     <Content Include="Content\fontawesome\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\MENU\Menu.js" />
+    <Content Include="Content\MENU\Menu_lateral.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

@@ -11,11 +11,44 @@
     <meta charset="UTF-8">
     <title>Lista de series de las herramientas</title>
     <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="~/Content/css/empleado.css" rel="stylesheet" />
+
+    @section styles{
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+
+        @*ESTILOS DE BOTONES*@
+        <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet" />
+
+
+        <style>
+
+            thead input {
+                width: 100%;
+                background-color: #FFFFCC !important
+            }
+
+            .btn-exportar-excel {
+                background-color: #198754 !important;
+                color: white !important;
+            }
+
+            .btn-exportar-pdf {
+                background-color: #dc3545 !important;
+                color: white !important;
+            }
+
+            .btn-exportar-print {
+                background-color: #00a7c9 !important;
+                color: white !important;
+            }
+        </style>
+    }
 </head>
+
 
 <body>
     <div class="row" style="margin-top:30px">
@@ -41,9 +74,10 @@
                     </a>
                     <hr />
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="tablem">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Sucursal</th>
                                     <th>Modelo</th>
                                     <th>Ubicacion fisica</th>
@@ -54,47 +88,10 @@
                                     <th>Comentario</th>
                                     <th>Cantidad de empleados</th>
                                     <th>Fecha registro</th>
-                                    <th style="width:150px"></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (CONTROL_HERRAMIENTA_SUNCORP.Models.Serie item in Model)
-                                {
-                                    <tr>
-                                        <td>@item.SUCURSAL.NOMBRE_SUCURSAL</td>
-                                        <td>@item.HERRAMIENTA.MODELO</td>
-                                        <td>@item.UBICACION_FISICA</td>
-                                        <td>@item.NUMERO_SERIE</td>
-                                        <td>@item.PRECIO</td>
-                                        <td>@item.ESTADO_HERRAMIENTA.DECRIPCION_ESTADO_HERRAMIENTA</td>
-                                        @if (string.IsNullOrEmpty(item.FACTURA.NUMERO_FACTURA))
-                                        {
-                                            <td>No hay factura</td>
-                                        }
-                                        else
-                                        {
-                                            <td>@item.FACTURA.NUMERO_FACTURA</td>
-                                        }
-                                        <td>@item.COMENTARIO</td>
-                                        <td>@item.CANTIDAD_DE_EMPLEADOS</td>
-                                        <td>@item.FECHA_REGISTRO</td>
-
-                                        <td class="text-center">
-                                            <a class="btn btn-primary btn-sm" style="font-size: 15px; padding: 4px 10px; " href="@Url.Action("Editarserieher","Serie_herramienta", new { IdSERIE = item.ID_REGISTRO_SERIE_HERRAMIENTA})">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a class="btn btn-danger btn-sm" style="font-size: 15px; padding: 4px 10px;" href="@Url.Action("Eliminarserieher","Serie_herramienta", new { Idserie = item.ID_REGISTRO_SERIE_HERRAMIENTA })">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
-                                            <a class="btn btn-success btn-sm" style="font-size: 15px; padding: 4px 10px;" href="@Url.Action("Serie_empleado", "Serieemple", new { idseries = item.ID_REGISTRO_SERIE_HERRAMIENTA})">
-                                                <i class="fas fa-user"></i>
-                                            </a>
-                                        </td>
-
-                                    </tr>
-
-                                }
-
                             </tbody>
                         </table>
                     </div>
@@ -102,6 +99,64 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Modal para mostrar los empleados -->
+    <div class="modal fade" id="empleadosModal" tabindex="-1" role="dialog" aria-labelledby="empleadosModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="empleadosModalLabel">Empleados Relacionados</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="herramientaSelect">Seleccionar Herramienta:</label>
+                        <select id="herramientaSelect" class="form-control">
+                            <!-- Opciones de herramientas se cargarán aquí -->
+                        </select>
+                    </div>
+                    <!--Cargar empleados-->
+                    <div>
+                        <!-- Select para empleados con barra de búsqueda -->
+                        <label for="empleadoSelect">Seleccionar Empleado:</label>
+                        <select id="empleadoSelect" class="form-control" style="width: 100%;">
+                            <!-- Las opciones se cargarán aquí dinámicamente -->
+                        </select>
+                    </div>
+                    <!--guardar empleados-->
+                    <div>
+                        <button type="button" class="btn btn-primary" id="guardarButton">Guardar</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID_empleado</th>
+                                    <th>DNI</th>
+                                    <th>Nombre</th>
+                                    <th>Sucursal</th>
+                                    <th>Departamento</th>
+                                    <th>Rol</th>
+                                    <th>Opc</th>
+                                </tr>
+                            </thead>
+                            <tbody id="empleadosTableBody">
+                                <!-- Los datos de los empleados se cargarán aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -113,6 +168,376 @@
             background-color: #F7DC6F; /* Amarillo claro */
         }
     </style>
+
+    @section Scripts{
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+        <script src="https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-MX.json"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+        @*SCRIPTS DE BOTONES*@
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+
+        @*excel*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+
+        @*pdf*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+        @*imprimir*@
+        <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+
+
+        <script>
+           $(document).ready(function() {
+
+    // Inicializar DataTable
+    var table = new DataTable('#tablem', {
+        order: [[0, 'desc']],
+        responsive: true,
+        rowReorder: true,
+        autoWidth: false,
+        language: {
+            "decimal": ".",
+            "emptyTable": "No hay datos disponibles en la tabla",
+            "zeroRecords": "No se encontraron coincidencias",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total de entradas)",
+            "lengthMenu": "Mostrar _MENU_ entradas",
+            "search": "Buscar:",
+            "infoEmpty": "No hay datos para mostrar",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": ">",
+                "previous": "<"
+            }
+        },
+        ajax: {
+            "url": '@Url.Action("Listaserieherramienta", "Serie_herramienta")',
+            "type": "GET",
+            "datatype": "json"
+        },
+        "columns": [
+            { "data": "ID_REGISTRO_SERIE_HERRAMIENTA" },
+            { "data": "SUCURSAL.NOMBRE_SUCURSAL" },
+            { "data": "HERRAMIENTA.MODELO" },
+            { "data": "UBICACION_FISICA" },
+            { "data": "NUMERO_SERIE" },
+            { "data": "PRECIO" },
+            { "data": "ESTADO_HERRAMIENTA.DECRIPCION_ESTADO_HERRAMIENTA" },
+            { "data": "FACTURA.NUMERO_FACTURA" },
+            { "data": "COMENTARIO" },
+            { "data": "CANTIDAD_DE_EMPLEADOS" },
+            {
+                "data": "FECHA_REGISTRO",
+                "render": function (data) {
+                    return moment(data).format('YYYY-MM-DD');
+                }
+            },
+            {
+               "data": null,
+                "className": "text-center",
+                "render": function (data, type, row) {
+                    var editUrl = '@Url.Action("Editarserieher", "Serie_herramienta", new { IdSERIE = "__ID__" })'
+                        .replace("__ID__", row.ID_REGISTRO_SERIE_HERRAMIENTA);
+
+                    var deleteUrl = '@Url.Action("Eliminarserieher","Serie_herramienta", new { Idserie = "__ID__" })'
+                        .replace("__ID__", row.ID_REGISTRO_SERIE_HERRAMIENTA);
+
+                    var infoempleado = '@Url.Action("Serie_empleado", "Serieemple", new { idseries = "__ID__" })'
+                        .replace("__ID__", row.ID_REGISTRO_SERIE_HERRAMIENTA);
+
+                    return `
+                        <a class="btn btn-primary btn-sm" style="font-size: 15px; padding: 4px 10px;" href="${editUrl}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-danger btn-sm" style="font-size: 15px; padding: 4px 10px;" href="${deleteUrl}">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+
+                        <button class="btn btn-success btn-sm" style="font-size: 15px; padding: 4px 10px;"
+                            data-toggle="modal" data-target="#empleadosModal" onclick="loadEmpleados(${row.ID_REGISTRO_SERIE_HERRAMIENTA});addSerieToSelect(${row.ID_REGISTRO_SERIE_HERRAMIENTA}, '${row.NUMERO_SERIE}');loadEmpleadosSelect();">
+                            <i class="fas fa-user"></i>
+                        </button>`;
+                }
+            }
+        ],
+        //________________ TERCERO ____________
+        columnDefs: [
+            {
+                targets: 0,
+                visible: false
+            }
+        ],
+        //_______________ CUARTO ______________
+        dom: 'Bfrtip',
+        buttons: [
+            //'excel',
+            {
+                extend: 'excelHtml5',
+                text: 'Exportar Excel',
+                filename: 'Reporte de serie herramienta',
+                title: '',
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7, 9, 10]
+                },
+                className: 'btn-exportar-excel',
+            },
+            //'pdf',
+            {
+                extend: 'pdfHtml5',
+                text: 'Exportar PDF',
+                filename: 'Reporte de serie herramienta',
+                title: '',
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6, 7, 9, 10,]
+                },
+                className: 'btn-exportar-pdf',
+            },
+            //'print'
+            {
+                extend: 'print',
+                title: '',
+                exportOptions: {
+                    columns: [1, 2, 3, 4, 5, 6]
+                },
+                className: 'btn-exportar-print'
+
+            },
+            //extra
+            'pageLength'
+        ],
+        orderCellsTop: true,
+        fixedHeader: true,
+        initComplete: function () {
+            var api = this.api();
+
+            // Para cada columna
+            api.columns().eq(0).each(function (colIdx) {
+                var cell = $('.filters th').eq($(api.column(colIdx).header()).index());
+                var title = $(cell).text();
+                $(cell).html('<input type="text" placeholder="Buscar..." />');
+
+                // Evento para cada input de filtro
+                $('input', $('.filters th').eq($(api.column(colIdx).header()).index()))
+                    .off('keyup change')
+                    .on('keyup change', function (e) {
+                        e.stopPropagation();
+                        $(this).attr('title', $(this).val());
+                        var regexr = '({search})';
+                        var cursorPosition = this.selectionStart;
+                        api.column(colIdx).search(
+                            this.value != ''
+                                ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                : '',
+                            this.value != '',
+                            this.value == ''
+                        ).draw();
+                        $(this).focus()[0].setSelectionRange(cursorPosition, cursorPosition);
+                    });
+            });
+        }
+    });
+});
+
+        </script>
+
+        <script>
+            function loadEmpleados(idSeries) {
+                console.log(idSeries);
+            var infoempleado='@Url.Action("GetSerieEmpleado", "Serie_herramienta", new { idseries = "_ID_" })'
+                                .replace("_ID_", idSeries);
+
+    $.ajax({
+        url: infoempleado, // URL con el parámetro idseries
+        type: 'GET',
+        success: function (data) {
+            var empleadosTableBody = $('#empleadosTableBody');
+            empleadosTableBody.empty(); // Limpiar cualquier contenido previo
+
+            data.forEach(function (empleado) {
+                empleadosTableBody.append(`
+                    <tr>
+                        <td>${empleado.IdEmpleado}</td>
+                        <td>${empleado.Dni}</td>
+                        <td>${empleado.Nombre} ${empleado.Apellido}</td>
+                        <td>${empleado.Sucursal}</td>
+                        <td>${empleado.Departamento}</td>
+                        <td>${empleado.Rol}</td>
+                        <td><button class="btn btn-danger btn-sm eliminar-button" onclick="eliminarEmpleado(${empleado.IdEmpleado}, ${idSeries});loadEmpleadosSelect()" >X</button></td>
+                    </tr>
+                `);
+            });
+
+            // Agregar el evento click para los botones de eliminar
+            $('.eliminar-button').click(function () {
+                var idEmpleado = $(this).closest('tr').data('id');
+                eliminarEmpleado(idEmpleado, idSerie);
+            });
+        },
+        error: function () {
+            alert("Error al cargar los empleados.");
+        }
+    });
+}
+        </script>
+
+        <script>
+            //select herramienta serie
+            function addSerieToSelect(idSerie, numeroSerie) {
+                // Obtenemos el select donde queremos agregar las opciones
+                var select = document.getElementById('herramientaSelect');
+
+                // Creamos una nueva opción
+                var newOption = document.createElement('option');
+                newOption.value = idSerie;       // El value será el ID_REGISTRO_SERIE_HERRAMIENTA
+                newOption.text = numeroSerie;    // El texto será el NUMERO_SERIE
+
+                // Agregamos la nueva opción al select
+                select.appendChild(newOption);
+            }
+        </script>
+
+
+        <!--cargar los empleados en el select -->
+        <script>
+    function loadEmpleadosSelect() {
+        console.log("cargara los empleados en el select");
+
+        var infoempleado = '@Url.Action("GetSerieEmpleados", "Serie_herramienta")';
+
+        $.ajax({
+            url: infoempleado, // URL con el parámetro idseries
+            type: 'GET',
+            success: function(data) {
+                var empleadosSelect = $('#empleadoSelect');
+                empleadosSelect.empty(); // Limpiar cualquier contenido previo
+
+                // Agregar las opciones al select
+                data.forEach(function(empleado) {
+                    empleadosSelect.append(`
+                        <option value="${empleado.IdEmpleado}">${empleado.Dni}</option>
+                    `);
+                });
+            },
+            error: function() {
+                alert("Error al cargar los empleados.");
+            }
+        });
+    }
+        </script>
+
+        <!--guradar datos de modal y recargar los datos -->
+        <script>
+    function recargarEmpleados(idSerie) {
+    var infoempleado = '@Url.Action("GetSerieEmpleado", "Serie_herramienta", new { idseries = "_ID_" })'
+        .replace("_ID_", idSerie);
+
+    $.ajax({
+        url: infoempleado,
+        type: 'GET',
+        success: function (data) {
+            var empleadosTableBody = $('#empleadosTableBody');
+            empleadosTableBody.empty(); // Limpiar cualquier contenido previo
+
+            data.forEach(function (empleado) {
+                empleadosTableBody.append(`
+                    <tr data-id="${empleado.IdEmpleado}">
+                        <td>${empleado.IdEmpleado}</td>
+                        <td>${empleado.Dni}</td>
+                        <td>${empleado.Nombre} ${empleado.Apellido}</td>
+                        <td>${empleado.Sucursal}</td>
+                        <td>${empleado.Departamento}</td>
+                        <td>${empleado.Rol}</td>
+                        <td><button class="btn btn-danger btn-sm eliminar-button">X</button></td>
+                    </tr>
+                `);
+            });
+
+            // Agregar el evento click para los botones de eliminar
+            $('.eliminar-button').click(function() {
+                var idEmpleado = $(this).closest('tr').data('id');
+                eliminarEmpleado(idEmpleado, idSerie);
+            });
+        },
+        error: function () {
+            alert("Error al cargar los empleados.");
+        }
+    });
+}
+
+
+    $(document).ready(function() {
+        $('#guardarButton').click(function() {
+            // Obtener el ID de la herramienta seleccionada
+            var herramientaId = $('#herramientaSelect').val();
+            // Obtener el ID del empleado seleccionado
+            var empleadoId = $('#empleadoSelect').val();
+
+            if (herramientaId && empleadoId) {
+                // Enviar los datos al servidor
+                $.ajax({
+                    url: '@Url.Action("GuardarEmpleadoHerramienta", "Serie_herramienta")',
+                    type: 'POST',
+                    data: {
+                        idEmpleado: empleadoId,
+                        idHerramienta: herramientaId
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Datos guardados correctamente.');
+                            // Recargar los empleados sin cerrar el modal
+                            recargarEmpleados(herramientaId);
+                        } else {
+                            alert('Error al guardar los datos.');
+                        }
+                    },
+                    error: function() {
+                        alert('Error en la petición.');
+                    }
+                });
+            } else {
+                alert('Por favor, seleccione una herramienta y un empleado.');
+            }
+        });
+    });
+        </script>
+
+        <!--Eliminar registro llevando dos parametros el idempleado y el idserie-->
+        <script>
+            function eliminarEmpleado(idEmpleado, idSerie) {
+    if (confirm('¿Estás seguro de que quieres eliminar este registro?')) {
+        $.ajax({
+            url: '@Url.Action("EliminarEmpleado", "Serie_herramienta")',
+            type: 'POST',
+            data: {
+                idEmpleado: idEmpleado,
+                idSerie: idSerie
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert('Registro eliminado correctamente.');
+                    // Recargar la tabla de empleados después de eliminar
+                    recargarEmpleados(idSerie);
+                    loadEmpleadosSelect();
+                } else {
+                    alert('Error al eliminar el registro.');
+                }
+            },
+            error: function () {
+                alert('Error en la petición.');
+            }
+        });
+    }
+}
+        </script>
+
+    }
 </body>
 </html>
-

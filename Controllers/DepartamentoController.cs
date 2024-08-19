@@ -157,17 +157,30 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Eliminardept(string Iddpt)
         {
-            using (SqlConnection oconexion = new SqlConnection(cadena))
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_DELETE_DEPARTAMENTO", oconexion);
                 cmd.Parameters.AddWithValue("ID_DEPARTAMENTO", Iddpt);
                 cmd.CommandType = CommandType.StoredProcedure;
                 oconexion.Open();
                 cmd.ExecuteNonQuery();
+                }
+                // Si la eliminación es exitosa, redirigir a la vista deseada
+                return RedirectToAction("Departamento", "Departamento");
             }
-            return RedirectToAction("Departamento", "Departamento");
+            catch (SqlException ex)
+            {
+                // En caso de un conflicto, retornar un mensaje de error a la vista
+                ViewBag.ErrorMessage = "No puede eliminar el departamento porque hay registros relacionados";
+                // Aquí podrías registrar el error en un log si es necesario
+
+                // Redirigir a la vista actual con el mensaje de error
+                return View();  // Asegúrate de que "Marca" sea la vista correcta
+            }
         }
 
-     
+
     }
 }

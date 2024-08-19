@@ -1,0 +1,70 @@
+﻿
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+
+
+.sidenav a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px; /* Adjusted for better spacing */
+}
+
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #343a40;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+
+
+#main {
+    transition: margin-left .3s;
+    padding: 16px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .sidenav {
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+
+        .sidenav .show-menu .sub-menu {
+            max-height: 300px; /* Adjust this value as needed */
+        }
+
+    .container.body-content {
+        transition: margin-left 0.3s;
+    }
+}
+
+
+
+
+

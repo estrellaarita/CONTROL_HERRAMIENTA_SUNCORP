@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     @section styles{
-        <a href="~/Views/Sucursal/sucursal.cshtml">~/Views/Sucursal/sucursal.cshtml</a>
+       
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
@@ -31,7 +31,7 @@
                     <h4>Lista de sucursales</h4>
                 </div>
                 <div class="card-body">
-                    <a class="btn btn-success" style="font-size: 20px; padding: 6px 16px;" href="@Url.Action("Registrarherramienta", "Herramienta")">
+                    <a class="btn btn-success" style="font-size: 20px; padding: 6px 16px;" href="@Url.Action("Crear", "Sucursal")">
                         <i class="fas fa-plus-circle"></i>
                     </a>
                     <hr />
@@ -40,8 +40,8 @@
                             <thead>
                                 <tr>
                                     <th>Sucursal</th>
-                                    <th>Correo electronico</th>
-                                    <th>Direccion</th>
+                                    <th>Correo electrónico</th>
+                                    <th>Dirección </th>
                                     <th>Empresa</th>
                                     <th>Comentario</th>
                                     <th>Fecha registro</th>

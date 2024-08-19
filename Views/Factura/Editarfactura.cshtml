@@ -5,101 +5,156 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row" style="margin-top:25px">
-    <div class="col-sm-12 text-center">
-        <!-- Agregué la clase text-center -->
-        <div class="panel panel-warning" style="display: inline-block;">
-            <!-- Agregué display: inline-block -->
-            <div class="panel-heading">
-                <h4>EDITAR FACTURA</h4><br />
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+
+    <h3 class="text-center mt-3 justify">Actualizar factura</h3>
+
+    <div class="container mt-3 d-flex justify-content-center col-sm-12">
+        <form action="@Url.Action("Editarfactura", "Factura")" enctype="multipart/form-data" method="post">
+
+            <input type="hidden" class="form-control" name="ID_FACTURA" value="@Html.DisplayTextFor(m=>m.ID_FACTURA)" /><br />
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Numero factura</label>
+                    <input type="text" class="form-control" name="Numero_factura" required value="@Html.DisplayTextFor(m=>m.NUMERO_FACTURA)" /><br />
+                </div>
             </div>
-            <div class="panel-body">
-                <form action="@Url.Action("Editarfactura", "Factura")" enctype="multipart/form-data" method="post">
 
-                    <input type="hidden" class="form-control" name="ID_FACTURA" value="@Html.DisplayTextFor(m=>m.ID_FACTURA)" /><br />
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="ID_USUARIO_BD">Usuario</label><br />
+                    <select class="form-control" name="ID_USUARIO_BD" id="ID_USUARIO_BD" required>
+                        <option value="">Seleccione el usuario</option>
+                        @foreach (var itemg in ViewBag.aUsuario)
+                        {
+                            <option value="@itemg.Value" @(itemg.Value.Equals(Model.ID_USUARIO_BD.ToString()) ? "selected" : "")>@itemg.Text</option>
 
-                    <style>
-                        .center-input {
-                            text-align: center; /* Centra el contenido en línea */
-                            margin-top: 20px; /* Espacio superior opcional */
                         }
-
-                        .center-input input {
-                           display: inline-block; /* Permite centrar el input dentro del contenedor */
-                        }
-                    </style>
-
-                    <div class="center-input">
-                        <div class="form-group">
-                            <label style="font-weight: bold; font-size: 1.2em;">Numero factura</label>
-                            <input type="text" class="form-control" name="Numero_factura" required value="@Html.DisplayTextFor(m=>m.NUMERO_FACTURA)" /><br />
-                        </div>
-                    </div>
-
-                    <style>
-                        .form-container {
-                            text-align: center; /* Centra el contenido en línea */
-                            margin: 50px; /* Espacio opcional alrededor del contenedor */
-                        }
-
-
-                        .form-group label {
-                            display: block; /* Asegura que el label ocupe una línea completa */
-                            margin-bottom: 10px; /* Espacio entre el label y el DropDownList */
-                        }
-                    </style>
-
-                    <div class="form-container">
-                        <div class="center-input">
-                            <div class="form-group">
-                                <label style="font-weight: bold; font-size: 1.2em;" for="ID_USUARIO_BD">Usuario</label>
-                                @Html.DropDownListFor(model => model.ID_USUARIO_BD, (SelectList)ViewBag.aUsuario, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="center-input">
-                         <div class="form-group">
-                             <label style="font-weight: bold; font-size: 1.2em;">Fecha de Compra</label>
-                            <input type="date" class="form-control" name="Fecha_compra" required value="@Model.FECHA_COMPRA.ToString("yyyy-MM-dd")" />
-                         </div>
-                    </div>
-
-                    <div class="form-container">
-                         <div class="center-input">
-                             <div class="form-group">
-                               <label style="font-weight: bold; font-size: 1.2em;" for="ID_MARCA">Proveedor</label>
-                               @Html.DropDownListFor(model => model.ID_PROVEEDOR, (SelectList)ViewBag.iProveedor, new { @class = "form-control" })
-                               </div>
-                         </div>
-                    </div>
-
-                    <div class="center-input">
-                          <div class="form-group">
-                              <label style="font-weight: bold; font-size: 1.2em;">Comentario</label>
-                            <input type="text" class="form-control" name="Comentario" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" /><br />
-                          </div>
-                    </div>
-                     <br />
-
-                    <div class="form-group">
-                        <label style="font-weight: bold; font-size: 1.2em;">Imagen actual</label><br />
-                       <div class="col-md-10">
-                         <img width="365" height="300" src="@Url.Action("ConvertirImagen", "Factura", new { codigo = Model.ID_FACTURA})" alt="Imagen de factura" /><br />
-                       </div>
-                    </div>
-                    <br />
-
-                    <div class="form-group">
-                        <label style="font-weight: bold; font-size: 1.2em;">Nueva imagen</label><br />
-                      <input type="file" class="form-control" id="FOTO" name="upload" value="@Html.DisplayTextFor(m=>m.FOTO)" /><br />
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <a class="btn btn-warning" href="@Url.Action("FACTURA","Factura")">Volver</a>
-                </form>
+                    </select>
+                </div>
             </div>
-        </div>
+            <br />
+
+            <style>
+                .center-input {
+                    text-align: left; /* Centra el contenido en línea */
+                    margin-top: 20px; /* Espacio superior opcional */
+                }
+
+                    .center-input input {
+                        display: inline-block; /* Permite centrar el input dentro del contenedor */
+                    }
+            </style>
+
+            <style>
+
+
+                .form-group label {
+                    display: block; /* Asegura que el label ocupe una línea completa */
+                    margin-bottom: 10px; /* Espacio entre el label y el DropDownList */
+                }
+            </style>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Fecha de Compra</label>
+                    <input type="date" class="form-control" name="Fecha_compra" required value="@Model.FECHA_COMPRA.ToString("yyyy-MM-dd")" />
+                </div>
+            </div>
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="ID_PROVEEDOR">Proveedor</label><br />
+                    <select class="form-control" name="ID_PROVEEDOR" id="ID_PROVEEDOR" required>
+                        <option value="">Seleccione el proveedor</option>
+                        @foreach (var itemg in ViewBag.iProveedor)
+                        {
+                            <option value="@itemg.Value" @(itemg.Value.Equals(Model.ID_PROVEEDOR.ToString()) ? "selected" : "")>@itemg.Text</option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Comentario</label><br />
+                    <textarea class="form-control" rows="5" name="Comentario" value="@Html.DisplayTextFor(m=>m.COMENTARIO)"></textarea><br />
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Imagen actual</label><br />
+                    <div class="col-md-10">
+                        <img width="365" height="300" src="@Url.Action("ConvertirImagen", "Factura", new { codigo = Model.ID_FACTURA})" alt="Imagen de factura" /><br />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Nueva imagen</label><br />
+                    <input type="file" class="form-control" id="FOTO" name="upload" value="@Html.DisplayTextFor(m=>m.FOTO)" /><br />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Monto total</label>
+                    <input type="number" class="form-control" name="Monto_total" required value="@Html.DisplayTextFor(m=>m.MONTO_TOTAL)" /><br />
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary ml-4" style="font-size: 20px; color: #FFFFFF;">
+                <i class="fas fa-sync-alt" aria-hidden="true"></i>
+            </button>
+            <a class="btn btn-warning ml-4" href="@Url.Action("FACTURA","Factura")" style="font-size: 20px; color: #FFFFFF;">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            </a>
+
+
+
+        </form>
     </div>
-</div>
+
+    @section Scripts{
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script type="text/javascript">
+
+          $(document).ready(function () {
+              $('#ID_USUARIO_BD').select2();
+              $('#ID_PROVEEDOR').select2();
+             
+          });
+
+        </script>
+    }
+</body>
+</html>
 

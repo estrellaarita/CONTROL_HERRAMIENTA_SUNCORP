@@ -7,44 +7,169 @@
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/MENU/Menu_lateral.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
+    <style>
 
+        .sidenav {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            
+        }
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                    background-color: #575757;
+                }
+
+            .sidenav .sub-menu {
+                background-color: #333;
+                padding-left: 20px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+
+                .sidenav .sub-menu a {
+                    color: #ddd;
+                    padding: 12px 20px;
+                    font-size: 16px;
+                }
+
+                    .sidenav .sub-menu a:hover {
+                        background-color: #575757;
+                    }
+
+            .sidenav .show-menu .sub-menu {
+                max-height: 300px; /* Adjust this value as needed */
+            }
+
+            .sidenav .menu-item a {
+                cursor: pointer;
+                font-weight: 500;
+            }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+   
+
+        .container.body-content {
+           
+            transition: margin-left .5s;
+        }
+
+      
+
+        .sidenav .sub-menu.open {
+            max-height: 300px; /* Adjust this value as needed */
+        }
+
+    
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("CONTROL DE HERRAMIENTAS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Empresa", "empresa", "Empresa", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Sucursal", "sucursal", "Sucursal", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Empleado", "empleado", "Empleado", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Herramienta", "serie", "Serie_herramienta", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Proveedor", "proveedor", "Proveedor", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Factura", "factura", "Factura", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Descargas", "descargas", "Descargas", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Salir", "CerrarSesion", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-</div>
+
+    <div id="mySidenav" class="sidenav">
+        <br />
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <a href="@Url.Action("empresa", "Empresa")">Empresa</a>
+        <a href="@Url.Action("sucursal", "Sucursal")">Sucursal</a>
+        <div id="empleado-menu" class="menu-item">
+            <a href="@Url.Action("EMPLEADO", "EMPLEADO")">Empleado</a>
+            <div class="sub-menu">
+                <a href="@Url.Action("Rol", "Rol")">Rol</a>
+                <a href="@Url.Action("Departamento", "Departamento")">Departamento</a>
+            </div>
         </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.ToString("d MMM yyyy") - Control de herramientas</p>
-        </footer>
+        <div id="herramienta-menu" class="menu-item">
+            <a href="@Url.Action("Serie", "Serie_herramienta")">Serie herramienta</a>
+            <div class="sub-menu">
+                <a href="@Url.Action("Herramienta", "Herramienta")">Herramienta</a>
+                <div class="sub-menu">
+                    <a href="@Url.Action("Tipo", "Tipo")">Tipo Herramienta</a>
+                    <a href="@Url.Action("Marca", "Marca")">Marca</a>
+                </div>
+            </div>
+            </div>
+        <a href="@Url.Action("proveedor", "Proveedor")">Proveedor</a>
+        <a href="@Url.Action("factura", "Factura")">Factura</a>
+        <a href="@Url.Action("descargas", "Descargas")">Descargas</a>
+        <a href="@Url.Action("CerrarSesion", "Home")">Salir</a>
+    </div>
+
+    <div id="main">
+        <button class="openbtn" onclick="openNav()">☰ Menú</button>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.ToString("d MMM yyyy") - Control de herramientas</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        function openNav() {
+            if (window.innerWidth <= 768) {
+                document.getElementById("mySidenav").style.left = "0";
+                document.getElementById("main").style.marginLeft = "0"; /* No shift main content */
+                document.getElementById("main").classList.add("show-menu");
+            } else {
+                document.getElementById("mySidenav").style.left = "0";
+                document.getElementById("main").style.marginLeft = "250px";
+            }
+        }
+
+       
+
+        function closeNav() {
+            if (window.innerWidth <= 768) {
+                document.getElementById("mySidenav").style.left = "-100%";
+            } else {
+                document.getElementById("mySidenav").style.left = "-250px";
+                document.getElementById("main").style.marginLeft = "0";
+            }
+        }
+
+        function toggleSubMenu(menuId) {
+            var menu = document.getElementById(menuId);
+            if (menu.classList.contains('show-menu')) {
+                menu.classList.remove('show-menu');
+            } else {
+                menu.classList.add('show-menu');
+            }
+        }
+
+        // Ensure the menu is correctly positioned on page load
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) {
+                document.getElementById("mySidenav").style.left = "-250px";
+                document.getElementById("main").style.marginLeft = "0";
+            }
+        });
+    </script>
+
 </body>
 </html>

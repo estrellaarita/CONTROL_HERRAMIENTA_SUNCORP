@@ -5,59 +5,105 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row" style="margin-top:30px">
-    <div class="col-sm-12 text-center">
-        <!-- Agregué la clase text-center -->
-        <div class="panel panel-warning" style="display: inline-block;">
-            <!-- Agregué display: inline-block -->
-            <div class="panel-heading">
-                <h4>ACTUALIZAR SUCURSAL</h4>
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+
+    <h3 class="text-center mt-3 justify">Actualizar sucursal</h3>
+
+    <div class="container mt-3 d-flex justify-content-center col-sm-12">
+        <form action="@Url.Action("Editarsucur","Sucursal")" method="post">
+
+            <input type="hidden" class="form-control" name="ID_SUCURSAL" value="@Html.DisplayTextFor(m=>m.ID_SUCURSAL)" /><br />
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Nombre sucursal</label>
+                    <input type="text" class="form-control" name="NOMBRE_SUCURSAL" value="@Html.DisplayTextFor(m=>m.NOMBRE_SUCURSAL)" /><br />
+                </div>
             </div>
-            <div class="panel-body">
-                <form action="@Url.Action("Editarsucur","Sucursal")" method="post">
-
-                    <input type="hidden" class="form-control" name="ID_SUCURSAL" value="@Html.DisplayTextFor(m=>m.ID_SUCURSAL)" /><br />
-
-                    <div class="form-group">
-                        <label>Nombre sucursal</label>
-                        <input type="text" class="form-control" name="NOMBRE_SUCURSAL" value="@Html.DisplayTextFor(m=>m.NOMBRE_SUCURSAL)" /><br />
-                    </div>
-
-                    <div class="form-group">
-                        <label>Correo electronico</label>
-                        <input type="text" class="form-control" name="CORREO_ELECTRONICO" value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" /><br />
-                    </div>
-
-                    <div class="form-group">
-                        <label>Direccion</label>
-                        <input type="text" class="form-control" name="DIRECCION" value="@Html.DisplayTextFor(m=>m.DIRECCION)" /><br />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ID_EMPRESA">Empresa</label>
-                        @Html.DropDownListFor(model => model.ID_EMPRESA, (SelectList)ViewBag.iEmpresas, new { @class = "form-control" })<br />
-                    </div>
-
-                    <div class="form-group">
-                        <label>Comentario</label>
-                        <input type="text" class="form-control" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)" /><br />
-                    </div>
-
-                    @if (ViewData["MENSAJESUCURSAL"] != null)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @ViewData["MENSAJESUCURSAL"]
-                        </div>
-                    }
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                    <a class="btn btn-warning" href="@Url.Action("sucursal","Sucursal")">Volver</a>
-
-                </form>
 
 
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Correo electrónico</label>
+                    <input type="email" class="form-control" name="CORREO_ELECTRONICO" value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" /><br />
+                </div>
             </div>
-        </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Dirección</label>
+                    <textarea type="text" class="form-control" rows="5" name="DIRECCION" value="@Html.DisplayTextFor(m=>m.DIRECCION)"></textarea><br />
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Empresa</label><br />
+                    <select class="form-control" name="ID_EMPRESA" id="ID_EMPRESA">
+                        <option value="">Seleccione una empresa</option>
+                        @foreach (var iteml in ViewBag.iEmpresas)
+                        {
+                            <option value="@iteml.Value" @(iteml.Value.Equals(Model.ID_EMPRESA.ToString()) ? "selected" : "")>@iteml.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Comentario</label>
+                    <textarea type="text" class="form-control" rows="5" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)"></textarea><br />
+                </div>
+            </div>
+
+            @if (ViewData["MENSAJESUCURSAL"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData["MENSAJESUCURSAL"]
+                </div>
+            }
+            <button type="submit" class="btn btn-primary ml-4" style="font-size: 20px; color: #FFFFFF;">
+                <i class="fas fa-sync-alt" aria-hidden="true"></i>
+            </button>
+            <a class="btn btn-warning ml-4" href="@Url.Action("sucursal","Sucursal")" style="font-size: 20px; color: #FFFFFF;">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            </a>
+
+        </form>
     </div>
-</div>
 
+    @section Scripts{
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('#ID_EMPRESA').select2();
+               
+            });
+
+        </script>
+    }
+</body>
+</html>
 
