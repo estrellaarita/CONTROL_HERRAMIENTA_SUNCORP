@@ -34,7 +34,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Nombre sucursal</label>
-                    <input type="text" class="form-control" name="NOMBRE_SUCURSAL" value="@Html.DisplayTextFor(m=>m.NOMBRE_SUCURSAL)" /><br />
+                    <input type="text" class="form-control" name="NOMBRE_SUCURSAL" value="@Html.DisplayTextFor(m=>m.NOMBRE_SUCURSAL)" required /><br />
                 </div>
             </div>
 
@@ -42,22 +42,24 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Correo electrónico</label>
-                    <input type="email" class="form-control" name="CORREO_ELECTRONICO" value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" /><br />
+                    <input type="email" class="form-control" name="CORREO_ELECTRONICO" value="@Html.DisplayTextFor(m=>m.CORREO_ELECTRONICO)" required /><br />
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Dirección</label>
-                    <textarea type="text" class="form-control" rows="5" name="DIRECCION" value="@Html.DisplayTextFor(m=>m.DIRECCION)"></textarea><br />
+                    @Html.TextAreaFor(m => m.DIRECCION, new { @class = "form-control", rows = 5, required = "required" })
+                    <br />
                 </div>
             </div>
+
 
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Empresa</label><br />
-                    <select class="form-control" name="ID_EMPRESA" id="ID_EMPRESA">
+                    <select class="form-control" name="ID_EMPRESA" id="ID_EMPRESA" required>
                         <option value="">Seleccione una empresa</option>
                         @foreach (var iteml in ViewBag.iEmpresas)
                         {
@@ -71,7 +73,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Comentario</label>
-                    <textarea type="text" class="form-control" rows="5" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)"></textarea><br />
+                    @Html.TextAreaFor(m => m.COMENTARIO, new { @class = "form-control", rows = 5 })
                 </div>
             </div>
 

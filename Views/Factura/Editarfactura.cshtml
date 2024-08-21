@@ -27,20 +27,20 @@
     <div class="container mt-3 d-flex justify-content-center col-sm-12">
         <form action="@Url.Action("Editarfactura", "Factura")" enctype="multipart/form-data" method="post">
 
-            <input type="hidden" class="form-control" name="ID_FACTURA" value="@Html.DisplayTextFor(m=>m.ID_FACTURA)" /><br />
+            <input type="hidden" class="form-control" name="ID_FACTURA" value="@Html.DisplayTextFor(m=>m.ID_FACTURA)" />
 
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Numero factura</label>
-                    <input type="text" class="form-control" name="Numero_factura" required value="@Html.DisplayTextFor(m=>m.NUMERO_FACTURA)" /><br />
+                    <input type="text" class="form-control" name="NUMERO_FACTURA" required value="@Html.DisplayTextFor(m=>m.NUMERO_FACTURA)" /><br />
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="ID_USUARIO_BD">Usuario</label><br />
-                    <select class="form-control" name="ID_USUARIO_BD" id="ID_USUARIO_BD" required>
+                    <select class="form-control" name="ID_USUARIO_BD" id="ID_USUARIO_BD_l" required>
                         <option value="">Seleccione el usuario</option>
                         @foreach (var itemg in ViewBag.aUsuario)
                         {
@@ -75,7 +75,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Fecha de Compra</label>
-                    <input type="date" class="form-control" name="Fecha_compra" required value="@Model.FECHA_COMPRA.ToString("yyyy-MM-dd")" />
+                    <input type="date" class="form-control" name="FECHA_COMPRA" required value="@Model.FECHA_COMPRA.ToString("yyyy-MM-dd")" />
                 </div>
             </div>
             <br />
@@ -83,7 +83,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="ID_PROVEEDOR">Proveedor</label><br />
-                    <select class="form-control" name="ID_PROVEEDOR" id="ID_PROVEEDOR" required>
+                    <select class="form-control" name="ID_PROVEEDOR" id="ID_PROVEEDOR_p" required>
                         <option value="">Seleccione el proveedor</option>
                         @foreach (var itemg in ViewBag.iProveedor)
                         {
@@ -95,13 +95,13 @@
             </div>
             <br />
 
+
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label>Comentario</label><br />
-                    <textarea class="form-control" rows="5" name="Comentario" value="@Html.DisplayTextFor(m=>m.COMENTARIO)"></textarea><br />
+                    <label>Comentario</label>
+                    @Html.TextAreaFor(m => m.COMENTARIO, new { @class = "form-control", rows = 5 })
                 </div>
             </div>
-
 
 
             <div class="form-row">
@@ -124,7 +124,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Monto total</label>
-                    <input type="number" class="form-control" name="Monto_total" required value="@Html.DisplayTextFor(m=>m.MONTO_TOTAL)" /><br />
+                    <input type="number" class="form-control" name="MONTO_TOTAL" required value="@Html.DisplayTextFor(m=>m.MONTO_TOTAL)" /><br />
                 </div>
             </div>
 
@@ -148,8 +148,8 @@
         <script type="text/javascript">
 
           $(document).ready(function () {
-              $('#ID_USUARIO_BD').select2();
-              $('#ID_PROVEEDOR').select2();
+              $('#ID_USUARIO_BD_l').select2();
+              $('#ID_PROVEEDOR_p').select2();
              
           });
 

@@ -87,13 +87,14 @@
             </div>
 
 
+
+
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Comentario</label>
-                    <textarea type="text" class="form-control" name="COMENTARIO" value="@Html.DisplayTextFor(m=>m.COMENTARIO)"></textarea><br />
+                    @Html.TextAreaFor(m => m.COMENTARIO, new { @class = "form-control", rows = 5 })
                 </div>
             </div>
-
             <br />
 
             <div class="form-row">

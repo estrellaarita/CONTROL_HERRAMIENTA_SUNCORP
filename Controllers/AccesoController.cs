@@ -19,7 +19,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
     {
         // PARAMETROS PARA LA CONEXION DE LA BD
         static string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
-        
+
         //GET : ACESSO
         public ActionResult login()
         {

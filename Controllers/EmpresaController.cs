@@ -18,7 +18,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
     public class EmpresaController : Controller
     {
         static string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
-        
+
         private static List<Empresa> oempresa = new List<Empresa>();
         public ActionResult empresa()
         {

@@ -17,7 +17,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Models
         static string cadena = "Data Source=DESKTOP-22LJCAJ;Initial Catalog=BD_CONTROL_INVENTARIO_HERRAMIENTAS_SUNCORP;Integrated Security=True";
 
         // GET: Serie_empleado
-       public ActionResult Serie_empleado(int? idseries)
+        public ActionResult Serie_empleado(int? idseries)
        {
             List<Serieempleado> aserieempleado = new List<Serieempleado>();
 

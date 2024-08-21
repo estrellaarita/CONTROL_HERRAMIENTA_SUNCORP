@@ -127,7 +127,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                        factura.ID_FACTURA = Convert.ToInt32(dr["ID_FACTURA"]);
                         factura.NUMERO_FACTURA = dr["NUMERO_FACTURA"].ToString();
                         factura.ID_USUARIO_BD = Convert.ToInt32(dr["ID_USUARIO_BD"]);
-                        factura.MONTO_TOTAL = dr["MONTO_TOTAL"].ToString();
+                        
                         factura.FECHA_COMPRA = Convert.ToDateTime(dr["FECHA_COMPRA"]);
                         factura.ID_PROVEEDOR = Convert.ToInt32(dr["ID_PROVEEDOR"]);
                         factura.COMENTARIO = dr["COMENTARIO"].ToString();
@@ -135,6 +135,7 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                         factura.FOTO = dr["FOTO"] != DBNull.Value ? (byte[])dr["FOTO"] : null;
 
                         factura.FECHA_REGISTRO = Convert.ToDateTime(dr["FECHA_REGISTRO"]);
+                        factura.MONTO_TOTAL = dr["MONTO_TOTAL"].ToString();
 
                         //USUARIO BD
                         usuario eusuario = new usuario();
@@ -380,42 +381,42 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                     {
                         // Si no se ha seleccionado una imagen nueva, obtener la imagen actual de la base de datos
                         using (SqlConnection oconexion = new SqlConnection(cadena))
-                    {
-                        SqlCommand cmd = new SqlCommand("SELECT FOTO FROM FACTURA WHERE ID_FACTURA = @ID_FACTURA", oconexion);
-                        cmd.Parameters.AddWithValue("ID_FACTURA", ofactura.ID_FACTURA);
-                        oconexion.Open();
-                        byte[] imagenData = (byte[])cmd.ExecuteScalar();
-                        ofactura.FOTO = imagenData;
+                        {
+                            SqlCommand cmd = new SqlCommand("SELECT FOTO FROM FACTURA WHERE ID_FACTURA = @ID_FACTURA", oconexion);
+                            cmd.Parameters.AddWithValue("ID_FACTURA", ofactura.ID_FACTURA);
+                            oconexion.Open();
+                            ofactura.FOTO = cmd.ExecuteScalar() as byte[];
+                        }
                     }
-                }
 
-                    //ACtualiza los datos en la BD
-                using (SqlConnection oconexion = new SqlConnection(cadena))
-                {
-                    SqlCommand cmd = new SqlCommand("SP_ACTUALIZAR_FACTURA", oconexion);
+                    // Actualiza los datos en la BD
+                    using (SqlConnection oconexion = new SqlConnection(cadena))
+                    {
+                        SqlCommand cmd = new SqlCommand("SP_ACTUALIZAR_FACTURA", oconexion);
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("ID_FACTURA", ofactura.ID_FACTURA);
-                    cmd.Parameters.AddWithValue("NUMERO_FACTURA", ofactura.NUMERO_FACTURA);
-                    cmd.Parameters.AddWithValue("ID_USUARIO_BD", ofactura.ID_USUARIO_BD);
-                    cmd.Parameters.AddWithValue("FECHA_COMPRA", ofactura.FECHA_COMPRA);
-                    cmd.Parameters.AddWithValue("ID_PROVEEDOR", ofactura.ID_PROVEEDOR);
-                    cmd.Parameters.AddWithValue("COMENTARIO", ofactura.COMENTARIO);
-                    cmd.Parameters.AddWithValue("FOTO", ofactura.FOTO);
-                    cmd.Parameters.AddWithValue("MONTO_TOTAL", ofactura.MONTO_TOTAL);
+                        cmd.Parameters.AddWithValue("ID_FACTURA", ofactura.ID_FACTURA);
+                        cmd.Parameters.AddWithValue("NUMERO_FACTURA", ofactura.NUMERO_FACTURA);
+                        cmd.Parameters.AddWithValue("ID_USUARIO_BD", ofactura.ID_USUARIO_BD);
+                        cmd.Parameters.AddWithValue("FECHA_COMPRA", ofactura.FECHA_COMPRA);
+                        cmd.Parameters.AddWithValue("ID_PROVEEDOR", ofactura.ID_PROVEEDOR);
+                        cmd.Parameters.AddWithValue("COMENTARIO", ofactura.COMENTARIO);
+                        cmd.Parameters.AddWithValue("FOTO", ofactura.FOTO);
+                        cmd.Parameters.AddWithValue("MONTO_TOTAL", ofactura.MONTO_TOTAL);
 
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    oconexion.Open();
+                        oconexion.Open();
+                        cmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
                     // Maneja la excepción (por ejemplo, loguea el error o muestra un mensaje al usuario)
                     ModelState.AddModelError("", "Se produjo un error al actualizar los datos: " + ex.Message);
+                    return View(ofactura);
                 }
             }
 
             return RedirectToAction("FACTURA", "Factura");
         }
-
     }
 }

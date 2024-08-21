@@ -100,7 +100,9 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
         [HttpPost]
         public ActionResult Eliminarrol(string Idrol)
         {
-            using (SqlConnection oconexion = new SqlConnection(cadena))
+            try
+            {
+                using (SqlConnection oconexion = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("SP_DELETE_ROL", oconexion);
                 cmd.Parameters.AddWithValue("ID_ROL", Idrol);
@@ -109,6 +111,16 @@ namespace CONTROL_HERRAMIENTA_SUNCORP.Controllers
                 cmd.ExecuteNonQuery();
             }
             return RedirectToAction("Rol", "Rol");
+        }
+            catch (SqlException ex)
+            {
+                // En caso de un conflicto, retornar un mensaje de error a la vista
+                ViewBag.ErrorMessage = "No puede eliminar el departamento porque hay registros relacionados";
+                // Aquí podrías registrar el error en un log si es necesario
+
+                // Redirigir a la vista actual con el mensaje de error
+                return View();  // Asegúrate de que "Marca" sea la vista correcta
+            }
         }
 
         //ACTUALIZAR ROL
